@@ -1,4 +1,4 @@
-package com.nuveq.sojibdemo;
+package com.nuveq.sojibdemo.view.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -13,13 +13,17 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.CameraUpdate;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.nuveq.sojibdemo.databinding.ActivityMainBinding;
+import com.nuveq.sojibdemo.network.ApiService;
+import com.nuveq.sojibdemo.datamodel.registration.Data;
+import com.nuveq.sojibdemo.utils.GPSTracker;
+import com.nuveq.sojibdemo.utils.PermissionUtils;
+import com.nuveq.sojibdemo.R;
+import com.nuveq.sojibdemo.datamodel.registration.ResponseData;
+import com.nuveq.sojibdemo.network.RestClient;
+import com.nuveq.sojibdemo.databinding.ActivityRegistrationBinding;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,14 +34,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class RegistrationActivity extends AppCompatActivity {
 
-    ActivityMainBinding binding;
+    ActivityRegistrationBinding binding;
     private boolean mPermissionDenied = false;
     private double latitude, longitude;
     Gson gson = new Gson();
     private GPSTracker gps;
-    int itemPosition = 0;
+    int itemPosition = -1;
     String name;
     String phone;
     String pass;
@@ -50,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         final String androidID = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_registration);
         getGpsLocation();
         getApiService().getBranch().enqueue(new Callback<ArrayList<ResponseData>>() {
             @Override
@@ -97,24 +101,29 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String name = binding.tvName.getText().toString();
-                String phone = binding.etPhone.getText().toString();
-                String pass = binding.etPass.getText().toString();
+                name = binding.tvName.getText().toString();
+                phone = binding.etPhone.getText().toString();
+                pass = binding.etPass.getText().toString();
+
+                if (!isValid()) {
+                    return;
+                }
 
                 if (latitude == 0) {
                     getGpsLocation();
-                    Toast.makeText(MainActivity.this, "GPS Error", Toast.LENGTH_LONG).show();
+                    Toast.makeText(RegistrationActivity.this, "GPS Error", Toast.LENGTH_LONG).show();
                     return;
                 } else {
                     Geocoder geocoder;
                     List<Address> addresses;
-                    geocoder = new Geocoder(MainActivity.this, Locale.getDefault());
+                    geocoder = new Geocoder(RegistrationActivity.this, Locale.getDefault());
 
                     try {
                         addresses = geocoder.getFromLocation(latitude, longitude, 1);
-                        String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
+                        String address = addresses.get(0).getFeatureName(); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
                         String city = addresses.get(0).getLocality();
-                        location = address + "," + city;
+                        String state = addresses.get(0).getSubLocality();
+                        location = address + "," + state + "," + city;
 
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -139,11 +148,11 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(Call<ResponseData> call, Response<ResponseData> response) {
                         if (response.isSuccessful()) {
                             Log.e("", "");
-                            Toast.makeText(MainActivity.this, "data save successfully", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegistrationActivity.this, "data save successfully", Toast.LENGTH_SHORT).show();
 
                         } else {
                             Log.e("", "");
-                            Toast.makeText(MainActivity.this, "data save Failed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegistrationActivity.this, "data save Failed", Toast.LENGTH_SHORT).show();
 
                         }
 
@@ -151,13 +160,37 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<ResponseData> call, Throwable t) {
-                        Toast.makeText(MainActivity.this, "data save Failed,Please Check internet Connection", Toast.LENGTH_LONG).show();
+                        Toast.makeText(RegistrationActivity.this, "data save Failed,Please Check internet Connection", Toast.LENGTH_LONG).show();
 
                     }
                 });
             }
         });
 
+    }
+
+    private boolean isValid() {
+
+        if (name.equals("")) {
+            binding.tvName.setError("name can't be empty");
+            return false;
+        }
+        if (pass.equals("")) {
+            binding.etPass.setError("password can't be empty");
+
+            return false;
+        }
+        if (phone.equals("")) {
+            binding.etPhone.setError("phone number can't be empty");
+            return false;
+        }
+
+        if (itemPosition < 0) {
+
+            Toast.makeText(getApplicationContext(), "Please select branch", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
     }
 
 
@@ -167,8 +200,6 @@ public class MainActivity extends AppCompatActivity {
 
             latitude = gps.getLatitude();
             longitude = gps.getLongitude();
-
-            LatLng latLng = new LatLng(latitude, longitude);
 
         } else {
 
@@ -188,7 +219,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void enableMyLocation() {
-        if (PermissionUtils.isPermissionGranted(MainActivity.this, PermissionUtils.LOCATION_PERMISSION, PermissionUtils.REQUEST_LOCATION)) {
+        if (PermissionUtils.isPermissionGranted(RegistrationActivity.this, PermissionUtils.LOCATION_PERMISSION, PermissionUtils.REQUEST_LOCATION)) {
         }
     }
 

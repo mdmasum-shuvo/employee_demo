@@ -1,4 +1,4 @@
-package com.nuveq.sojibdemo;
+package com.nuveq.sojibdemo.utils;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -14,6 +14,8 @@ import android.os.IBinder;
 import android.provider.Settings;
 
 import androidx.appcompat.app.AlertDialog;
+
+import com.nuveq.sojibdemo.R;
 
 
 public class GPSTracker extends Service implements LocationListener {

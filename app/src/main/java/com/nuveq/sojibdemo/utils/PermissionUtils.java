@@ -1,4 +1,4 @@
-package com.nuveq.sojibdemo;
+package com.nuveq.sojibdemo.utils;
 
 import android.Manifest;
 import android.app.Activity;

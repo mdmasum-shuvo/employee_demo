@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_profile"
+            android:checked="true"
+            android:enabled="true"
+            android:icon="@drawable/man_user"
+            android:title="@string/profile" />
+        <item
+            android:id="@+id/nav_add_plan"
+            android:checked="true"
+            android:enabled="true"
+            android:icon="@drawable/ic_add"
+            android:title="@string/add_plan" />
+
+        <item
+            android:id="@+id/nav_plan_list"
+            android:icon="@drawable/planer_list"
+            android:title="@string/plan_list" />
+
+       <!-- <item
+            android:id="@+id/nav_approved_apprisal"
+            android:icon="@drawable/ic_approved"
+            android:title="@string/approved_apprisal" />-->
+
+    </group>
+    <item android:title="@string/Other"
+        >
+        <menu>
+            <!--<item-->
+
+            <!--app:showAsAction="ifRoom"-->
+            <!--android:icon="@drawable/settings"-->
+            <!--android:id="@+id/nav_share"-->
+            <!--android:title="@string/settings" />-->
+            <item
+                android:enabled="true"
+                app:showAsAction="ifRoom"
+                android:icon="@drawable/log_out"
+                android:id="@+id/nav_log_out"
+                android:title="@string/logout" />
+        </menu>
+    </item>
+</menu>

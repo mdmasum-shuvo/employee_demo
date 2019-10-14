@@ -1,4 +1,4 @@
-package com.nuveq.sojibdemo;
+package com.nuveq.sojibdemo.datamodel.registration;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;

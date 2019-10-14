@@ -1,4 +1,4 @@
-package com.nuveq.sojibdemo;
+package com.nuveq.sojibdemo.network;
 
 
 import androidx.annotation.NonNull;

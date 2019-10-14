@@ -8,4 +8,39 @@
     <color name="black_2">#050505</color>
     <color name="black_overlay">#66000000</color>
     <color name="black_overlay_2">#28000000</color>
+
+
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorOffWhite">#dddddd</color>
+    <color name="colorWhiteGrey">#eeeeee</color>
+    <color name="colorSmallText">#8C95C4</color>
+    <color name="colorGrayText">#8D8787</color>
+    <color name="colorGray_idlc">#666668</color>
+    <color name="blue">#4466ad</color>
+    <color name="pink_blue">#6200EE</color>
+    <color name="text_color">#383a3e</color>
+    <color name="colorQuestionText">#C60001</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorGreenText">#356859</color>
+    <color name="tab_indicator">#cfafff</color>
+
+
+    <!--<color name="colorPrimary">#FFC107</color>-->
+    <!--<color name="colorPrimaryDark">#FFA000</color>-->
+    <color name="backgroundcolor">#fcfcfc</color>
+    <color name="lightgray">#ededed</color>
+    <color name="deeppurple">#008B8B</color>
+    <color name="idlc_backgrounf">#ccee1c25</color>
+    <color name="yello">#ffb300</color>
+    <color name="green">#00bfa5</color>
+    <!--<color name="colorAccent">#FF4081</color>-->
+    <color name="darkblue">#23283a</color>
+    <color name="testcolorblue">#152b38</color>
+    <color name="pink">#fe104d</color>
+    <color name="tab_color">#F44336</color>
+    <color name="darkgray">#A4A4A4</color>
+    <color name="dimgray">#696969</color>
+    <color name="gray">#37474f</color>
+
+    <color name="blue_gray">#848484</color>
 </resources>

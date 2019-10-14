@@ -1,9 +1,8 @@
-package com.nuveq.sojibdemo;
+package com.nuveq.sojibdemo.network;
 
 
 import com.google.gson.JsonObject;
-
-import org.json.JSONObject;
+import com.nuveq.sojibdemo.datamodel.registration.ResponseData;
 
 import java.util.ArrayList;
 
@@ -24,6 +23,10 @@ public interface ApiService {
 
     @GET("BranchInfoes")
     Call<ArrayList<ResponseData>> getBranch();
+
+
+    @GET("Login")
+    Call<Object> getLogin(@Body JsonObject object);
 }
 
 
