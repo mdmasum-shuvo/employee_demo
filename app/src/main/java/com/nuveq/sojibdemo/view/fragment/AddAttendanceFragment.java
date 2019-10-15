@@ -3,7 +3,8 @@ package com.nuveq.sojibdemo.view.fragment;
 import com.nuveq.sojibdemo.R;
 import com.nuveq.sojibdemo.common.BaseFragment;
 
-public class AddVisitPlanFragment extends BaseFragment {
+public class AddAttendanceFragment extends BaseFragment {
+
     @Override
     protected Integer layoutResourceId() {
         return R.layout.fragment_plan_list;

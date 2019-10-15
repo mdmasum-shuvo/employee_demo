@@ -40,7 +40,6 @@ public abstract class BaseFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, layoutResourceId(), container, false);
-
         return binding.getRoot();
     }
 

@@ -11,11 +11,10 @@
 
 
     <color name="colorWhite">#FFFFFF</color>
-    <color name="colorOffWhite">#dddddd</color>
+    <color name="colorOffWhite">#F8F8F8</color>
     <color name="colorWhiteGrey">#eeeeee</color>
     <color name="colorSmallText">#8C95C4</color>
     <color name="colorGrayText">#8D8787</color>
-    <color name="colorGray_idlc">#666668</color>
     <color name="blue">#4466ad</color>
     <color name="pink_blue">#6200EE</color>
     <color name="text_color">#383a3e</color>
@@ -42,5 +41,5 @@
     <color name="dimgray">#696969</color>
     <color name="gray">#37474f</color>
 
-    <color name="blue_gray">#848484</color>
+    <color name="blue_gray">#455a64</color>
 </resources>

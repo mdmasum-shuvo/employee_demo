@@ -50,6 +50,11 @@ import com.nuveq.sojibdemo.R;
 import com.nuveq.sojibdemo.network.RestClient;
 import com.nuveq.sojibdemo.appdata.SharedPreferencesEnum;
 import com.nuveq.sojibdemo.view.activity.LoginActivity;
+import com.nuveq.sojibdemo.view.fragment.AddAttendanceFragment;
+import com.nuveq.sojibdemo.view.fragment.AddVisitPlanFragment;
+import com.nuveq.sojibdemo.view.fragment.AttendanceListFragment;
+import com.nuveq.sojibdemo.view.fragment.ProfileFragment;
+import com.nuveq.sojibdemo.view.fragment.VisitPlanListFragment;
 
 
 import java.io.IOException;
@@ -255,19 +260,29 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         int id = item.getItemId();
         switch (id) {
             case R.id.nav_profile:
-             /*   ProfileFragment homeFragment = new ProfileFragment();
-                fragmentTransaction(homeFragment, getResources().getString(R.string.profile));*/
-
+                ProfileFragment homeFragment = new ProfileFragment();
+                fragmentTransaction(homeFragment, getResources().getString(R.string.profile));
                 break;
 
             case R.id.nav_add_plan:
-            /*    UnassignedAppraisalFragment myAssignmentFragment = new UnassignedAppraisalFragment();
-                fragmentTransaction(myAssignmentFragment, getResources().getString(R.string.unassigned_apprisal));*/
+                AddVisitPlanFragment addVisitPlanFragment = new AddVisitPlanFragment();
+                fragmentTransaction(addVisitPlanFragment, getResources().getString(R.string.add_plan));
+
 
                 break;
             case R.id.nav_plan_list:
-            /*    MyAppraisalFragment myPlannerFragment = new MyAppraisalFragment();
-                fragmentTransaction(myPlannerFragment, getResources().getString(R.string.my_apprisal));*/
+                VisitPlanListFragment myPlannerFragment = new VisitPlanListFragment();
+                fragmentTransaction(myPlannerFragment, getResources().getString(R.string.plan_list));
+                break;
+
+            case R.id.nav_add_attendance:
+                AddAttendanceFragment addAttendanceFragment = new AddAttendanceFragment();
+                fragmentTransaction(addAttendanceFragment, getResources().getString(R.string.attend_add));
+                break;
+
+            case R.id.nav_attendance_list:
+                AttendanceListFragment attendanceListFragment = new AttendanceListFragment();
+                fragmentTransaction(attendanceListFragment, getResources().getString(R.string.attend_list));
                 break;
 
             case R.id.nav_log_out:
@@ -530,7 +545,6 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
 
         return "location not found";
     }
-
 
 
     // when app first time load

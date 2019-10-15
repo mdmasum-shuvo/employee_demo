@@ -14,6 +14,14 @@
             android:icon="@drawable/man_user"
             android:title="@string/profile" />
         <item
+            android:id="@+id/nav_add_attendance"
+            android:icon="@drawable/ic_add"
+            android:title="@string/attend_add" />
+        <item
+            android:id="@+id/nav_attendance_list"
+            android:icon="@drawable/planer_list"
+            android:title="@string/attend_list" />
+        <item
             android:id="@+id/nav_add_plan"
             android:checked="true"
             android:enabled="true"
@@ -24,6 +32,8 @@
             android:id="@+id/nav_plan_list"
             android:icon="@drawable/planer_list"
             android:title="@string/plan_list" />
+
+
 
        <!-- <item
             android:id="@+id/nav_approved_apprisal"

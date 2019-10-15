@@ -3,165 +3,373 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <include layout="@layout/toolbar"/>
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:context=".view.activity.RegistrationActivity"
-            android:layout_marginTop="?actionBarSize">
 
             <RelativeLayout
-                android:id="@+id/rvone"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_15sdp"
-                android:background="@drawable/field_shape"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <LinearLayout
+                android:layout_height="match_parent">
+                <include layout="@layout/toolbar"/>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/login_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp"
-                    android:orientation="vertical">
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="?actionBarSize"
+                   >
+
+                    <ImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_220sdp"
+                        android:background="@color/colorPrimary"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_50sdp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginRight="8dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
+                        android:id="@+id/textView2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Name" />
-                    <EditText
-                        android:id="@+id/tv_name"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginRight="8dp"
+                        android:text="Consumer Division"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="@dimen/_12sdp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card_login"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:imeOptions="actionNext"
-                        android:maxLength="10"
-                        android:maxLines="1" />
+                        android:layout_height="@dimen/_300sdp"
+                        android:layout_marginLeft="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_25sdp"
+                        android:layout_marginRight="@dimen/_15sdp"
+                        app:cardCornerRadius="@dimen/_5sdp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView2">
 
-                </LinearLayout>
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
 
-            </RelativeLayout>
+                            <LinearLayout
+                                android:id="@+id/linearLayout2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_15sdp"
+                                android:layout_marginTop="@dimen/_50sdp"
+                                android:layout_marginRight="@dimen/_15sdp"
+                                android:orientation="vertical"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:layout_editor_absoluteX="33dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/gray_rectangle_shape"
+                                    android:orientation="vertical">
+
+                                    <com.google.android.material.textfield.TextInputLayout
+                                        android:id="@+id/textInputLayout"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="@dimen/_10sdp"
+                                        android:backgroundTint="@color/colorPrimary"
+                                        android:defaultFocusHighlightEnabled="true"
+                                        android:textColorHint="@color/gray">
+
+                                        <EditText
+                                            android:id="@+id/etUsername"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:backgroundTint="@color/lightgray"
+                                            tools:text="65xkhsdasd"
+                                            android:enabled="false"
+                                            android:drawableLeft="@drawable/ic_person"
+                                            android:inputType="textEmailAddress"
+                                            android:textColor="@color/blue_gray"
+                                            android:textSize="@dimen/_14sdp" />
+                                    </com.google.android.material.textfield.TextInputLayout>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/_15sdp"
+                                    android:background="@drawable/gray_rectangle_shape"
+                                    android:orientation="horizontal">
+
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        />
+                                    <com.google.android.material.textfield.TextInputLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/_50sdp"
+                                        android:backgroundTint="@color/colorPrimary"
+                                        android:textColorHint="@color/gray"
+                                        >
+
+                                        <EditText
+                                            android:id="@+id/etPassword"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:backgroundTint="@color/lightgray"
+                                            android:hint="Password"
+                                            android:inputType="textPassword"
+                                            android:drawableLeft="@drawable/ic_lock"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/_14sdp" />
+                                    </com.google.android.material.textfield.TextInputLayout>
+                                </LinearLayout>
+                            </LinearLayout>
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/btnLogin"
+                                android:layout_width="@dimen/_170sdp"
+                                android:layout_height="@dimen/_30sdp"
+                                android:layout_gravity="end"
+                                android:layout_marginTop="@dimen/_20sdp"
+                                app:cardBackgroundColor="@color/colorPrimary"
+                                app:cardCornerRadius="@dimen/_5sdp"
+                                app:cardElevation="@dimen/_5sdp"
+                                app:layout_constraintEnd_toEndOf="@+id/linearLayout2"
+                                app:layout_constraintStart_toStartOf="@+id/linearLayout2"
+                                app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="LOGIN"
+                                        android:textColor="@color/colorWhite"
+                                        android:textSize="@dimen/_14sdp"
+                                        android:textStyle="bold" />
+                                </RelativeLayout>
+                            </androidx.cardview.widget.CardView>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.cardview.widget.CardView>
 
 
-            <RelativeLayout
-                android:id="@+id/rv_phone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_15sdp"
-                android:background="@drawable/field_shape"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rvone">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp"
-                    android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/textView3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Phone Number" />
-                    <EditText
-                        android:id="@+id/et_phone"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:imeOptions="actionNext"
-                        android:inputType="number"
-                        android:maxLength="10"
-                        android:maxLines="1" />
-
-                </LinearLayout>
-
-            </RelativeLayout>
-            <RelativeLayout
-                android:id="@+id/rv_pass"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_15sdp"
-                android:background="@drawable/field_shape"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rv_phone">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp"
-                    android:orientation="vertical">
+                        android:text="Consumer Division Employee Tracking System"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/_10sdp"
+                        app:layout_constraintBottom_toTopOf="@+id/textView4"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.506"
+                        app:layout_constraintStart_toStartOf="parent" />
 
                     <TextView
+                        android:id="@+id/textView4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Pasword" />
-                    <EditText
-                        android:id="@+id/et_pass"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:imeOptions="actionNext"
-                        android:inputType="textPassword"
-                        android:maxLength="10"
-                        android:maxLines="1" />
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:text="@string/it_support"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/_6sdp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
 
-                </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/rv_bracnh"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_15sdp"
-                android:background="@drawable/field_shape"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rv_pass">
-
-                <LinearLayout
+                <androidx.coordinatorlayout.widget.CoordinatorLayout
+                    android:id="@+id/registration_container"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp"
-                    android:orientation="vertical">
+                    android:layout_height="match_parent"
+                    android:visibility="gone"
+                    >
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Branch" />
-                    <Spinner
-                        android:id="@+id/spiner"
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"></Spinner>
+                        android:layout_height="match_parent"
+                        tools:context=".view.activity.RegistrationActivity"
+                        android:layout_marginTop="?actionBarSize">
+                        <RelativeLayout
+                            android:id="@+id/rvone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/_15sdp"
+                            android:background="@drawable/field_shape"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/_10sdp"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Name" />
+                                <EditText
+                                    android:id="@+id/tv_name"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:imeOptions="actionNext"
+                                    android:maxLength="10"
+                                    android:maxLines="1" />
+
+                            </LinearLayout>
+
+                        </RelativeLayout>
 
 
-                </LinearLayout>
+                        <RelativeLayout
+                            android:id="@+id/rv_phone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/_15sdp"
+                            android:background="@drawable/field_shape"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/rvone">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/_10sdp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Phone Number" />
+                                <EditText
+                                    android:id="@+id/et_phone"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="number"
+                                    android:maxLength="10"
+                                    android:maxLines="1" />
+
+                            </LinearLayout>
+
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:id="@+id/rv_pass"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/_15sdp"
+                            android:background="@drawable/field_shape"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/rv_phone">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/_10sdp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Pasword" />
+                                <EditText
+                                    android:id="@+id/et_pass"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="textPassword"
+                                    android:maxLength="10"
+                                    android:maxLines="1" />
+
+                            </LinearLayout>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/rv_bracnh"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/_15sdp"
+                            android:background="@drawable/field_shape"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/rv_pass">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/_10sdp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Branch" />
+                                <Spinner
+                                    android:id="@+id/spiner"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"></Spinner>
+
+
+                            </LinearLayout>
+
+                        </RelativeLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/btn_save"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_gravity="bottom"
+                        android:clickable="true"
+                        android:backgroundTint="@color/colorPrimary" >
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Save"
+                                android:textColor="#FFF"
+                                android:textAlignment="center"
+                                android:textStyle="bold"
+                                android:textSize="@dimen/_15sdp"
+                                />
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+                </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
 
             </RelativeLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/btn_save"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_25sdp"
-            android:layout_gravity="bottom"
-            android:clickable="true"
-            android:backgroundTint="@color/colorPrimary" >
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Save"
-                    android:textColor="#FFF"
-                    android:textAlignment="center"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/_15sdp"
-                    />
-            </RelativeLayout>
-        </androidx.cardview.widget.CardView>
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+
+
+
+
+
 </layout>
