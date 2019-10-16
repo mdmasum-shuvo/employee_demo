@@ -222,8 +222,6 @@ public class SharedPreferencesEnum {
      * Enum representing your setting names or key for your setting.
      */
     public enum Key {
-        API_KEY, LOAN, USER_NAME,STM_NAME,FULL_NAME,STM_CODE, USER_FULLNAME, USER_CODE, ROLLUSER, TEST, PASSWORD, SETTING, USER_INFO,
-        LOCA_LLOGIN, REF, BRANCH;
-
+        PHONE_NUMBER
     }
 }

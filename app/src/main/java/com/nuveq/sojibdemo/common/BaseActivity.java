@@ -49,7 +49,6 @@ import com.nuveq.sojibdemo.utils.GPSTracker;
 import com.nuveq.sojibdemo.R;
 import com.nuveq.sojibdemo.network.RestClient;
 import com.nuveq.sojibdemo.appdata.SharedPreferencesEnum;
-import com.nuveq.sojibdemo.view.activity.LoginActivity;
 import com.nuveq.sojibdemo.view.fragment.AddAttendanceFragment;
 import com.nuveq.sojibdemo.view.fragment.AddVisitPlanFragment;
 import com.nuveq.sojibdemo.view.fragment.AttendanceListFragment;
@@ -128,27 +127,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         mActivity = BaseActivity.this;
     }
 
-    public void logout() {
-        android.app.AlertDialog.Builder builder;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            builder = new android.app.AlertDialog.Builder(this, android.R.style.Theme_Material_Light_Dialog_Alert);
-        } else {
-            builder = new android.app.AlertDialog.Builder(this);
-        }
-        builder.setTitle(getString(R.string.logout_title));
-        builder.setMessage(getString(R.string.logout_message));
-        builder.setIcon(R.drawable.common_google_signin_btn_icon_dark);
-        builder.setNegativeButton("No", null);
-        builder.setPositiveButton("Yes", (dialog, which) -> {
-            //  startActvity(this, LoginActivity.class, true);
-            Intent intent = new Intent(this, LoginActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-            localCash().put(SharedPreferencesEnum.Key.ROLLUSER, "");
-        });
-        android.app.AlertDialog dialog = builder.create();
-        dialog.show();
-    }
+
 
     public void initToolbar() {
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -286,7 +265,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
                 break;
 
             case R.id.nav_log_out:
-                logout();
+
                 break;
             default:
                 break;

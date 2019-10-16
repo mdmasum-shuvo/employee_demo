@@ -2,6 +2,8 @@ package com.nuveq.sojibdemo.view.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.location.Address;
 import android.location.Geocoder;
@@ -18,12 +20,14 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.nuveq.sojibdemo.network.ApiService;
 import com.nuveq.sojibdemo.datamodel.registration.Data;
+import com.nuveq.sojibdemo.utils.CommonUtils;
 import com.nuveq.sojibdemo.utils.GPSTracker;
 import com.nuveq.sojibdemo.utils.PermissionUtils;
 import com.nuveq.sojibdemo.R;
-import com.nuveq.sojibdemo.datamodel.registration.ResponseData;
+import com.nuveq.sojibdemo.datamodel.registration.Registration;
 import com.nuveq.sojibdemo.network.RestClient;
 import com.nuveq.sojibdemo.databinding.ActivityRegistrationBinding;
+import com.nuveq.sojibdemo.viewmodel.Viewmodel;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -49,16 +53,18 @@ public class RegistrationActivity extends AppCompatActivity {
     ArrayList<String> branchResponseArrayList = new ArrayList<>();
     ArrayList<Integer> branchIdList = new ArrayList<>();
     ArrayAdapter<String> adapter;
+    private Viewmodel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         final String androidID = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_registration);
+        viewModel = ViewModelProviders.of(this).get(Viewmodel.class);
         getGpsLocation();
-        getApiService().getBranch().enqueue(new Callback<ArrayList<ResponseData>>() {
+        CommonUtils.getApiService().getBranch().enqueue(new Callback<ArrayList<Registration>>() {
             @Override
-            public void onResponse(Call<ArrayList<ResponseData>> call, Response<ArrayList<ResponseData>> response) {
+            public void onResponse(Call<ArrayList<Registration>> call, Response<ArrayList<Registration>> response) {
                 if (response.isSuccessful()) {
                     for (int i = 0; i < response.body().size(); i++) {
                         try {
@@ -80,7 +86,7 @@ public class RegistrationActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<ArrayList<ResponseData>> call, Throwable t) {
+            public void onFailure(Call<ArrayList<Registration>> call, Throwable t) {
                 Log.e("", "");
 
             }
@@ -142,28 +148,17 @@ public class RegistrationActivity extends AppCompatActivity {
                 String jsonString = gson.toJson(data);
                 JsonObject jsonObject = new JsonParser().parse(jsonString).getAsJsonObject();
 
-
-                getApiService().register(jsonObject).enqueue(new Callback<ResponseData>() {
-                    @Override
-                    public void onResponse(Call<ResponseData> call, Response<ResponseData> response) {
-                        if (response.isSuccessful()) {
-                            Log.e("", "");
-                            Toast.makeText(RegistrationActivity.this, "data save successfully", Toast.LENGTH_SHORT).show();
-
-                        } else {
-                            Log.e("", "");
-                            Toast.makeText(RegistrationActivity.this, "data save Failed", Toast.LENGTH_SHORT).show();
-
-                        }
+                viewModel.getRegistrationResponse(jsonObject).observe(RegistrationActivity.this, isSuccess -> {
+                    if (isSuccess) {
+                        CommonUtils.showCustomAlert(RegistrationActivity.this, "succeed", "Registration successfully done", false);
+                        binding.registrationContainer.setVisibility(View.GONE);
+                        binding.loginLayout.setVisibility(View.VISIBLE);
 
                     }
 
-                    @Override
-                    public void onFailure(Call<ResponseData> call, Throwable t) {
-                        Toast.makeText(RegistrationActivity.this, "data save Failed,Please Check internet Connection", Toast.LENGTH_LONG).show();
-
-                    }
                 });
+
+
             }
         });
 
@@ -223,8 +218,5 @@ public class RegistrationActivity extends AppCompatActivity {
         }
     }
 
-    public ApiService getApiService() {
-        return RestClient.getInstance().callRetrofit();
-    }
 
 }

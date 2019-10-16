@@ -2,14 +2,22 @@ package com.nuveq.sojibdemo.network;
 
 
 import com.google.gson.JsonObject;
-import com.nuveq.sojibdemo.datamodel.registration.ResponseData;
+import com.nuveq.sojibdemo.datamodel.MacResponse;
+import com.nuveq.sojibdemo.datamodel.registration.Registration;
 
+import java.text.Normalizer;
 import java.util.ArrayList;
+import java.util.Map;
 
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FieldMap;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
+import retrofit2.http.Query;
 
 /**
  * Contains all API call declarations
@@ -18,15 +26,20 @@ public interface ApiService {
 
 
     @POST("EmpInfoes")
-    Call<ResponseData> register(@Body JsonObject object);
+    Call<Registration> register(@Body JsonObject object);
 
 
     @GET("BranchInfoes")
-    Call<ArrayList<ResponseData>> getBranch();
+    Call<ArrayList<Registration>> getBranch();
 
 
-    @GET("Login")
+    @POST("loginemp")
     Call<Object> getLogin(@Body JsonObject object);
+
+    @GET("loginemp")
+    Call<MacResponse> getDataBytMac(@Field("macaddress") String data);
+
+
 }
 
 
