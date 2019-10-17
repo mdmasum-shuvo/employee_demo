@@ -91,10 +91,6 @@ public class AuthenticationRepository {
     }
 
 
-
-
-
-
     public void setCallbackListener(ServerResponseFailedCallback mListener) {
         this.mListener = mListener;
     }

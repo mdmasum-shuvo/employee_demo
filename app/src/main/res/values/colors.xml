@@ -23,6 +23,9 @@
     <color name="colorGreenText">#356859</color>
     <color name="tab_indicator">#cfafff</color>
 
+    <color name="red">#E30000</color>
+    <color name="deep_red">#A52A2A</color>
+
 
     <!--<color name="colorPrimary">#FFC107</color>-->
     <!--<color name="colorPrimaryDark">#FFA000</color>-->
