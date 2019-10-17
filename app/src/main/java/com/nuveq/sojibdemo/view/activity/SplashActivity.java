@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.Settings;
 
 import com.nuveq.sojibdemo.R;
@@ -19,7 +20,6 @@ public class SplashActivity extends BaseActivity implements ServerResponseFailed
     private Viewmodel viewModel;
 
 
-
     @Override
     protected int getLayoutResourceFile() {
         return R.layout.activity_splash;
@@ -31,12 +31,20 @@ public class SplashActivity extends BaseActivity implements ServerResponseFailed
         viewModel.getRepository().setCallbackListener(this);
         initLoader();
         showLoader();
-        final String androidID = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
+     /*   final String androidID = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
 
         viewModel.getMacData(androidID).observe(this, data -> {
             SharedPreferencesEnum.getInstance(this).put(SharedPreferencesEnum.Key.PHONE_NUMBER, data.getPhoneNumber());
             startActivity(new Intent(this, RegistrationActivity.class).putExtra(AppConstants.PHONE_NUMBER, data.getPhoneNumber()));
-        });
+        });*/
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startActivity(RegistrationActivity.class, true, null);
+
+            }
+        }, 2000);
     }
 
     @Override

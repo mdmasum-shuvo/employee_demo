@@ -43,7 +43,6 @@
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="70dp"
-                        android:text="@={data.fullName}"
                         android:textColor="@color/colorWhite"
                         android:textSize="24sp"
                         android:textStyle="bold"
@@ -159,7 +158,6 @@
                         android:clickable="true"
                         android:textColor="@color/blue"
 
-                        android:text="@={data.mobile}"
                         app:layout_constraintLeft_toRightOf="@+id/textView10"
                         app:layout_constraintTop_toTopOf="parent"
                         />
@@ -203,7 +201,6 @@
                         android:clickable="true"
                         android:textColor="@color/blue"
 
-                        android:text="@={data.designationName}"
                         app:layout_constraintLeft_toRightOf="@+id/textView11"
                         app:layout_constraintTop_toBottomOf="@+id/mobileNumber" />
 
@@ -217,7 +214,6 @@
                         android:clickable="true"
                         android:textColor="@color/blue"
 
-                        android:text="@={data.organizationName}"
                         app:layout_constraintLeft_toRightOf="@+id/textView7"
                         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
@@ -231,7 +227,6 @@
                         android:clickable="true"
                         android:textColor="@color/blue"
 
-                        android:text="@={data.departmentName}"
                         app:layout_constraintLeft_toRightOf="@+id/textView22"
                         app:layout_constraintTop_toBottomOf="@+id/occupation" />
 

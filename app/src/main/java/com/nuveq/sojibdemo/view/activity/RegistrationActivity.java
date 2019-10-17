@@ -5,6 +5,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -160,6 +161,10 @@ public class RegistrationActivity extends AppCompatActivity {
 
 
             }
+        });
+
+        binding.btnLogin.setOnClickListener(view -> {
+            startActivity(new Intent(RegistrationActivity.this, MainActivity.class));
         });
 
     }

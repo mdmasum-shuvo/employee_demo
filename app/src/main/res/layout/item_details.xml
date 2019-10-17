@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_90sdp"
+    android:background="@color/colorOffWhite"
+    
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/btnNext"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:background="@drawable/border_round_blue"
+        android:text="Check in\n10:15 am"
+        android:textColor="@color/colorOffWhite"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:background="@drawable/shape_green"
+        android:text="Check out\n8:15 pm"
+        android:textColor="@color/colorOffWhite"
+        app:layout_constraintStart_toStartOf="@+id/btnNext"
+        app:layout_constraintTop_toBottomOf="@+id/btnNext" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="@dimen/_210sdp"
+        android:layout_height="@dimen/_60sdp"
+        app:cardCornerRadius="@dimen/_5sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/button2"
+        app:layout_constraintStart_toEndOf="@+id/btnNext"
+        app:layout_constraintStart_toStartOf="@id/guideline"
+        app:layout_constraintTop_toTopOf="@+id/btnNext">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/_5sdp"
+                android:paddingLeft="@dimen/_5sdp"
+                android:text="10 may,2019" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_5sdp"
+                android:text="asdfasdasdasdasdsa" />
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="120dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
