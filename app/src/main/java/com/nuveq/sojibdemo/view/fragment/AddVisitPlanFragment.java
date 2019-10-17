@@ -4,9 +4,10 @@ import com.nuveq.sojibdemo.R;
 import com.nuveq.sojibdemo.common.BaseFragment;
 
 public class AddVisitPlanFragment extends BaseFragment {
+
     @Override
     protected Integer layoutResourceId() {
-        return R.layout.fragment_plan_list;
+        return R.layout.fragment_attendance_list;
     }
 
     @Override
