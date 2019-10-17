@@ -41,7 +41,7 @@ public class SplashActivity extends BaseActivity implements ServerResponseFailed
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(RegistrationActivity.class, true, null);
+                startActvity(SplashActivity.this,RegistrationActivity.class, true);
 
             }
         }, 2000);
