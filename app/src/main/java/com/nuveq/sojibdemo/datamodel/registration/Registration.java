@@ -1,241 +1,255 @@
 package com.nuveq.sojibdemo.datamodel.registration;
 
 import java.util.List;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Registration {
 
-@SerializedName("empId")
-@Expose
-private Integer empId;
-@SerializedName("marketingCode")
-@Expose
-private String marketingCode;
-@SerializedName("name")
-@Expose
-private String name;
-@SerializedName("picture")
-@Expose
-private String picture;
-@SerializedName("phoneNumber")
-@Expose
-private String phoneNumber;
-@SerializedName("macAddress")
-@Expose
-private String macAddress;
-@SerializedName("branchId")
-@Expose
-private Integer branchId;
-@SerializedName("password")
-@Expose
-private String password;
-@SerializedName("location")
-@Expose
-private String location;
-@SerializedName("roleId")
-@Expose
-private Integer roleId;
-@SerializedName("status")
-@Expose
-private Boolean status;
-@SerializedName("createDate")
-@Expose
-private String createDate;
-@SerializedName("editDate")
-@Expose
-private String editDate;
-@SerializedName("editUser")
-@Expose
-private String editUser;
-@SerializedName("branch")
-@Expose
-private String branch;
-@SerializedName("role")
-@Expose
-private String role;
-@SerializedName("attendanceInfo")
-@Expose
-private List<Object> attendanceInfo = null;
-@SerializedName("empTrackingInfo")
-@Expose
-private List<Object> empTrackingInfo = null;
-@SerializedName("loginHistory")
-@Expose
-private List<Object> loginHistory = null;
-@SerializedName("salesOrderInfo")
-@Expose
-private List<Object> salesOrderInfo = null;
-@SerializedName("visitAreaInfo")
-@Expose
-private List<Object> visitAreaInfo = null;
+    @SerializedName("empId")
+    @Expose
+    private Integer empId;
+    @SerializedName("marketingCode")
+    @Expose
+    private String marketingCode;
+    @SerializedName("name")
+    @Expose
+    private String name;
+    @SerializedName("picture")
+    @Expose
+    private String picture;
+    @SerializedName("phoneNumber")
+    @Expose
+    private String phoneNumber;
+    @SerializedName("macAddress")
+    @Expose
+    private String macAddress;
+    @SerializedName("branchId")
+    @Expose
+    private Integer branchId;
+    @SerializedName("password")
+    @Expose
+    private String password;
+    @SerializedName("location")
+    @Expose
+    private String location;
+    @SerializedName("roleId")
+    @Expose
+    private Integer roleId;
+    @SerializedName("status")
+    @Expose
+    private Boolean status;
+    @SerializedName("createDate")
+    @Expose
+    private String createDate;
+    @SerializedName("editDate")
+    @Expose
+    private String editDate;
+    @SerializedName("editUser")
+    @Expose
+    private String editUser;
+    @SerializedName("branch")
+    @Expose
+    private String branch;
+    @SerializedName("role")
+    @Expose
+    private String role;
+    @SerializedName("attendanceInfo")
+    @Expose
+    private List<Object> attendanceInfo = null;
+    @SerializedName("empTrackingInfo")
+    @Expose
+    private List<Object> empTrackingInfo = null;
+    @SerializedName("loginHistory")
+    @Expose
+    private List<Object> loginHistory = null;
+    @SerializedName("salesOrderInfo")
+    @Expose
+    private List<Object> salesOrderInfo = null;
+    @SerializedName("visitAreaInfo")
+    @Expose
+    private List<Object> visitAreaInfo = null;
 
-public Integer getEmpId() {
-return empId;
-}
+    @SerializedName("message")
+    @Expose
+    private String message;
 
-public void setEmpId(Integer empId) {
-this.empId = empId;
-}
 
-public String getMarketingCode() {
-return marketingCode;
-}
+    public String getMessage() {
+        return message;
+    }
 
-public void setMarketingCode(String marketingCode) {
-this.marketingCode = marketingCode;
-}
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
-public String getName() {
-return name;
-}
+    public Integer getEmpId() {
+        return empId;
+    }
 
-public void setName(String name) {
-this.name = name;
-}
+    public void setEmpId(Integer empId) {
+        this.empId = empId;
+    }
 
-public String getPicture() {
-return picture;
-}
+    public String getMarketingCode() {
+        return marketingCode;
+    }
 
-public void setPicture(String picture) {
-this.picture = picture;
-}
+    public void setMarketingCode(String marketingCode) {
+        this.marketingCode = marketingCode;
+    }
 
-public String getPhoneNumber() {
-return phoneNumber;
-}
+    public String getName() {
+        return name;
+    }
 
-public void setPhoneNumber(String phoneNumber) {
-this.phoneNumber = phoneNumber;
-}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-public String getMacAddress() {
-return macAddress;
-}
+    public String getPicture() {
+        return picture;
+    }
 
-public void setMacAddress(String macAddress) {
-this.macAddress = macAddress;
-}
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
 
-public Integer getBranchId() {
-return branchId;
-}
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
 
-public void setBranchId(Integer branchId) {
-this.branchId = branchId;
-}
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 
-public String getPassword() {
-return password;
-}
+    public String getMacAddress() {
+        return macAddress;
+    }
 
-public void setPassword(String password) {
-this.password = password;
-}
+    public void setMacAddress(String macAddress) {
+        this.macAddress = macAddress;
+    }
 
-public String getLocation() {
-return location;
-}
+    public Integer getBranchId() {
+        return branchId;
+    }
 
-public void setLocation(String location) {
-this.location = location;
-}
+    public void setBranchId(Integer branchId) {
+        this.branchId = branchId;
+    }
 
-public Integer getRoleId() {
-return roleId;
-}
+    public String getPassword() {
+        return password;
+    }
 
-public void setRoleId(Integer roleId) {
-this.roleId = roleId;
-}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-public Boolean getStatus() {
-return status;
-}
+    public String getLocation() {
+        return location;
+    }
 
-public void setStatus(Boolean status) {
-this.status = status;
-}
+    public void setLocation(String location) {
+        this.location = location;
+    }
 
-public String getCreateDate() {
-return createDate;
-}
+    public Integer getRoleId() {
+        return roleId;
+    }
 
-public void setCreateDate(String createDate) {
-this.createDate = createDate;
-}
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
+    }
 
-public String getEditDate() {
-return editDate;
-}
+    public Boolean getStatus() {
+        return status;
+    }
 
-public void setEditDate(String editDate) {
-this.editDate = editDate;
-}
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
 
-public String getEditUser() {
-return editUser;
-}
+    public String getCreateDate() {
+        return createDate;
+    }
 
-public void setEditUser(String editUser) {
-this.editUser = editUser;
-}
+    public void setCreateDate(String createDate) {
+        this.createDate = createDate;
+    }
 
-public String getBranch() {
-return branch;
-}
+    public String getEditDate() {
+        return editDate;
+    }
 
-public void setBranch(String branch) {
-this.branch = branch;
-}
+    public void setEditDate(String editDate) {
+        this.editDate = editDate;
+    }
 
-public String getRole() {
-return role;
-}
+    public String getEditUser() {
+        return editUser;
+    }
 
-public void setRole(String role) {
-this.role = role;
-}
+    public void setEditUser(String editUser) {
+        this.editUser = editUser;
+    }
 
-public List<Object> getAttendanceInfo() {
-return attendanceInfo;
-}
+    public String getBranch() {
+        return branch;
+    }
 
-public void setAttendanceInfo(List<Object> attendanceInfo) {
-this.attendanceInfo = attendanceInfo;
-}
+    public void setBranch(String branch) {
+        this.branch = branch;
+    }
 
-public List<Object> getEmpTrackingInfo() {
-return empTrackingInfo;
-}
+    public String getRole() {
+        return role;
+    }
 
-public void setEmpTrackingInfo(List<Object> empTrackingInfo) {
-this.empTrackingInfo = empTrackingInfo;
-}
+    public void setRole(String role) {
+        this.role = role;
+    }
 
-public List<Object> getLoginHistory() {
-return loginHistory;
-}
+    public List<Object> getAttendanceInfo() {
+        return attendanceInfo;
+    }
 
-public void setLoginHistory(List<Object> loginHistory) {
-this.loginHistory = loginHistory;
-}
+    public void setAttendanceInfo(List<Object> attendanceInfo) {
+        this.attendanceInfo = attendanceInfo;
+    }
 
-public List<Object> getSalesOrderInfo() {
-return salesOrderInfo;
-}
+    public List<Object> getEmpTrackingInfo() {
+        return empTrackingInfo;
+    }
 
-public void setSalesOrderInfo(List<Object> salesOrderInfo) {
-this.salesOrderInfo = salesOrderInfo;
-}
+    public void setEmpTrackingInfo(List<Object> empTrackingInfo) {
+        this.empTrackingInfo = empTrackingInfo;
+    }
 
-public List<Object> getVisitAreaInfo() {
-return visitAreaInfo;
-}
+    public List<Object> getLoginHistory() {
+        return loginHistory;
+    }
 
-public void setVisitAreaInfo(List<Object> visitAreaInfo) {
-this.visitAreaInfo = visitAreaInfo;
-}
+    public void setLoginHistory(List<Object> loginHistory) {
+        this.loginHistory = loginHistory;
+    }
+
+    public List<Object> getSalesOrderInfo() {
+        return salesOrderInfo;
+    }
+
+    public void setSalesOrderInfo(List<Object> salesOrderInfo) {
+        this.salesOrderInfo = salesOrderInfo;
+    }
+
+    public List<Object> getVisitAreaInfo() {
+        return visitAreaInfo;
+    }
+
+    public void setVisitAreaInfo(List<Object> visitAreaInfo) {
+        this.visitAreaInfo = visitAreaInfo;
+    }
 
 }

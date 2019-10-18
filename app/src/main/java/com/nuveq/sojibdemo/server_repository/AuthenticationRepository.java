@@ -6,16 +6,22 @@ import android.widget.Toast;
 
 import androidx.lifecycle.MutableLiveData;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.nuveq.sojibdemo.datamodel.AuthenticationPost;
 import com.nuveq.sojibdemo.datamodel.MacResponse;
+import com.nuveq.sojibdemo.datamodel.registration.Data;
 import com.nuveq.sojibdemo.datamodel.registration.Registration;
 import com.nuveq.sojibdemo.listener.ServerResponseFailedCallback;
+import com.nuveq.sojibdemo.network.HTTP_PARAM;
 import com.nuveq.sojibdemo.utils.CommonUtils;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -26,15 +32,19 @@ public class AuthenticationRepository {
     MutableLiveData<MacResponse> getMacData;
     private ServerResponseFailedCallback mListener;
 
-    public MutableLiveData<Boolean> getRegistrationResponse(JsonObject jsonObject) {
+    public MutableLiveData<Boolean> getRegistrationResponse(Data data) {
         isRegister = new MutableLiveData<>();
-
+        Gson gson = new Gson();
+        String jsonString = gson.toJson(data);
+        JsonObject jsonObject = new JsonParser().parse(jsonString).getAsJsonObject();
 
         CommonUtils.getApiService().register(jsonObject).enqueue(new Callback<Registration>() {
             @Override
             public void onResponse(Call<Registration> call, Response<Registration> response) {
                 if (response.isSuccessful()) {
-                    isRegister.setValue(true);
+                    if (mListener != null) {
+                        mListener.onFailed(response.body().getMessage());
+                    }
                 } else {
                     if (mListener != null) {
                         mListener.onFailed(response.message());
@@ -48,7 +58,6 @@ public class AuthenticationRepository {
                 if (mListener != null) {
                     mListener.onFailed(t.getMessage());
                 }
-
             }
         });
 
@@ -58,30 +67,33 @@ public class AuthenticationRepository {
 
     public MutableLiveData<MacResponse> getMacData(String mac) {
         getMacData = new MutableLiveData<>();
-        Map<String, String> map = new HashMap<String, String>();
-        map.put("macaddress", "6c55e5653fc2d84");
-        MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
-        builder.addFormDataPart("macaddress", "6c55e5653fc2d84");
-        CommonUtils.getApiService().getDataBytMac("6c55e5653fc2d84").enqueue(new Callback<MacResponse>() {
+        Gson gson = new Gson();
+        AuthenticationPost post = new AuthenticationPost();
+        post.setMacaddress("6c55e5653fc2d8");
+        post.setPassword("f");
+        String jsonString = gson.toJson(post);
+        JsonObject jsonObject = new JsonParser().parse(jsonString).getAsJsonObject();
+        MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.MIXED);
+        builder.addFormDataPart("macaddress", mac);
+        CommonUtils.getApiService().getDataBytMac(jsonObject).enqueue(new Callback<String>() {
             @Override
-            public void onResponse(Call<MacResponse> call, Response<MacResponse> response) {
+            public void onResponse(Call<String> call, Response<String> response) {
                 if (response.isSuccessful()) {
-                    if (response.body().getStatus().equals("true")) {
-                        getMacData.setValue(response.body());
+                    if (response.body() !=null) {
+                       // getMacData.setValue(response.body());
                     } else {
                         if (mListener != null) {
-                           // mListener.onFailed(response.body().getMessage());
                         }
                     }
-                }
-                else
-                if (mListener != null) {
-                    mListener.onFailed(response.message());
+                } else {
+                    if (mListener != null) {
+                        mListener.onFailed(response.message());
+                    }
                 }
             }
 
             @Override
-            public void onFailure(Call<MacResponse> call, Throwable t) {
+            public void onFailure(Call<String> call, Throwable t) {
                 if (mListener != null) {
                     mListener.onFailed(t.getMessage());
                 }

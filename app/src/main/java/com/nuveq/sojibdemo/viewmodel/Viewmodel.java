@@ -8,6 +8,8 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.google.gson.JsonObject;
 import com.nuveq.sojibdemo.datamodel.MacResponse;
+import com.nuveq.sojibdemo.datamodel.registration.Data;
+import com.nuveq.sojibdemo.datamodel.registration.Registration;
 import com.nuveq.sojibdemo.server_repository.AuthenticationRepository;
 
 public class Viewmodel extends AndroidViewModel {
@@ -21,7 +23,7 @@ public class Viewmodel extends AndroidViewModel {
     }
 
 
-    public MutableLiveData<Boolean> getRegistrationResponse(JsonObject jsonObject) {
+    public MutableLiveData<Boolean> getRegistrationResponse(Data jsonObject) {
 
         return repository.getRegistrationResponse(jsonObject);
 

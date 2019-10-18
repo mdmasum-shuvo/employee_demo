@@ -2,6 +2,7 @@ package com.nuveq.sojibdemo.network;
 
 
 import com.google.gson.JsonObject;
+import com.nuveq.sojibdemo.datamodel.AuthenticationPost;
 import com.nuveq.sojibdemo.datamodel.MacResponse;
 import com.nuveq.sojibdemo.datamodel.registration.Registration;
 
@@ -15,6 +16,7 @@ import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Query;
@@ -36,8 +38,9 @@ public interface ApiService {
     @POST("loginemp")
     Call<Object> getLogin(@Body JsonObject object);
 
-    @GET("loginemp")
-    Call<MacResponse> getDataBytMac(@Field("macaddress") String data);
+    @Headers("Content-Type: application/json")
+    @POST("loginview")
+    Call<String> getDataBytMac(@Body JsonObject data);
 
 
 }

@@ -6,31 +6,26 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 public class MacResponse implements Serializable {
+    @SerializedName("status")
+    @Expose
+    private Boolean status;
+    @SerializedName("phoneNumber")
+    @Expose
+    private String phoneNumber;
 
-@SerializedName("status")
-@Expose
-private Boolean status;
-@SerializedName("phoneNumber")
-@Expose
-private String phoneNumber;
+    public Boolean getStatus() {
+        return status;
+    }
 
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
 
-public Boolean getStatus() {
-return status;
-}
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
 
-public void setStatus(Boolean status) {
-this.status = status;
-}
-
-public String getPhoneNumber() {
-return phoneNumber;
-}
-
-public void setPhoneNumber(String phoneNumber) {
-this.phoneNumber = phoneNumber;
-}
-
-
-
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 }

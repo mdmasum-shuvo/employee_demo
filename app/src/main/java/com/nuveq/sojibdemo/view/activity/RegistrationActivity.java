@@ -63,6 +63,8 @@ public class RegistrationActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_registration);
         viewModel = ViewModelProviders.of(this).get(Viewmodel.class);
         getGpsLocation();
+        binding.registrationContainer.setVisibility(View.VISIBLE);
+        binding.loginLayout.setVisibility(View.GONE);
         CommonUtils.getApiService().getBranch().enqueue(new Callback<ArrayList<Registration>>() {
             @Override
             public void onResponse(Call<ArrayList<Registration>> call, Response<ArrayList<Registration>> response) {
@@ -143,13 +145,13 @@ public class RegistrationActivity extends AppCompatActivity {
                 data.setPhoneNumber(phone);
                 data.setPassword(pass);
                 data.setLocation(location);
-                data.setMacAddress(androidID);
+                data.setMacAddress("654423198451");
                 data.setBranchId(branchIdList.get(itemPosition));
 
                 String jsonString = gson.toJson(data);
                 JsonObject jsonObject = new JsonParser().parse(jsonString).getAsJsonObject();
 
-                viewModel.getRegistrationResponse(jsonObject).observe(RegistrationActivity.this, isSuccess -> {
+                viewModel.getRegistrationResponse(data).observe(RegistrationActivity.this, isSuccess -> {
                     if (isSuccess) {
                         CommonUtils.showCustomAlert(RegistrationActivity.this, "succeed", "Registration successfully done", false);
                         binding.registrationContainer.setVisibility(View.GONE);
@@ -159,6 +161,19 @@ public class RegistrationActivity extends AppCompatActivity {
 
                 });
 
+  /*       getApiService().register(jsonObject).enqueue(new Callback<Registration>() {
+             @Override
+             public void onResponse(Call<Registration> call, Response<Registration> response) {
+                 if (response.isSuccessful()){
+
+                 }
+             }
+
+             @Override
+             public void onFailure(Call<Registration> call, Throwable t) {
+
+             }
+         });*/
 
             }
         });
@@ -223,5 +238,8 @@ public class RegistrationActivity extends AppCompatActivity {
         }
     }
 
+    public ApiService getApiService() {
+        return RestClient.getInstance().callRetrofit();
+    }
 
 }

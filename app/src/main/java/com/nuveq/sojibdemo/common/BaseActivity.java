@@ -526,6 +526,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
     }
 
 
+
     // when app first time load
     public void homeFragment() {
     /*    ProfileFragment homeFragment = new ProfileFragment();
