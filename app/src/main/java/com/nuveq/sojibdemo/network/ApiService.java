@@ -3,6 +3,7 @@ package com.nuveq.sojibdemo.network;
 
 import com.google.gson.JsonObject;
 import com.nuveq.sojibdemo.datamodel.AuthenticationPost;
+import com.nuveq.sojibdemo.datamodel.LoginResponse;
 import com.nuveq.sojibdemo.datamodel.MacResponse;
 import com.nuveq.sojibdemo.datamodel.registration.Registration;
 
@@ -39,8 +40,8 @@ public interface ApiService {
     Call<Object> getLogin(@Body JsonObject object);
 
     @Headers("Content-Type: application/json")
-    @POST("loginview")
-    Call<String> getDataBytMac(@Body JsonObject data);
+    @POST("login")
+    Call<LoginResponse> getDataBytMac(@Body JsonObject data);
 
 
 }

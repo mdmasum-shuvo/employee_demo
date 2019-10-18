@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.nuveq.sojibdemo.datamodel.AuthenticationPost;
+import com.nuveq.sojibdemo.datamodel.LoginResponse;
 import com.nuveq.sojibdemo.datamodel.MacResponse;
 import com.nuveq.sojibdemo.datamodel.registration.Data;
 import com.nuveq.sojibdemo.datamodel.registration.Registration;
@@ -73,11 +74,9 @@ public class AuthenticationRepository {
         post.setPassword("f");
         String jsonString = gson.toJson(post);
         JsonObject jsonObject = new JsonParser().parse(jsonString).getAsJsonObject();
-        MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.MIXED);
-        builder.addFormDataPart("macaddress", mac);
-        CommonUtils.getApiService().getDataBytMac(jsonObject).enqueue(new Callback<String>() {
+        CommonUtils.getApiService().getDataBytMac(jsonObject).enqueue(new Callback<LoginResponse>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 if (response.isSuccessful()) {
                     if (response.body() !=null) {
                        // getMacData.setValue(response.body());
@@ -93,7 +92,7 @@ public class AuthenticationRepository {
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            public void onFailure(Call<LoginResponse> call, Throwable t) {
                 if (mListener != null) {
                     mListener.onFailed(t.getMessage());
                 }
