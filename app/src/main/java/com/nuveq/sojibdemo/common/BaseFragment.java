@@ -28,12 +28,15 @@ import androidx.fragment.app.Fragment;
 import com.nuveq.sojibdemo.network.ApiService;
 import com.nuveq.sojibdemo.R;
 import com.nuveq.sojibdemo.network.RestClient;
+import com.nuveq.sojibdemo.utils.maputils.GPSTracker;
 
 
 public abstract class BaseFragment extends Fragment {
     private ViewDataBinding binding;
     private ProgressDialog progressDialog;
     private LinearLayout loadingView, noDataView;
+    private GPSTracker gps;
+    public double latitude = 0, longitude = 0;
 
     // Inflate the view for the fragment based on layout XML
     @Override
@@ -48,10 +51,20 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        getGpsLocation();
         initFragmentComponents();
         initFragmentFunctionality();
         initFragmentListener();
+    }
+
+    public void getGpsLocation() {
+        gps = new GPSTracker(getActivity());
+        if (gps.canGetLocation()) {
+            latitude = gps.getLatitude();
+            longitude = gps.getLongitude();
+            // Toast.makeText(this, "lt:" + latitude + "\n" + "lng:" + longitude, Toast.LENGTH_SHORT).show();
+
+        }
     }
 
     @Override

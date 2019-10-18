@@ -20,7 +20,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/card_licence_no"
+                android:id="@+id/btn_Check_in"
                 android:layout_width="@dimen/_90sdp"
                 android:layout_height="@dimen/_90sdp"
                 android:layout_marginLeft="@dimen/_45sdp"
@@ -58,16 +58,16 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/card_nid_no"
+                android:id="@+id/btn_check_out"
                 android:layout_width="@dimen/_90sdp"
                 android:layout_height="@dimen/_90sdp"
                 android:layout_marginEnd="@dimen/_45sdp"
                 app:cardBackgroundColor="@color/colorOffWhite"
                 app:cardCornerRadius="@dimen/_5sdp"
                 app:cardElevation="@dimen/_10sdp"
-                app:layout_constraintBottom_toBottomOf="@+id/card_licence_no"
+                app:layout_constraintBottom_toBottomOf="@+id/btn_Check_in"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/card_licence_no">
+                app:layout_constraintTop_toTopOf="@+id/btn_Check_in">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -98,7 +98,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_15sdp"
-                app:layout_constraintTop_toBottomOf="@+id/card_nid_no">
+                app:layout_constraintTop_toBottomOf="@+id/btn_check_out">
 
                 <LinearLayout
                     android:layout_width="match_parent"

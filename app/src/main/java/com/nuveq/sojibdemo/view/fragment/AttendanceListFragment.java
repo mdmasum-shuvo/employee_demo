@@ -34,7 +34,7 @@ public class AttendanceListFragment extends BaseFragment {
     @Override
     protected void initFragmentListener() {
 
-        binding.cardLicenceNo.setOnClickListener(view -> {
+        binding.btnCheckIn.setOnClickListener(view -> {
             Runnable mRunnable;
             Handler mHandler = new Handler();
             mRunnable = new Runnable() {

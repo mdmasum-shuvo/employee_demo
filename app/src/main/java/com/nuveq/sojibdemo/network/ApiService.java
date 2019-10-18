@@ -43,6 +43,14 @@ public interface ApiService {
     @POST("loginview")
     Call<String> getDataBytMac(@Body JsonObject data);
 
+    @Headers("Content-Type: application/json")
+    @POST("checkin")
+    Call<String> postCheckIn(@Body JsonObject data);
+
+    @Headers("Content-Type: application/json")
+    @POST("checkout")
+    Call<String> postCheckOut(@Body JsonObject data);
+
 
 }
 

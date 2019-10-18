@@ -3,10 +3,12 @@ package com.nuveq.sojibdemo.common;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.location.Address;
@@ -17,6 +19,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -40,6 +43,7 @@ import androidx.databinding.ViewDataBinding;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.gson.GsonBuilder;
@@ -50,6 +54,7 @@ import com.nuveq.sojibdemo.network.ApiService;
 import com.nuveq.sojibdemo.R;
 import com.nuveq.sojibdemo.network.RestClient;
 import com.nuveq.sojibdemo.appdata.SharedPreferencesEnum;
+import com.nuveq.sojibdemo.service.LocationMonitoringService;
 import com.nuveq.sojibdemo.utils.maputils.GPSTracker;
 import com.nuveq.sojibdemo.view.fragment.AddAttendanceFragment;
 import com.nuveq.sojibdemo.view.fragment.AddVisitPlanFragment;
@@ -98,6 +103,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initVariable();
+
         mHandler = new Handler();
         binding = DataBindingUtil.setContentView(this, getLayoutResourceFile());
         initComponent();
@@ -555,8 +561,30 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
     }
 
 
+    public void locationBroadcast() {
 
-/*    // when app first time load
+        LocalBroadcastManager.getInstance(this).registerReceiver(
+                new BroadcastReceiver() {
+                    @Override
+                    public void onReceive(Context context, Intent intent) {
+                        String latitude = intent.getStringExtra(LocationMonitoringService.EXTRA_LATITUDE);
+                        String longitude = intent.getStringExtra(LocationMonitoringService.EXTRA_LONGITUDE);
+
+                        if (latitude != null && longitude != null) {
+                            Log.e("location:", "service:" + "\n Latitude : " + latitude + "\n Longitude: " + longitude);
+                        }
+                    }
+                }, new IntentFilter(LocationMonitoringService.ACTION_LOCATION_BROADCAST)
+        );
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+
+    /*    // when app first time load
     public void homeFragment() {
         ProfileFragment homeFragment = new ProfileFragment();
         fragmentTransaction(homeFragment, getResources().getString(R.string.profile));

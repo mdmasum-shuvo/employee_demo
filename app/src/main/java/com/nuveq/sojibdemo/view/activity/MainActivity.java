@@ -14,7 +14,6 @@ public class MainActivity extends BaseActivity {
 
     ActivityMainBinding binding;
     OnItemClickListener onItemClickListener;
-    ProfileFragment profileFragment = new ProfileFragment();
 
     @Override
     protected int getLayoutResourceFile() {
@@ -28,11 +27,13 @@ public class MainActivity extends BaseActivity {
         initToolbar();
         initDrawer();
         loadHomeFragment();
+
     }
 
     @Override
     protected void initFunctionality() {
         //binding.recyclerView.setAdapter(adapter);
+        locationBroadcast();
     }
 
     @Override
