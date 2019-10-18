@@ -36,12 +36,12 @@ public interface ApiService {
     Call<ArrayList<Registration>> getBranch();
 
 
-    @POST("loginemp")
-    Call<Object> getLogin(@Body JsonObject object);
+    @POST("login")
+    Call<LoginResponse> getLogin(@Body JsonObject object);
 
     @Headers("Content-Type: application/json")
-    @POST("login")
-    Call<LoginResponse> getDataBytMac(@Body JsonObject data);
+    @POST("loginview")
+    Call<String> getDataBytMac(@Body JsonObject data);
 
 
 }

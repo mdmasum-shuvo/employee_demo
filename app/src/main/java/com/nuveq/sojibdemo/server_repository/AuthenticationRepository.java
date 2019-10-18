@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import androidx.lifecycle.MutableLiveData;
 
+import com.google.android.gms.common.internal.service.Common;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -30,12 +31,14 @@ import retrofit2.Response;
 public class AuthenticationRepository {
 
     MutableLiveData<Boolean> isRegister;
-    MutableLiveData<MacResponse> getMacData;
+    MutableLiveData<String> getMacData;
+    MutableLiveData<LoginResponse> getLoginData;
+    Gson gson = new Gson();
     private ServerResponseFailedCallback mListener;
 
     public MutableLiveData<Boolean> getRegistrationResponse(Data data) {
         isRegister = new MutableLiveData<>();
-        Gson gson = new Gson();
+
         String jsonString = gson.toJson(data);
         JsonObject jsonObject = new JsonParser().parse(jsonString).getAsJsonObject();
 
@@ -65,23 +68,63 @@ public class AuthenticationRepository {
         return isRegister;
     }
 
-
-    public MutableLiveData<MacResponse> getMacData(String mac) {
-        getMacData = new MutableLiveData<>();
-        Gson gson = new Gson();
-        AuthenticationPost post = new AuthenticationPost();
-        post.setMacaddress("6c55e5653fc2d8");
-        post.setPassword("f");
-        String jsonString = gson.toJson(post);
+    public MutableLiveData<LoginResponse> getLoginData(AuthenticationPost object) {
+        getLoginData = new MutableLiveData<>();
+        String jsonString = gson.toJson(object);
         JsonObject jsonObject = new JsonParser().parse(jsonString).getAsJsonObject();
-        CommonUtils.getApiService().getDataBytMac(jsonObject).enqueue(new Callback<LoginResponse>() {
+
+        CommonUtils.getApiService().getLogin(jsonObject).enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 if (response.isSuccessful()) {
-                    if (response.body() !=null) {
-                       // getMacData.setValue(response.body());
+                    if (response.body().getStatus() != null) {
+                        getLoginData.setValue(response.body());
                     } else {
                         if (mListener != null) {
+                            mListener.onFailed(response.message());
+                        }
+                    }
+                }
+                else {
+                    if (mListener != null) {
+                        mListener.onFailed(response.message());
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<LoginResponse> call, Throwable t) {
+
+            }
+        });
+        return getLoginData;
+    }
+
+
+    public MutableLiveData<String> getMacData(String mac) {
+        getMacData = new MutableLiveData<>();
+        Gson gson = new Gson();
+        AuthenticationPost post = new AuthenticationPost();
+        post.setMacaddress(mac);
+        String jsonString = gson.toJson(post);
+        JsonObject jsonObject = new JsonParser().parse(jsonString).getAsJsonObject();
+        CommonUtils.getApiService().getDataBytMac(jsonObject).enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if (response.isSuccessful()) {
+                    if (response.body() != null) {
+                        if (!response.body().contains("Invalid Account!")) {
+                            getMacData.setValue(response.body());
+                        } else {
+                            if (mListener != null) {
+                                mListener.onFailed("failed");
+                            }
+                        }
+                        // getMacData.setValue(response.body());
+                    } else {
+                        if (mListener != null) {
+                            mListener.onFailed(response.message());
                         }
                     }
                 } else {
@@ -92,7 +135,7 @@ public class AuthenticationRepository {
             }
 
             @Override
-            public void onFailure(Call<LoginResponse> call, Throwable t) {
+            public void onFailure(Call<String> call, Throwable t) {
                 if (mListener != null) {
                     mListener.onFailed(t.getMessage());
                 }

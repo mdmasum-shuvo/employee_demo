@@ -222,6 +222,6 @@ public class SharedPreferencesEnum {
      * Enum representing your setting names or key for your setting.
      */
     public enum Key {
-        PHONE_NUMBER
+        PHONE_NUMBER,USER_ID;
     }
 }

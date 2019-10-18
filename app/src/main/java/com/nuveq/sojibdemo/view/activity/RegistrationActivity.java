@@ -2,7 +2,6 @@ package com.nuveq.sojibdemo.view.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
@@ -19,15 +18,20 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.nuveq.sojibdemo.appdata.AppConstants;
+import com.nuveq.sojibdemo.appdata.SharedPreferencesEnum;
+import com.nuveq.sojibdemo.common.BaseActivity;
+import com.nuveq.sojibdemo.datamodel.AuthenticationPost;
+import com.nuveq.sojibdemo.listener.ServerResponseFailedCallback;
 import com.nuveq.sojibdemo.network.ApiService;
 import com.nuveq.sojibdemo.datamodel.registration.Data;
 import com.nuveq.sojibdemo.utils.CommonUtils;
-import com.nuveq.sojibdemo.utils.GPSTracker;
 import com.nuveq.sojibdemo.utils.PermissionUtils;
 import com.nuveq.sojibdemo.R;
 import com.nuveq.sojibdemo.datamodel.registration.Registration;
 import com.nuveq.sojibdemo.network.RestClient;
 import com.nuveq.sojibdemo.databinding.ActivityRegistrationBinding;
+import com.nuveq.sojibdemo.utils.maputils.GPSTracker;
 import com.nuveq.sojibdemo.viewmodel.Viewmodel;
 
 import java.io.IOException;
@@ -39,7 +43,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RegistrationActivity extends AppCompatActivity {
+public class RegistrationActivity extends BaseActivity implements ServerResponseFailedCallback {
 
     ActivityRegistrationBinding binding;
     private boolean mPermissionDenied = false;
@@ -59,12 +63,29 @@ public class RegistrationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final String androidID = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_registration);
+
+    }
+
+    @Override
+    protected int getLayoutResourceFile() {
+        return R.layout.activity_registration;
+    }
+
+    @Override
+    protected void initComponent() {
+        binding = (ActivityRegistrationBinding) getBinding();
         viewModel = ViewModelProviders.of(this).get(Viewmodel.class);
+        viewModel.getRepository().setCallbackListener(this);
         getGpsLocation();
-        binding.registrationContainer.setVisibility(View.VISIBLE);
-        binding.loginLayout.setVisibility(View.GONE);
+
+        if (getIntentData() != null) {
+            binding.etUsername.setText(getIntentData());
+            binding.registrationContainer.setVisibility(View.GONE);
+            binding.loginLayout.setVisibility(View.VISIBLE);
+        } else {
+            binding.registrationContainer.setVisibility(View.VISIBLE);
+            binding.loginLayout.setVisibility(View.GONE);
+        }
         CommonUtils.getApiService().getBranch().enqueue(new Callback<ArrayList<Registration>>() {
             @Override
             public void onResponse(Call<ArrayList<Registration>> call, Response<ArrayList<Registration>> response) {
@@ -145,11 +166,8 @@ public class RegistrationActivity extends AppCompatActivity {
                 data.setPhoneNumber(phone);
                 data.setPassword(pass);
                 data.setLocation(location);
-                data.setMacAddress("654423198451");
+                data.setMacAddress(AppConstants.ANDROID_ID);
                 data.setBranchId(branchIdList.get(itemPosition));
-
-                String jsonString = gson.toJson(data);
-                JsonObject jsonObject = new JsonParser().parse(jsonString).getAsJsonObject();
 
                 viewModel.getRegistrationResponse(data).observe(RegistrationActivity.this, isSuccess -> {
                     if (isSuccess) {
@@ -161,26 +179,38 @@ public class RegistrationActivity extends AppCompatActivity {
 
                 });
 
-  /*       getApiService().register(jsonObject).enqueue(new Callback<Registration>() {
-             @Override
-             public void onResponse(Call<Registration> call, Response<Registration> response) {
-                 if (response.isSuccessful()){
-
-                 }
-             }
-
-             @Override
-             public void onFailure(Call<Registration> call, Throwable t) {
-
-             }
-         });*/
 
             }
         });
 
         binding.btnLogin.setOnClickListener(view -> {
-            startActivity(new Intent(RegistrationActivity.this, MainActivity.class));
+            AuthenticationPost post = new AuthenticationPost();
+            post.setMacaddress(AppConstants.ANDROID_ID);
+            String pass = binding.etPassword.getText().toString().trim();
+            if (pass.equals("")) {
+                CommonUtils.showCustomAlert(this, "Error", "Please enter password", false);
+                return;
+            }
+            post.setPassword(pass);
+            viewModel.getLoginResponse(post).observe(this, data -> {
+                if (data != null) {
+                    SharedPreferencesEnum.getInstance(this).put(SharedPreferencesEnum.Key.USER_ID, data.getEmpId());
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable(AppConstants.INTENT_KEY, data);
+                    startActivity(MainActivity.class, true, bundle);
+                }
+            });
         });
+
+    }
+
+    @Override
+    protected void initFunctionality() {
+
+    }
+
+    @Override
+    protected void initListener() {
 
     }
 
@@ -209,7 +239,7 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
 
-    private void getGpsLocation() {
+    public void getGpsLocation() {
         gps = new GPSTracker(this);
         if (gps.canGetLocation()) {
 
@@ -238,8 +268,22 @@ public class RegistrationActivity extends AppCompatActivity {
         }
     }
 
+    private String getIntentData() {
+        if (getIntent().getExtras() != null) {
+            String phone = getIntent().getStringExtra(AppConstants.PHONE_NUMBER);
+            return phone;
+
+        }
+
+        return null;
+    }
+
     public ApiService getApiService() {
         return RestClient.getInstance().callRetrofit();
     }
 
+    @Override
+    public void onFailed(String msg) {
+        CommonUtils.showCustomAlert(this, "Failed", msg, false);
+    }
 }

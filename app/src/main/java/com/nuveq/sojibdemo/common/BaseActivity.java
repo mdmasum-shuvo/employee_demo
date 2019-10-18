@@ -44,11 +44,13 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.navigation.NavigationView;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonNull;
+import com.nuveq.sojibdemo.appdata.AppConstants;
+import com.nuveq.sojibdemo.datamodel.LoginResponse;
 import com.nuveq.sojibdemo.network.ApiService;
-import com.nuveq.sojibdemo.utils.GPSTracker;
 import com.nuveq.sojibdemo.R;
 import com.nuveq.sojibdemo.network.RestClient;
 import com.nuveq.sojibdemo.appdata.SharedPreferencesEnum;
+import com.nuveq.sojibdemo.utils.maputils.GPSTracker;
 import com.nuveq.sojibdemo.view.fragment.AddAttendanceFragment;
 import com.nuveq.sojibdemo.view.fragment.AddVisitPlanFragment;
 import com.nuveq.sojibdemo.view.fragment.AttendanceListFragment;
@@ -128,7 +130,6 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
     }
 
 
-
     public void initToolbar() {
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
@@ -199,11 +200,31 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
 
 
     public void loadHomeFragment() {
+        ProfileFragment profileFragment = new ProfileFragment();
+        profileFragment.setArguments(getIntentData());
+
         Runnable mPendingRunnable = new Runnable() {
             @Override
             public void run() {
                 // update the main content by replacing fragments
-//             fragmentTransaction(new MyAssignmentFragment(),"My Assignment");
+                fragmentTransaction(profileFragment, "My Profile");
+            }
+        };
+
+        // If mPendingRunnable is not null, then add to the message queue
+        if (mPendingRunnable != null) {
+            mHandler.post(mPendingRunnable);
+        }
+    }
+
+    public void loadFragment(Fragment fragment, String TAG) {
+
+
+        Runnable mPendingRunnable = new Runnable() {
+            @Override
+            public void run() {
+                // update the main content by replacing fragments
+                fragmentTransaction(fragment, TAG);
             }
         };
 
@@ -239,29 +260,27 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         int id = item.getItemId();
         switch (id) {
             case R.id.nav_profile:
-                ProfileFragment homeFragment = new ProfileFragment();
-                fragmentTransaction(homeFragment, getResources().getString(R.string.profile));
+                loadHomeFragment();
                 break;
 
             case R.id.nav_add_plan:
                 AddVisitPlanFragment addVisitPlanFragment = new AddVisitPlanFragment();
-                fragmentTransaction(addVisitPlanFragment, getResources().getString(R.string.add_plan));
-
-
+                loadFragment(addVisitPlanFragment, getResources().getString(R.string.add_plan));
                 break;
             case R.id.nav_plan_list:
                 VisitPlanListFragment myPlannerFragment = new VisitPlanListFragment();
-                fragmentTransaction(myPlannerFragment, getResources().getString(R.string.plan_list));
+                loadFragment(myPlannerFragment, getResources().getString(R.string.plan_list));
+
                 break;
 
             case R.id.nav_add_attendance:
                 AddAttendanceFragment addAttendanceFragment = new AddAttendanceFragment();
-                fragmentTransaction(addAttendanceFragment, getResources().getString(R.string.attend_add));
+                loadFragment(addAttendanceFragment, getResources().getString(R.string.attend_add));
                 break;
 
             case R.id.nav_attendance_list:
                 AttendanceListFragment attendanceListFragment = new AttendanceListFragment();
-                fragmentTransaction(attendanceListFragment, getResources().getString(R.string.attend_list));
+                loadFragment(attendanceListFragment, getResources().getString(R.string.attend_list));
                 break;
 
             case R.id.nav_log_out:
@@ -526,12 +545,22 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
     }
 
 
+    private Bundle getIntentData() {
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
 
-    // when app first time load
-    public void homeFragment() {
-    /*    ProfileFragment homeFragment = new ProfileFragment();
-        fragmentTransaction(homeFragment, getResources().getString(R.string.profile));*/
+            return bundle;
+        }
+        return null;
     }
+
+
+
+/*    // when app first time load
+    public void homeFragment() {
+        ProfileFragment homeFragment = new ProfileFragment();
+        fragmentTransaction(homeFragment, getResources().getString(R.string.profile));
+    }*/
 
 
 }

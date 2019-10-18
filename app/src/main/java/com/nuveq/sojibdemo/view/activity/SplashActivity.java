@@ -27,6 +27,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.nuveq.sojibdemo.appdata.AppConstants.ANDROID_ID;
+
 public class SplashActivity extends BaseActivity implements ServerResponseFailedCallback {
     private Viewmodel viewModel;
 
@@ -42,11 +44,13 @@ public class SplashActivity extends BaseActivity implements ServerResponseFailed
         viewModel.getRepository().setCallbackListener(this);
         initLoader();
         showLoader();
-        final String androidID = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
+        ANDROID_ID = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
 
-        viewModel.getMacData(androidID).observe(this, data -> {
-            SharedPreferencesEnum.getInstance(this).put(SharedPreferencesEnum.Key.PHONE_NUMBER, data.getPhoneNumber());
-            startActivity(new Intent(this, RegistrationActivity.class).putExtra(AppConstants.PHONE_NUMBER, data.getPhoneNumber()));
+        viewModel.getMacData(ANDROID_ID).observe(this, data -> {
+            if (data !=null) {
+                SharedPreferencesEnum.getInstance(this).put(SharedPreferencesEnum.Key.PHONE_NUMBER, data);
+                startActivity(new Intent(this, RegistrationActivity.class).putExtra(AppConstants.PHONE_NUMBER, data));
+            }
         });
    /*     new Handler().postDelayed(new Runnable() {
             @Override
@@ -70,6 +74,5 @@ public class SplashActivity extends BaseActivity implements ServerResponseFailed
     @Override
     public void onFailed(String msg) {
         startActivity(new Intent(this, RegistrationActivity.class));
-
     }
 }
