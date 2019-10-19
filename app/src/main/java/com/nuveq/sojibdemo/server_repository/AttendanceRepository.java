@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.nuveq.sojibdemo.datamodel.AttendancePost;
+import com.nuveq.sojibdemo.datamodel.TrackingPost;
 import com.nuveq.sojibdemo.listener.ServerResponseFailedCallback;
 import com.nuveq.sojibdemo.utils.CommonUtils;
 
@@ -48,6 +49,9 @@ public class AttendanceRepository {
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
+                if (mListener != null) {
+                    mListener.onFailed(t.getMessage());
+                }
 
             }
         });
@@ -82,6 +86,41 @@ public class AttendanceRepository {
             @Override
             public void onFailure(Call<String> call, Throwable t) {
 
+            }
+        });
+        return checkData;
+
+    }
+
+    public MutableLiveData<String> getTrackData(TrackingPost data) {
+        checkData = new MutableLiveData<>();
+        String jsonString = gson.toJson(data);
+        JsonObject jsonObject = new JsonParser().parse(jsonString).getAsJsonObject();
+
+        CommonUtils.getApiService().postTracking(jsonObject).enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if (response.isSuccessful()) {
+                    if (response.body() != null) {
+                        checkData.setValue(response.body());
+                    } else {
+                        if (mListener != null) {
+                            mListener.onFailed(response.message());
+                        }
+
+                    }
+                } else {
+                    if (mListener != null) {
+                        mListener.onFailed(response.message());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                if (mListener != null) {
+                    mListener.onFailed(t.getMessage());
+                }
             }
         });
         return checkData;

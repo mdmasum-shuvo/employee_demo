@@ -85,9 +85,11 @@ public class RegistrationActivity extends BaseActivity implements ServerResponse
             binding.registrationContainer.setVisibility(View.VISIBLE);
             binding.loginLayout.setVisibility(View.GONE);
         }
+        showProgressDialog();
         CommonUtils.getApiService().getBranch().enqueue(new Callback<ArrayList<Registration>>() {
             @Override
             public void onResponse(Call<ArrayList<Registration>> call, Response<ArrayList<Registration>> response) {
+                hideProgressDialog();
                 if (response.isSuccessful()) {
                     for (int i = 0; i < response.body().size(); i++) {
                         try {
@@ -111,6 +113,7 @@ public class RegistrationActivity extends BaseActivity implements ServerResponse
             @Override
             public void onFailure(Call<ArrayList<Registration>> call, Throwable t) {
                 Log.e("", "");
+                hideProgressDialog();
 
             }
         });
@@ -129,6 +132,7 @@ public class RegistrationActivity extends BaseActivity implements ServerResponse
         binding.btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
 
                 name = binding.tvName.getText().toString();
                 phone = binding.etPhone.getText().toString();
@@ -168,8 +172,10 @@ public class RegistrationActivity extends BaseActivity implements ServerResponse
                 data.setMacAddress(AppConstants.ANDROID_ID);
                 data.setBranchId(branchIdList.get(itemPosition));
 
+                showProgressDialog();
                 viewModel.getRegistrationResponse(data).observe(RegistrationActivity.this, isSuccess -> {
                     if (isSuccess) {
+                        hideProgressDialog();
                         CommonUtils.showCustomAlert(RegistrationActivity.this, "succeed", "Registration successfully done", false);
                         binding.registrationContainer.setVisibility(View.GONE);
                         binding.loginLayout.setVisibility(View.VISIBLE);
@@ -191,12 +197,16 @@ public class RegistrationActivity extends BaseActivity implements ServerResponse
                 return;
             }
             post.setPassword(pass);
+            showProgressDialog();
             viewModel.getLoginResponse(post).observe(this, data -> {
                 if (data != null) {
+                    hideProgressDialog();
+                    Toast.makeText(getApplicationContext(), "Login successful", Toast.LENGTH_SHORT).show();
                     SharedPreferencesEnum.getInstance(this).put(SharedPreferencesEnum.Key.USER_ID, data.getEmpId());
                     Bundle bundle = new Bundle();
                     bundle.putSerializable(AppConstants.INTENT_KEY, data);
                     startActivity(MainActivity.class, true, bundle);
+                    finish();
                 }
             });
         });
@@ -283,6 +293,7 @@ public class RegistrationActivity extends BaseActivity implements ServerResponse
 
     @Override
     public void onFailed(String msg) {
+        hideProgressDialog();
         CommonUtils.showCustomAlert(this, "Failed", msg, false);
     }
 }

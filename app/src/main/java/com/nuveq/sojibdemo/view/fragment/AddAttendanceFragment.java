@@ -12,6 +12,7 @@ import com.nuveq.sojibdemo.appdata.SharedPreferencesEnum;
 import com.nuveq.sojibdemo.common.BaseFragment;
 import com.nuveq.sojibdemo.databinding.FragmentAttendanceListBinding;
 import com.nuveq.sojibdemo.datamodel.AttendancePost;
+import com.nuveq.sojibdemo.datamodel.TrackingPost;
 import com.nuveq.sojibdemo.listener.ServerResponseFailedCallback;
 import com.nuveq.sojibdemo.utils.CommonUtils;
 import com.nuveq.sojibdemo.utils.maputils.GPSTracker;
@@ -48,6 +49,8 @@ public class AddAttendanceFragment extends BaseFragment implements ServerRespons
     protected void initFragmentFunctionality() {
 
         binding.btnCheckIn.setOnClickListener(view -> {
+            resetAllButton();
+            binding.btnCheckIn.setCardBackgroundColor(getResources().getColor(R.color.lightgray));
             if (latitude == 0) {
                 getGpsLocation();
                 Toast.makeText(getActivity(), "GPS Error", Toast.LENGTH_LONG).show();
@@ -71,19 +74,47 @@ public class AddAttendanceFragment extends BaseFragment implements ServerRespons
 
             }
 
+            TrackingPost post = new TrackingPost();
+            post.setDate(CommonUtils.currentDate());
+            post.setEmpid(String.valueOf(SharedPreferencesEnum.getInstance(getActivity()).getInt(SharedPreferencesEnum.Key.USER_ID)));
+            post.setLatpoint("" + latitude);
+            post.setLogpoint("" + longitude);
+            post.setTime(CommonUtils.currentTime());
+            viewModel.getTracking(post).observe(getActivity(), data -> {
+                if (data != null) {
+
+                }
+            });
+
             AttendancePost attendancePost = new AttendancePost();
-            attendancePost.setCheckinlocation(location);
-            attendancePost.setCheckintime(CommonUtils.currentTime());
-            attendancePost.setDate(CommonUtils.currentDate());
             attendancePost.setEmpid(String.valueOf(SharedPreferencesEnum.getInstance(getActivity()).getInt(SharedPreferencesEnum.Key.USER_ID)));
+            attendancePost.setDate(CommonUtils.currentDate());
+            attendancePost.setCheckintime(CommonUtils.currentTime());
+            attendancePost.setCheckinlocation(location);
+            showProgressDialog();
             viewModel.getCheckIn(attendancePost).observe(getActivity(), data -> {
                 if (data != null) {
+                    hideProgressDialog();
                     CommonUtils.showCustomAlert(getActivity(), "Success", data, false);
                 }
             });
 
         });
         binding.btnCheckOut.setOnClickListener(view -> {
+            resetAllButton();
+            binding.btnCheckOut.setCardBackgroundColor(getResources().getColor(R.color.lightgray));
+
+            TrackingPost post = new TrackingPost();
+            post.setDate(CommonUtils.currentDate());
+            post.setEmpid(String.valueOf(SharedPreferencesEnum.getInstance(getActivity()).getInt(SharedPreferencesEnum.Key.USER_ID)));
+            post.setLatpoint("" + latitude);
+            post.setLogpoint("" + longitude);
+            post.setTime(CommonUtils.currentTime());
+            viewModel.getTracking(post).observe(getActivity(), data -> {
+                if (data != null) {
+
+                }
+            });
             if (latitude == 0) {
                 getGpsLocation();
                 Toast.makeText(getActivity(), "GPS Error", Toast.LENGTH_LONG).show();
@@ -112,8 +143,10 @@ public class AddAttendanceFragment extends BaseFragment implements ServerRespons
             attendancePost.setCheckintime(CommonUtils.currentTime());
             attendancePost.setDate(CommonUtils.currentDate());
             attendancePost.setEmpid(String.valueOf(SharedPreferencesEnum.getInstance(getActivity()).getInt(SharedPreferencesEnum.Key.USER_ID)));
+            showProgressDialog();
             viewModel.getCheckOut(attendancePost).observe(getActivity(), data -> {
                 if (data != null) {
+                    hideProgressDialog();
                     CommonUtils.showCustomAlert(getActivity(), "Success", data, false);
                 }
             });
@@ -121,13 +154,22 @@ public class AddAttendanceFragment extends BaseFragment implements ServerRespons
 
     }
 
+    private void resetAllButton() {
+        binding.btnCheckIn.setCardBackgroundColor(getResources().getColor(R.color.off_white));
+        binding.btnCheckOut.setCardBackgroundColor(getResources().getColor(R.color.off_white));
+
+    }
+
+
     @Override
     protected void initFragmentListener() {
+
 
     }
 
     @Override
     public void onFailed(String msg) {
+        hideProgressDialog();
         CommonUtils.showCustomAlert(getActivity(), "Failed", msg, false);
     }
 }

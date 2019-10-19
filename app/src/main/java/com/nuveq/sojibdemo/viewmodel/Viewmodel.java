@@ -11,6 +11,7 @@ import com.nuveq.sojibdemo.datamodel.AttendancePost;
 import com.nuveq.sojibdemo.datamodel.AuthenticationPost;
 import com.nuveq.sojibdemo.datamodel.LoginResponse;
 import com.nuveq.sojibdemo.datamodel.MacResponse;
+import com.nuveq.sojibdemo.datamodel.TrackingPost;
 import com.nuveq.sojibdemo.datamodel.registration.Data;
 import com.nuveq.sojibdemo.datamodel.registration.Registration;
 import com.nuveq.sojibdemo.server_repository.AttendanceRepository;
@@ -50,6 +51,11 @@ public class Viewmodel extends AndroidViewModel {
     public MutableLiveData<String> getCheckOut(AttendancePost mac) {
 
         return attendanceRepository.getCheckDataOut(mac);
+
+    }
+
+    public MutableLiveData<String> getTracking(TrackingPost data) {
+        return attendanceRepository.getTrackData(data);
 
     }
 

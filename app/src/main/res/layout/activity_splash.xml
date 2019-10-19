@@ -6,5 +6,21 @@
     android:layout_height="match_parent"
     tools:context=".view.activity.SplashActivity">
 
-    <include layout="@layout/view_common_loader"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/app_logo"
+        app:layout_constraintBottom_toBottomOf="@+id/include2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/include2"
+        app:layout_constraintVertical_bias="0.252">
+
+    </ImageView>
+
+    <include
+        android:id="@+id/include2"
+        layout="@layout/view_common_loader"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-47dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

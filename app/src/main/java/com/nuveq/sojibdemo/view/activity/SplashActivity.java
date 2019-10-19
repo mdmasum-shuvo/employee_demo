@@ -55,21 +55,17 @@ public class SplashActivity extends BaseActivity implements ServerResponseFailed
     protected void initComponent() {
         viewModel = ViewModelProviders.of(this).get(Viewmodel.class);
         viewModel.getRepository().setCallbackListener(this);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
 
         initLoader();
         showLoader();
         ANDROID_ID = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
-
+        viewModel.getMacData(ANDROID_ID).observe(SplashActivity.this, data -> {
+            if (data != null) {
+                SharedPreferencesEnum.getInstance(SplashActivity.this).put(SharedPreferencesEnum.Key.PHONE_NUMBER, data);
+                startActivity(new Intent(SplashActivity.this, RegistrationActivity.class).putExtra(AppConstants.PHONE_NUMBER, data));
+                finish();
+            }
+        });
 
    /*     new Handler().postDelayed(new Runnable() {
             @Override
@@ -95,7 +91,7 @@ public class SplashActivity extends BaseActivity implements ServerResponseFailed
         startActivity(new Intent(this, RegistrationActivity.class));
     }
 
-    @Override
+/*    @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
@@ -126,12 +122,7 @@ public class SplashActivity extends BaseActivity implements ServerResponseFailed
 
                             @Override
                             public void run() {
-                                viewModel.getMacData(ANDROID_ID).observe(SplashActivity.this, data -> {
-                                    if (data !=null) {
-                                        SharedPreferencesEnum.getInstance(SplashActivity.this).put(SharedPreferencesEnum.Key.PHONE_NUMBER, data);
-                                        startActivity(new Intent(SplashActivity.this, RegistrationActivity.class).putExtra(AppConstants.PHONE_NUMBER, data));
-                                    }
-                                });
+
                             }
                         }, 1500);
                     } else {
@@ -167,5 +158,5 @@ public class SplashActivity extends BaseActivity implements ServerResponseFailed
     protected void onStop() {
         super.onStop();
         unregisterNetworkChanges();
-    }
+    }*/
 }

@@ -28,6 +28,9 @@ public class MainActivity extends BaseActivity {
         initDrawer();
         loadHomeFragment();
 
+        binding.Toolbar.logout.setOnClickListener(view -> {
+            finish();
+        });
     }
 
     @Override
@@ -40,8 +43,6 @@ public class MainActivity extends BaseActivity {
     protected void initListener() {
 
     }
-
-
 
 
 }

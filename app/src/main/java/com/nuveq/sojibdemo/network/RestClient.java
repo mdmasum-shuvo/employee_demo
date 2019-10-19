@@ -3,6 +3,9 @@ package com.nuveq.sojibdemo.network;
 
 import androidx.annotation.NonNull;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -20,6 +23,7 @@ public class RestClient {
     private static final long TIMEOUT_SECOND = 120;
     private static final long WRITE_TIMEOUT_SECOND = 120;
     private static final long READ_TIMEOUT_SECOND = 120;
+    Gson gson = new GsonBuilder().setLenient().create();
 
     private static RestClient restClient = null;
     private OkHttpClient client;
@@ -54,6 +58,7 @@ public class RestClient {
         return "http://sojibkhan24-001-site1.etempurl.com/api/";
     }
 //return "http://service.idlc.com/SalesforceApiConsumerdevelopment/api/";
+
     /**
      * API service object
      *
@@ -68,7 +73,7 @@ public class RestClient {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(getBaseURL())
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .client(client)
                 .build();
 
