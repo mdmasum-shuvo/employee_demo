@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.google.gson.JsonObject;
 import com.nuveq.sojibdemo.datamodel.AttendancePost;
 import com.nuveq.sojibdemo.datamodel.AuthenticationPost;
+import com.nuveq.sojibdemo.datamodel.CheckOutPost;
 import com.nuveq.sojibdemo.datamodel.LoginResponse;
 import com.nuveq.sojibdemo.datamodel.MacResponse;
 import com.nuveq.sojibdemo.datamodel.TrackingPost;
@@ -48,7 +49,7 @@ public class Viewmodel extends AndroidViewModel {
 
     }
 
-    public MutableLiveData<String> getCheckOut(AttendancePost mac) {
+    public MutableLiveData<String> getCheckOut(CheckOutPost mac) {
 
         return attendanceRepository.getCheckDataOut(mac);
 

@@ -9,7 +9,7 @@ public class LoginResponse implements Serializable {
 
 @SerializedName("status")
 @Expose
-private String status;
+private Boolean status;
 @SerializedName("empId")
 @Expose
 private Integer empId;
@@ -23,11 +23,11 @@ private String macAddress;
 @Expose
 private String picture;
 
-public String getStatus() {
+public Boolean getStatus() {
 return status;
 }
 
-public void setStatus(String status) {
+public void setStatus(Boolean status) {
 this.status = status;
 }
 

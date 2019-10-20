@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.nuveq.sojibdemo.datamodel.AttendancePost;
+import com.nuveq.sojibdemo.datamodel.CheckOutPost;
 import com.nuveq.sojibdemo.datamodel.TrackingPost;
 import com.nuveq.sojibdemo.listener.ServerResponseFailedCallback;
 import com.nuveq.sojibdemo.utils.CommonUtils;
@@ -59,7 +60,7 @@ public class AttendanceRepository {
 
     }
 
-    public MutableLiveData<String> getCheckDataOut(AttendancePost data) {
+    public MutableLiveData<String> getCheckDataOut(CheckOutPost data) {
         checkData = new MutableLiveData<>();
         String jsonString = gson.toJson(data);
         JsonObject jsonObject = new JsonParser().parse(jsonString).getAsJsonObject();
@@ -85,7 +86,9 @@ public class AttendanceRepository {
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-
+                if (mListener != null) {
+                    mListener.onFailed(t.getMessage());
+                }
             }
         });
         return checkData;
@@ -104,23 +107,23 @@ public class AttendanceRepository {
                     if (response.body() != null) {
                         checkData.setValue(response.body());
                     } else {
-                        if (mListener != null) {
+                     /*   if (mListener != null) {
                             mListener.onFailed(response.message());
-                        }
+                        }*/
 
                     }
                 } else {
-                    if (mListener != null) {
+                  /*  if (mListener != null) {
                         mListener.onFailed(response.message());
-                    }
+                    }*/
                 }
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                if (mListener != null) {
+              /*  if (mListener != null) {
                     mListener.onFailed(t.getMessage());
-                }
+                }*/
             }
         });
         return checkData;

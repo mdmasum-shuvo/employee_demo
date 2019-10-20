@@ -12,6 +12,7 @@ import com.nuveq.sojibdemo.appdata.SharedPreferencesEnum;
 import com.nuveq.sojibdemo.common.BaseFragment;
 import com.nuveq.sojibdemo.databinding.FragmentAttendanceListBinding;
 import com.nuveq.sojibdemo.datamodel.AttendancePost;
+import com.nuveq.sojibdemo.datamodel.CheckOutPost;
 import com.nuveq.sojibdemo.datamodel.TrackingPost;
 import com.nuveq.sojibdemo.listener.ServerResponseFailedCallback;
 import com.nuveq.sojibdemo.utils.CommonUtils;
@@ -138,9 +139,9 @@ public class AddAttendanceFragment extends BaseFragment implements ServerRespons
 
             }
 
-            AttendancePost attendancePost = new AttendancePost();
-            attendancePost.setCheckinlocation(location);
-            attendancePost.setCheckintime(CommonUtils.currentTime());
+            CheckOutPost attendancePost = new CheckOutPost();
+            attendancePost.setCheckoutlocation(location);
+            attendancePost.setCheckouttime(CommonUtils.currentTime());
             attendancePost.setDate(CommonUtils.currentDate());
             attendancePost.setEmpid(String.valueOf(SharedPreferencesEnum.getInstance(getActivity()).getInt(SharedPreferencesEnum.Key.USER_ID)));
             showProgressDialog();

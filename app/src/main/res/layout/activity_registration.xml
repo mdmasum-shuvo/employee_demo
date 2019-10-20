@@ -241,7 +241,6 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:imeOptions="actionNext"
-                                    android:maxLength="10"
                                     android:maxLines="1" />
 
                             </LinearLayout>
@@ -274,7 +273,6 @@
                                     android:layout_height="wrap_content"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
-                                    android:maxLength="10"
                                     android:maxLines="1" />
 
                             </LinearLayout>
@@ -305,7 +303,6 @@
                                     android:layout_height="wrap_content"
                                     android:imeOptions="actionNext"
                                     android:inputType="textPassword"
-                                    android:maxLength="10"
                                     android:maxLines="1" />
 
                             </LinearLayout>

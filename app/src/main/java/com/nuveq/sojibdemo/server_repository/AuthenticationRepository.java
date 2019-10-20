@@ -77,15 +77,21 @@ public class AuthenticationRepository {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 if (response.isSuccessful()) {
-                    if (response.body().getStatus() != null) {
-                        getLoginData.setValue(response.body());
+                    if (response.body() != null) {
+                        if (response.body().getStatus()) {
+                            getLoginData.setValue(response.body());
+                        } else {
+                            if (mListener != null) {
+                                mListener.onFailed("Login Failed");
+                            }
+                        }
+
                     } else {
                         if (mListener != null) {
                             mListener.onFailed(response.message());
                         }
                     }
-                }
-                else {
+                } else {
                     if (mListener != null) {
                         mListener.onFailed(response.message());
                     }
