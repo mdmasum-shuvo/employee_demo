@@ -52,13 +52,8 @@ public class AddAttendanceFragment extends BaseFragment implements ServerRespons
 
     private Viewmodel viewModel;
     private FragmentAttendanceListBinding binding;
-    private boolean mPermissionDenied = false;
-    Gson gson = new Gson();
-    private GPSTracker gps;
     String location = null;
     private static final int REQUEST_PERMISSIONS_REQUEST_CODE = 34;
-
-
     private boolean mAlreadyStartedService = false;
 
     @Override
