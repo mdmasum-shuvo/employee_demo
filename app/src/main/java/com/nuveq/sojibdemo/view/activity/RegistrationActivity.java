@@ -169,7 +169,7 @@ public class RegistrationActivity extends BaseActivity implements ServerResponse
                 data.setPhoneNumber(phone);
                 data.setPassword(pass);
                 data.setLocation(location);
-                data.setMacAddress("26asddads");
+                data.setMacAddress(AppConstants.ANDROID_ID);
                 data.setBranchId(branchIdList.get(itemPosition));
 
                 showProgressDialog();

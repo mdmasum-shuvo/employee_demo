@@ -89,6 +89,7 @@
     <string name="attend_list">Attendance List</string>
     <string name="it_support">Developed by nuveq Software LTD</string>
     <string name="permission_denied">Permission denied</string>
+    <string name="share">share</string>
 
 
 </resources>
