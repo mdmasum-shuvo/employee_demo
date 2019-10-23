@@ -3,75 +3,136 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="model"
+            type="com.nuveq.sojibdemo.datamodel.attendance.Emp" />
+    </data>
+
+
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_75sdp"
- >
+        android:layout_height="wrap_content"
 
-        <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
+        android:background="@color/colorWhite">
+
+
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/off_white"
             android:orientation="vertical">
 
-            <Button
-                android:id="@+id/btnNext"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/_30sdp"
-                android:layout_marginStart="@dimen/_15sdp"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:background="@drawable/border_round_blue"
-                android:text="Check in\n10:15 am"
-                android:textColor="@color/colorOffWhite"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/_30sdp"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:background="@drawable/shape_green"
-                android:text="Check out\n8:15 pm"
-                android:textColor="@color/colorOffWhite"
-                app:layout_constraintStart_toStartOf="@+id/btnNext"
-                app:layout_constraintTop_toBottomOf="@+id/btnNext" />
-
-
-
-                <LinearLayout
-                    android:layout_width="@dimen/_210sdp"
-                    android:layout_height="@dimen/_60sdp"
-                    android:orientation="vertical"
-                    app:layout_constraintBottom_toBottomOf="@+id/button2"
-                    app:layout_constraintStart_toEndOf="@+id/btnNext"
-                    app:layout_constraintStart_toStartOf="@id/guideline"
-                    app:layout_constraintTop_toTopOf="@+id/btnNext">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="@dimen/_5sdp"
-                        android:paddingTop="@dimen/_5sdp"
-                        android:text="10 may,2019" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="@dimen/_5sdp"
-                        android:text="asdfasdasdasdasdsa" />
-                </LinearLayout>
-
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline"
-                android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_begin="120dp" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                android:text="@{model.date}"
+                android:textAlignment="center"
+                android:textColor="@color/blue"
+                android:textStyle="bold"
+                tools:text="10 may,2019" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvDate"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cons"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/_1sdp"
+                    android:layout_weight=".5"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:background="@color/off_white"
+                    android:orientation="vertical"
+                    android:paddingBottom="@dimen/_5sdp">
+
+                    <Button
+                        android:id="@+id/btnNext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:background="@drawable/border_round_blue"
+                        android:text="@{model.checkInTime}"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_check_in_location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:maxLines="1"
+                        android:text="@{model.checkInLocation}"
+                        android:textColor="@color/blue"
+                        app:layout_constraintStart_toStartOf="@+id/btnNext"
+                        app:layout_constraintTop_toBottomOf="@+id/btnNext" />
+
+                    <TextView
+                        android:id="@+id/tv_check_in_remarks"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="2"
+                        android:text="@{model.checkInRemarks}"
+                        android:textColor="@color/blue"
+                        app:layout_constraintStart_toStartOf="@+id/tv_check_in_location"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_check_in_location" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_1sdp"
+                    android:layout_toEndOf="@+id/cons"
+                    android:layout_weight=".5"
+                    android:background="@color/off_white"
+                    android:paddingBottom="@dimen/_5sdp">
+
+                    <Button
+                        android:id="@+id/btn_check_out"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:background="@drawable/border_round_blue"
+                        android:text="@{model.checkOutTime}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_check_out_location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:maxLines="1"
+                        android:text="@{model.checkOutLocation}"
+
+                        android:textColor="@color/blue"
+                        app:layout_constraintEnd_toEndOf="@+id/btn_check_out"
+                        app:layout_constraintTop_toBottomOf="@+id/btn_check_out" />
+
+                    <TextView
+                        android:id="@+id/tv_check_out_remarks"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="2"
+                        android:text="@{model.checkOutRemarks}"
+                        android:textColor="@color/blue"
+                        app:layout_constraintStart_toStartOf="@+id/tv_check_out_location"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_check_out_location" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+
+        </LinearLayout>
 
     </RelativeLayout>
 </layout>

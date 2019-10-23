@@ -7,16 +7,20 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
 import com.google.gson.JsonObject;
+import com.nuveq.sojibdemo.datamodel.AttendDatePost;
 import com.nuveq.sojibdemo.datamodel.AttendancePost;
 import com.nuveq.sojibdemo.datamodel.AuthenticationPost;
 import com.nuveq.sojibdemo.datamodel.CheckOutPost;
 import com.nuveq.sojibdemo.datamodel.LoginResponse;
 import com.nuveq.sojibdemo.datamodel.MacResponse;
 import com.nuveq.sojibdemo.datamodel.TrackingPost;
+import com.nuveq.sojibdemo.datamodel.attendance.Emp;
 import com.nuveq.sojibdemo.datamodel.registration.Data;
 import com.nuveq.sojibdemo.datamodel.registration.Registration;
 import com.nuveq.sojibdemo.server_repository.AttendanceRepository;
 import com.nuveq.sojibdemo.server_repository.AuthenticationRepository;
+
+import java.util.List;
 
 public class Viewmodel extends AndroidViewModel {
 
@@ -72,5 +76,9 @@ public class Viewmodel extends AndroidViewModel {
 
     public AttendanceRepository getAttendanceRepository() {
         return attendanceRepository;
+    }
+
+    public MutableLiveData<List<Emp>> getAttenDataList(AttendDatePost post) {
+        return attendanceRepository.getEmpttendanceDataList(post);
     }
 }

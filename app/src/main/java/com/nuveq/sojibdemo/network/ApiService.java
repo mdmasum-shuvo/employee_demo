@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import com.nuveq.sojibdemo.datamodel.AuthenticationPost;
 import com.nuveq.sojibdemo.datamodel.LoginResponse;
 import com.nuveq.sojibdemo.datamodel.MacResponse;
+import com.nuveq.sojibdemo.datamodel.attendance.AttendanceDataResponse;
 import com.nuveq.sojibdemo.datamodel.registration.Registration;
 
 import java.text.Normalizer;
@@ -54,6 +55,10 @@ public interface ApiService {
     @Headers("Content-Type: application/json")
     @POST("tracking")
     Call<String> postTracking(@Body JsonObject data);
+
+    @POST("attendancelist")
+    Call<AttendanceDataResponse> getAttendanceData(@Body JsonObject jsonObject);
+
 
 
 }

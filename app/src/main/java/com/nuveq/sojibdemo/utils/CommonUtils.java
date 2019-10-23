@@ -53,4 +53,28 @@ public class CommonUtils {
         String strDate = formatter2.format(date);
         return strDate;
     }
+    public static String currentDate(String currentDate) {
+        String builder = currentDate.replace("T00:00:00", "");
+        SimpleDateFormat currentFormatter = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date date = currentFormatter.parse(builder);
+            SimpleDateFormat formatter2 = new SimpleDateFormat(AppConstants.DATE_PATTERN_WORD);
+            String strDate = formatter2.format(date);
+            return strDate;
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    public static String currentTime(String currentTime) {
+        SimpleDateFormat currentFormatter = new SimpleDateFormat(AppConstants.TIME_PATTERN);
+        try {
+            Date date = currentFormatter.parse(currentTime);
+            SimpleDateFormat formatter2 = new SimpleDateFormat("HH:mm");
+            String strDate = formatter2.format(date);
+            return strDate;
+        } catch (Exception e) {
+        }
+        return null;
+    }
 }
