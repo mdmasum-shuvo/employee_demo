@@ -29,7 +29,7 @@ public class MainActivity extends BaseActivity {
         loadHomeFragment();
 
         binding.Toolbar.logout.setOnClickListener(view -> {
-            finish();
+            logout();
         });
     }
 

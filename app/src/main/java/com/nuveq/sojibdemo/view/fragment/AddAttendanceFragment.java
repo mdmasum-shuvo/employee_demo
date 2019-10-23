@@ -67,6 +67,8 @@ public class AddAttendanceFragment extends BaseFragment implements ServerRespons
         viewModel = ViewModelProviders.of(getActivity()).get(Viewmodel.class);
         viewModel.getAttendanceRepository().setCallbackListener(this);
         getGpsLocation();
+        binding.checkContainer.setVisibility(View.VISIBLE);
+        binding.containerAttendList.setVisibility(View.GONE);
     }
 
     @Override
@@ -74,7 +76,7 @@ public class AddAttendanceFragment extends BaseFragment implements ServerRespons
 
         binding.btnCheckIn.setOnClickListener(view -> {
             resetAllButton();
-            binding.btnCheckIn.setCardBackgroundColor(getResources().getColor(R.color.lightgray));
+            binding.btnCheckIn.setCardBackgroundColor(getResources().getColor(R.color.gray));
             if (latitude == 0) {
                 getGpsLocation();
                 Toast.makeText(getActivity(), "GPS Error", Toast.LENGTH_LONG).show();
@@ -115,7 +117,7 @@ public class AddAttendanceFragment extends BaseFragment implements ServerRespons
         });
         binding.btnCheckOut.setOnClickListener(view -> {
             resetAllButton();
-            binding.btnCheckOut.setCardBackgroundColor(getResources().getColor(R.color.lightgray));
+            binding.btnCheckOut.setCardBackgroundColor(getResources().getColor(R.color.gray));
 
             TrackingPost post = new TrackingPost();
             post.setDate(CommonUtils.currentDate());

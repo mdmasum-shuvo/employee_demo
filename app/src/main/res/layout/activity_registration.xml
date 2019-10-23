@@ -11,6 +11,7 @@
                     android:id="@+id/login_layout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:visibility="gone"
                    >
 
                     <ImageView
@@ -211,7 +212,6 @@
                     android:id="@+id/registration_container"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:visibility="gone"
                     >
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -343,7 +343,7 @@
                     <androidx.cardview.widget.CardView
                         android:id="@+id/btn_save"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_25sdp"
+                        android:layout_height="@dimen/_30sdp"
                         android:layout_gravity="bottom"
                         android:clickable="true"
                         android:backgroundTint="@color/colorPrimary" >

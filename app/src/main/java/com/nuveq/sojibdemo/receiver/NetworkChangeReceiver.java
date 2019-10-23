@@ -31,7 +31,7 @@ public class NetworkChangeReceiver extends BroadcastReceiver {
                                 String latitude = intent.getStringExtra(LocationMonitoringService.EXTRA_LATITUDE);
                                 String longitude = intent.getStringExtra(LocationMonitoringService.EXTRA_LONGITUDE);
 
-                                Toast.makeText(context, latitude + " \n" + longitude, Toast.LENGTH_SHORT).show();
+                                // Toast.makeText(context, latitude + " \n" + longitude, Toast.LENGTH_SHORT).show();
 
                             }
                         }, new IntentFilter(LocationMonitoringService.ACTION_LOCATION_BROADCAST)

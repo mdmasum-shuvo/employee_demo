@@ -79,16 +79,29 @@ public class AttendanceRepository {
                     if (response.body() != null) {
                         if (response.body().getStatus()) {
                             empttendanceDataList.setValue(response.body().getEmp());
+                        } else {
+                            if (mListener != null) {
+                                mListener.onFailed(response.body().getMessage());
+                            }
+                        }
+                    } else {
+                        if (mListener != null) {
+                            mListener.onFailed(response.message());
                         }
                     }
 
                 } else {
+                    if (mListener != null) {
+                        mListener.onFailed(response.message());
+                    }
                 }
             }
 
             @Override
             public void onFailure(Call<AttendanceDataResponse> call, Throwable t) {
-                Log.e("", "");
+                if (mListener != null) {
+                    mListener.onFailed("Something went wrong in server!");
+                }
             }
         });
 

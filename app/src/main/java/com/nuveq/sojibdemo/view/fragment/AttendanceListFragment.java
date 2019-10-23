@@ -2,6 +2,8 @@ package com.nuveq.sojibdemo.view.fragment;
 
 import android.content.Intent;
 import android.os.Handler;
+import android.text.TextUtils;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.lifecycle.ViewModelProviders;
@@ -12,16 +14,24 @@ import com.nuveq.sojibdemo.appdata.SharedPreferencesEnum;
 import com.nuveq.sojibdemo.common.BaseFragment;
 import com.nuveq.sojibdemo.databinding.FragmentAttendanceListBinding;
 import com.nuveq.sojibdemo.datamodel.AttendDatePost;
+import com.nuveq.sojibdemo.datamodel.attendance.Emp;
 import com.nuveq.sojibdemo.listener.ServerResponseFailedCallback;
+import com.nuveq.sojibdemo.utils.CommonUtils;
 import com.nuveq.sojibdemo.utils.MyThread;
 import com.nuveq.sojibdemo.view.DashboardAdapter;
 import com.nuveq.sojibdemo.viewmodel.Viewmodel;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
 public class AttendanceListFragment extends BaseFragment implements ServerResponseFailedCallback {
     FragmentAttendanceListBinding binding;
 
-    MyThread thread;
-    Viewmodel viewModel;
+    private Viewmodel viewModel;
+    private Calendar calendar;
+    private List<Emp> empList = new ArrayList<>();
+    private DashboardAdapter adapter;
 
     @Override
 
@@ -32,55 +42,77 @@ public class AttendanceListFragment extends BaseFragment implements ServerRespon
     @Override
     protected void initFragmentComponents() {
         binding = (FragmentAttendanceListBinding) getBinding();
-        thread = new MyThread(getActivity());
         viewModel = ViewModelProviders.of(getActivity()).get(Viewmodel.class);
         viewModel.getAttendanceRepository().setCallbackListener(this);
         binding.rv.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        adapter = new DashboardAdapter(getActivity(), empList);
+        binding.rv.setAdapter(adapter);
+        binding.checkContainer.setVisibility(View.GONE);
+        binding.containerAttendList.setVisibility(View.VISIBLE);
+        calendar = Calendar.getInstance();
 
     }
 
     @Override
     protected void initFragmentFunctionality() {
-        AttendDatePost post = new AttendDatePost();
-
-        post.setEmpid(SharedPreferencesEnum.getInstance(getActivity()).getString(SharedPreferencesEnum.Key.USER_ID));
-        post.setFromdate("10/20/2019");
-        post.setTodate("10/20/2019");
-        viewModel.getAttenDataList(post).observe(this, data -> {
-            if (data != null) {
-                DashboardAdapter adapter = new DashboardAdapter(getActivity(), data);
-                binding.rv.setAdapter(adapter);
-
-            }
-        });
+        callApi("2019/10/1", CommonUtils.currentDate());
     }
 
     @Override
     protected void initFragmentListener() {
 
-        binding.btnCheckIn.setOnClickListener(view -> {
-            Runnable mRunnable;
-            Handler mHandler = new Handler();
-            mRunnable = new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(getActivity(), "thread", Toast.LENGTH_SHORT).show();
-                }
-            };
-            mHandler.postDelayed(mRunnable, 2 * 1000);
 
+        binding.etDateFrom.setOnClickListener(v -> {
+            CommonUtils.showDatePicker(getContext(), binding.etDateFrom, calendar);
+        });
+        binding.etDateTo.setOnClickListener(v -> {
+            CommonUtils.showDatePicker(getContext(), binding.etDateTo, calendar);
+        });
+
+
+        binding.btnFilter.setOnClickListener(v -> {
+            if ((!TextUtils.isEmpty(binding.etDateFrom.getText())) && ((!TextUtils.isEmpty(binding.etDateTo.getText())))) {
+
+                callApi(binding.etDateFrom.getText().toString(), binding.etDateTo.getText().toString());
+            } else {
+                showToast("please select both dates");
+            }
+
+        });
+    }
+
+    private void callApi(String from, String to) {
+
+        if (!empList.isEmpty()) {
+            empList.clear();
+        }
+        AttendDatePost post = new AttendDatePost();
+        post.setEmpid(String.valueOf(SharedPreferencesEnum.getInstance(getActivity()).getInt(SharedPreferencesEnum.Key.USER_ID)));
+        post.setFromdate(from);
+        post.setTodate(to);
+        showProgressDialog();
+        viewModel.getAttenDataList(post).observe(this, data -> {
+            if (data != null) {
+                hideProgressDialog();
+                empList.addAll(data);
+                empList.addAll(data);
+                empList.addAll(data);
+                adapter.notifyDataSetChanged();
+            }
         });
     }
 
 
     @Override
     public void onDestroy() {
-        thread.interrupt();
         super.onDestroy();
     }
 
     @Override
     public void onFailed(String msg) {
-
+        hideProgressDialog();
+        adapter.notifyDataSetChanged();
+        CommonUtils.showCustomAlert(getActivity(), "Failed", msg, false);
     }
 }

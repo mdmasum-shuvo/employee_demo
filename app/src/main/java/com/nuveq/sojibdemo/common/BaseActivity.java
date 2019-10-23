@@ -56,6 +56,8 @@ import com.nuveq.sojibdemo.network.RestClient;
 import com.nuveq.sojibdemo.appdata.SharedPreferencesEnum;
 import com.nuveq.sojibdemo.service.LocationMonitoringService;
 import com.nuveq.sojibdemo.utils.maputils.GPSTracker;
+import com.nuveq.sojibdemo.view.activity.RegistrationActivity;
+import com.nuveq.sojibdemo.view.activity.SplashActivity;
 import com.nuveq.sojibdemo.view.fragment.AddAttendanceFragment;
 import com.nuveq.sojibdemo.view.fragment.AddVisitPlanFragment;
 import com.nuveq.sojibdemo.view.fragment.AttendanceListFragment;
@@ -172,6 +174,28 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
                 }
             });
         }
+    }
+
+    public void logout() {
+        android.app.AlertDialog.Builder builder;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            builder = new android.app.AlertDialog.Builder(this, android.R.style.Theme_Material_Light_Dialog_Alert);
+        } else {
+            builder = new android.app.AlertDialog.Builder(this);
+        }
+        builder.setTitle(getString(R.string.logout_title));
+        builder.setMessage(getString(R.string.logout_message));
+        builder.setIcon(R.drawable.logout_icon);
+        builder.setNegativeButton("No", null);
+        builder.setPositiveButton("Yes", (dialog, which) -> {
+            //  startActvity(this, LoginActivity.class, true);
+            String data = SharedPreferencesEnum.getInstance(this).getString(SharedPreferencesEnum.Key.PHONE_NUMBER);
+            Intent intent = new Intent(this, RegistrationActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent.putExtra(AppConstants.PHONE_NUMBER, data));
+        });
+        android.app.AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     public void setToolbarTitle(String title) {

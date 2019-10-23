@@ -67,6 +67,11 @@ public abstract class BaseFragment extends Fragment {
         }
     }
 
+    public void toast(String msg){
+        Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
+
+    }
+
     @Override
     public void onResume() {
         super.onResume();

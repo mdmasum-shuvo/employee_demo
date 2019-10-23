@@ -43,10 +43,15 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.View
 
     @Override
     public void onBindViewHolder(DashboardAdapter.ViewFilesHolder holder, int position) {
-        list.get(position).setCheckInTime("CHECK IN\n" + CommonUtils.currentTime(list.get(position).getCheckInTime()));
-        list.get(position).setCheckOutTime("CHECK OUT\n" + CommonUtils.currentTime(list.get(position).getCheckOutTime()));
-        list.get(position).setDate(CommonUtils.currentDate(list.get(position).getDate()));
-        holder.binding.setModel(list.get(position));
+        Emp emp = new Emp();
+        emp.setCheckInTime("CHECK IN\n" + CommonUtils.currentTime(list.get(position).getCheckInTime()));
+        emp.setCheckOutTime("CHECK OUT\n" + CommonUtils.currentTime(list.get(position).getCheckOutTime()));
+        emp.setDate(CommonUtils.currentDate(list.get(position).getDate()));
+        emp.setCheckInLocation(list.get(position).getCheckInLocation());
+        emp.setCheckOutLocation(list.get(position).getCheckOutLocation());
+        emp.setCheckInRemarks(list.get(position).getCheckInRemarks());
+        emp.setCheckOutRemarks(list.get(position).getCheckOutRemarks());
+        holder.binding.setModel(emp);
     }
 
 
