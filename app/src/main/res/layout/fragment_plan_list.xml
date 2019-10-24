@@ -35,6 +35,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/blue_gray"
                             android:text="Date" />
                         <EditText
                             android:id="@+id/tv_date"
@@ -69,6 +70,8 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/blue_gray"
+
                             android:text="Time" />
                         <EditText
                             android:id="@+id/tv_time"
@@ -83,9 +86,8 @@
                     </LinearLayout>
 
                 </RelativeLayout>
-
                 <RelativeLayout
-                    android:id="@+id/rv_bracnh"
+                    android:id="@+id/rv_cat"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_15sdp"
@@ -97,14 +99,49 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/_10sdp"
+                        android:textColor="@color/blue_gray"
+
                         android:orientation="vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/blue_gray"
+
                             android:text="Visit area" />
                         <Spinner
-                            android:id="@+id/spiner"
+                            android:id="@+id/spiner_cat"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"></Spinner>
+
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rv_area"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_15sdp"
+                    android:background="@drawable/field_shape"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rv_cat">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_10sdp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/blue_gray"
+
+                            android:text="Visit area" />
+                        <Spinner
+                            android:id="@+id/spiner_area"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"></Spinner>
 

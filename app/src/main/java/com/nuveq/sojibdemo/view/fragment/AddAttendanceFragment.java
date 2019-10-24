@@ -36,6 +36,7 @@ import com.nuveq.sojibdemo.datamodel.AttendancePost;
 import com.nuveq.sojibdemo.datamodel.CheckOutPost;
 import com.nuveq.sojibdemo.datamodel.TrackingPost;
 import com.nuveq.sojibdemo.listener.ServerResponseFailedCallback;
+import com.nuveq.sojibdemo.receiver.NetworkChangeReceiver;
 import com.nuveq.sojibdemo.service.LocationMonitoringService;
 import com.nuveq.sojibdemo.utils.CommonUtils;
 import com.nuveq.sojibdemo.utils.maputils.GPSTracker;
@@ -56,6 +57,8 @@ public class AddAttendanceFragment extends BaseFragment implements ServerRespons
     private static final int REQUEST_PERMISSIONS_REQUEST_CODE = 34;
     private boolean mAlreadyStartedService = false;
 
+    NetworkChangeReceiver receiver;
+
     @Override
     protected Integer layoutResourceId() {
         return R.layout.fragment_attendance_list;
@@ -69,6 +72,7 @@ public class AddAttendanceFragment extends BaseFragment implements ServerRespons
         getGpsLocation();
         binding.checkContainer.setVisibility(View.VISIBLE);
         binding.containerAttendList.setVisibility(View.GONE);
+        receiver = new NetworkChangeReceiver();
     }
 
     @Override
@@ -125,10 +129,7 @@ public class AddAttendanceFragment extends BaseFragment implements ServerRespons
             post.setLatpoint("" + latitude);
             post.setLogpoint("" + longitude);
             post.setTime(CommonUtils.currentTime());
-            viewModel.getTracking(post).observe(getActivity(), data -> {
-                if (data != null) {
-                }
-            });
+
             if (latitude == 0) {
                 getGpsLocation();
                 Toast.makeText(getActivity(), "GPS Error", Toast.LENGTH_LONG).show();
@@ -160,6 +161,7 @@ public class AddAttendanceFragment extends BaseFragment implements ServerRespons
             showProgressDialog();
             viewModel.getCheckOut(attendancePost).observe(getActivity(), data -> {
                 if (data != null) {
+                    stopService();
                     hideProgressDialog();
                     CommonUtils.showCustomAlert(getActivity(), "Success", data, false);
                 }
@@ -208,7 +210,7 @@ public class AddAttendanceFragment extends BaseFragment implements ServerRespons
             startStep2(null);
 
         } else {
-            Toast.makeText(getActivity(), "google service avaialbe", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "google service available", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -431,33 +433,13 @@ public class AddAttendanceFragment extends BaseFragment implements ServerRespons
     }
 
     private void startLocationService() {
-        LocalBroadcastManager.getInstance(getActivity()).registerReceiver(
-                new BroadcastReceiver() {
-                    @Override
-                    public void onReceive(Context context, Intent intent) {
-                        String latitude = intent.getStringExtra(LocationMonitoringService.EXTRA_LATITUDE);
-                        String longitude = intent.getStringExtra(LocationMonitoringService.EXTRA_LONGITUDE);
-
-                        if (latitude != null && longitude != null) {
-                            TrackingPost post = new TrackingPost();
-                            post.setDate(CommonUtils.currentDate());
-                            post.setEmpid(String.valueOf(SharedPreferencesEnum.getInstance(getActivity()).getInt(SharedPreferencesEnum.Key.USER_ID)));
-                            post.setLatpoint("" + latitude);
-                            post.setLogpoint("" + longitude);
-                            post.setTime(CommonUtils.currentTime());
-                            viewModel.getTracking(post).observe(getActivity(), data -> {
-                                if (data != null) {
-                                    Log.e("location", "service:" + "\n Latitude : " + latitude + "\n Longitude: " + longitude);
-                                }
-                            });
-
-                            Toast.makeText(context, "service:" + "\n Latitude : " + latitude + "\n Longitude: " + longitude, Toast.LENGTH_SHORT).show();
-                        }
-
-
-                    }
-                }, new IntentFilter(LocationMonitoringService.ACTION_LOCATION_BROADCAST)
+        LocalBroadcastManager.getInstance(getActivity()).registerReceiver(receiver, new IntentFilter(LocationMonitoringService.ACTION_LOCATION_BROADCAST)
         );
+    }
+
+    private void stopService() {
+        LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(receiver);
+
     }
 
 

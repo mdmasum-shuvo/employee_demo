@@ -30,15 +30,14 @@ import retrofit2.Response;
 
 public class AuthenticationRepository {
 
-    MutableLiveData<Boolean> isRegister;
-    MutableLiveData<String> getMacData;
-    MutableLiveData<LoginResponse> getLoginData;
-    Gson gson = new Gson();
+    private MutableLiveData<Boolean> isRegister;
+    private MutableLiveData<String> getMacData;
+    private MutableLiveData<LoginResponse> getLoginData;
+    private Gson gson = new Gson();
     private ServerResponseFailedCallback mListener;
 
     public MutableLiveData<Boolean> getRegistrationResponse(Data data) {
         isRegister = new MutableLiveData<>();
-
         String jsonString = gson.toJson(data);
         JsonObject jsonObject = new JsonParser().parse(jsonString).getAsJsonObject();
 
@@ -54,7 +53,6 @@ public class AuthenticationRepository {
                         mListener.onFailed(response.message());
                     }
                 }
-
             }
 
             @Override
@@ -85,7 +83,6 @@ public class AuthenticationRepository {
                                 mListener.onFailed("Login Failed");
                             }
                         }
-
                     } else {
                         if (mListener != null) {
                             mListener.onFailed(response.message());
@@ -96,7 +93,6 @@ public class AuthenticationRepository {
                         mListener.onFailed(response.message());
                     }
                 }
-
             }
 
             @Override
