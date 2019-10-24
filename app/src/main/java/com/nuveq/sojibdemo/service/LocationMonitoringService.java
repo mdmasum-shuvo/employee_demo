@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -20,18 +21,30 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.nuveq.sojibdemo.appdata.AppConstants;
+import com.nuveq.sojibdemo.appdata.SharedPreferencesEnum;
+import com.nuveq.sojibdemo.datamodel.TrackingPost;
+import com.nuveq.sojibdemo.utils.CommonUtils;
+import com.nuveq.sojibdemo.viewmodel.Viewmodel;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class LocationMonitoringService extends Service implements
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
-
+    Gson gson = new Gson();
     private static final String TAG = LocationMonitoringService.class.getSimpleName();
     GoogleApiClient mLocationClient;
     LocationRequest mLocationRequest = new LocationRequest();
 
 
+    Viewmodel viewmodel;
     public static final String ACTION_LOCATION_BROADCAST = LocationMonitoringService.class.getName() + "LocationBroadcast";
     public static final String EXTRA_LATITUDE = "extra_latitude";
     public static final String EXTRA_LONGITUDE = "extra_longitude";
@@ -106,9 +119,44 @@ public class LocationMonitoringService extends Service implements
 
         if (location != null) {
             Log.d(TAG, "== location != null");
-           // Toast.makeText(this, String.valueOf(location.getLatitude()) + " \n" + String.valueOf(location.getLongitude()), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, String.valueOf(location.getLatitude()) + " \n" + String.valueOf(location.getLongitude()), Toast.LENGTH_SHORT).show();
             //Send result to activities
-            sendMessageToUI(String.valueOf(location.getLatitude()), String.valueOf(location.getLongitude()));
+            TrackingPost post = new TrackingPost();
+            post.setDate(CommonUtils.currentDate());
+            post.setEmpid(String.valueOf(SharedPreferencesEnum.getInstance(this).getInt(SharedPreferencesEnum.Key.USER_ID)));
+            post.setLatpoint("" + location.getLatitude());
+            post.setLogpoint("" + location.getLongitude());
+            post.setTime(CommonUtils.currentTime());
+            String jsonString = gson.toJson(post);
+            JsonObject jsonObject = new JsonParser().parse(jsonString).getAsJsonObject();
+            CommonUtils.getApiService().postTracking(jsonObject).enqueue(new Callback<String>() {
+                @Override
+                public void onResponse(Call<String> call, Response<String> response) {
+                    if (response.isSuccessful()) {
+                        if (response.body() != null) {
+
+                        } else {
+                     /*   if (mListener != null) {
+                            mListener.onFailed(response.message());
+                        }*/
+
+                        }
+                    } else {
+                  /*  if (mListener != null) {
+                        mListener.onFailed(response.message());
+                    }*/
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<String> call, Throwable t) {
+              /*  if (mListener != null) {
+                    mListener.onFailed(t.getMessage());
+                }*/
+                }
+            });
+
+            //sendMessageToUI(String.valueOf(location.getLatitude()), String.valueOf(location.getLongitude()));
         }
     }
 

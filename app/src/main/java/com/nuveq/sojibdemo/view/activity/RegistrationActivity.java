@@ -1,10 +1,13 @@
 package com.nuveq.sojibdemo.view.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -76,7 +79,8 @@ public class RegistrationActivity extends BaseActivity implements ServerResponse
         binding = (ActivityRegistrationBinding) getBinding();
         viewModel = ViewModelProviders.of(this).get(Viewmodel.class);
         viewModel.getRepository().setCallbackListener(this);
-        getGpsLocation();
+        viewModel.getGlobalRepository().setCallbackListener(this);
+
         if (getIntentData() != null) {
             binding.etUsername.setText(getIntentData());
             binding.registrationContainer.setVisibility(View.GONE);
@@ -85,39 +89,45 @@ public class RegistrationActivity extends BaseActivity implements ServerResponse
             binding.registrationContainer.setVisibility(View.VISIBLE);
             binding.loginLayout.setVisibility(View.GONE);
         }
-        showProgressDialog();
-        CommonUtils.getApiService().getBranch().enqueue(new Callback<ArrayList<Registration>>() {
-            @Override
-            public void onResponse(Call<ArrayList<Registration>> call, Response<ArrayList<Registration>> response) {
-                hideProgressDialog();
-                if (response.isSuccessful()) {
-                    for (int i = 0; i < response.body().size(); i++) {
-                        try {
-                            branchResponseArrayList.add(response.body().get(i).getBranch());
-                            branchIdList.add(response.body().get(i).getBranchId());
-                        } catch (Exception e) {
 
-                        }
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            return;
+        }
+
+        getGpsLocation();
+    }
+
+    @Override
+    protected void initFunctionality() {
+        showProgressDialog();
+        viewModel.getBrachData().observe(this, data -> {
+            if (data != null) {
+                hideProgressDialog();
+                for (int i = 0; i < data.size(); i++) {
+                    try {
+                        branchResponseArrayList.add(data.get(i).getBranch());
+                        branchIdList.add(data.get(i).getBranchId());
+                    } catch (Exception e) {
 
                     }
-
-                    adapter = new ArrayAdapter<>(getApplicationContext(), R.layout.support_simple_spinner_dropdown_item, branchResponseArrayList);
-                    binding.spiner.setAdapter(adapter);
-                    Log.e("", "");
-
-                } else {
-                    Log.e("", "");
                 }
-            }
 
-            @Override
-            public void onFailure(Call<ArrayList<Registration>> call, Throwable t) {
-                Log.e("", "");
-                hideProgressDialog();
-
+                adapter = new ArrayAdapter<>(getApplicationContext(), R.layout.support_simple_spinner_dropdown_item, branchResponseArrayList);
+                binding.spiner.setAdapter(adapter);
             }
         });
+    }
 
+    @Override
+    protected void initListener() {
         binding.spiner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 itemPosition = position;
@@ -210,38 +220,22 @@ public class RegistrationActivity extends BaseActivity implements ServerResponse
                 }
             });
         });
-
-    }
-
-    @Override
-    protected void initFunctionality() {
-
-    }
-
-    @Override
-    protected void initListener() {
-
     }
 
     private boolean isValid() {
 
         if (name.equals("")) {
-            binding.tvName.setError("name can't be empty");
+            showAlertDialog("Error", "name can't be empty");
             return false;
-        }
-        if (pass.equals("")) {
-            binding.etPass.setError("password can't be empty");
+        } else if (pass.equals("")) {
+            showAlertDialog("Error", "password can't be empty");
 
             return false;
-        }
-        if (phone.equals("")) {
-            binding.etPhone.setError("phone number can't be empty");
+        } else if (phone.equals("")) {
+            showAlertDialog("Error", "phone number can't be empty");
             return false;
-        }
-
-        if (itemPosition < 0) {
-
-            Toast.makeText(getApplicationContext(), "Please select branch", Toast.LENGTH_SHORT).show();
+        } else if (itemPosition < 0) {
+            showAlertDialog("Error", "Please select branch");
             return false;
         }
         return true;
@@ -274,7 +268,12 @@ public class RegistrationActivity extends BaseActivity implements ServerResponse
 
     private void enableMyLocation() {
         if (PermissionUtils.isPermissionGranted(RegistrationActivity.this, PermissionUtils.LOCATION_PERMISSION, PermissionUtils.REQUEST_LOCATION)) {
-        }
+
+            getGpsLocation();
+        } /*else {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        }*/
+
     }
 
     private String getIntentData() {

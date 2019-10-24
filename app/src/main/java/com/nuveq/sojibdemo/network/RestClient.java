@@ -55,7 +55,7 @@ public class RestClient {
      */
     @NonNull
     private static String getBaseURL() {
-        return "http://sojibkhan24-001-site1.etempurl.com/api/";
+        return HTTP_PARAM.BASE_URL;
     }
 //return "http://service.idlc.com/SalesforceApiConsumerdevelopment/api/";
 
