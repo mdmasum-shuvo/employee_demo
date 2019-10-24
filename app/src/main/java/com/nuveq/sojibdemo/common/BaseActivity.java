@@ -179,7 +179,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
     public void logout() {
         android.app.AlertDialog.Builder builder;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            builder = new android.app.AlertDialog.Builder(this, android.R.style.Theme_Material_Light_Dialog_Alert);
+            builder = new android.app.AlertDialog.Builder(this, R.style.DialogTheme);
         } else {
             builder = new android.app.AlertDialog.Builder(this);
         }

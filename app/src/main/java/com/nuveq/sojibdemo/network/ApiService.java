@@ -8,6 +8,7 @@ import com.nuveq.sojibdemo.datamodel.MacResponse;
 import com.nuveq.sojibdemo.datamodel.VisitPlanDataPost;
 import com.nuveq.sojibdemo.datamodel.attendance.AttendanceDataResponse;
 import com.nuveq.sojibdemo.datamodel.global.CategoryDatum;
+import com.nuveq.sojibdemo.datamodel.global.area.AreaResponse;
 import com.nuveq.sojibdemo.datamodel.global.area.Emp;
 import com.nuveq.sojibdemo.datamodel.registration.Registration;
 
@@ -69,8 +70,8 @@ public interface ApiService {
     @GET(HTTP_PARAM.CATEGORY)
     Call<ArrayList<CategoryDatum>> getCategoryData();
 
-    @GET(HTTP_PARAM.AREA)
-    Call<ArrayList<Emp>> getAreaData(@Body JsonObject object);
+    @POST(HTTP_PARAM.AREA)
+    Call<AreaResponse> getAreaData(@Body JsonObject object);
 
 
 }

@@ -225,21 +225,17 @@ public class RegistrationActivity extends BaseActivity implements ServerResponse
     private boolean isValid() {
 
         if (name.equals("")) {
-            binding.tvName.setError("name can't be empty");
+            showAlertDialog("Error", "name can't be empty");
             return false;
-        }
-        if (pass.equals("")) {
-            binding.etPass.setError("password can't be empty");
+        } else if (pass.equals("")) {
+            showAlertDialog("Error", "password can't be empty");
 
             return false;
-        }
-        if (phone.equals("")) {
-            binding.etPhone.setError("phone number can't be empty");
+        } else if (phone.equals("")) {
+            showAlertDialog("Error", "phone number can't be empty");
             return false;
-        }
-
-        if (itemPosition < 0) {
-            Toast.makeText(getApplicationContext(), "Please select branch", Toast.LENGTH_SHORT).show();
+        } else if (itemPosition < 0) {
+            showAlertDialog("Error", "Please select branch");
             return false;
         }
         return true;

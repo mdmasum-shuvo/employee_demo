@@ -25,6 +25,13 @@
         <item name="colorPrimary">@color/blue_gray</item>
         <item name="colorPrimaryDark">@color/blue_gray</item>
     </style>
+
+    <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/blue_gray</item>
+        <item name="colorPrimary">@color/blue_gray</item>
+        <item name="colorPrimaryDark">@color/red</item>
+
+    </style>
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

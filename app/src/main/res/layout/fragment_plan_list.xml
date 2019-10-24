@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout >
+<layout>
 
-    <RelativeLayout
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorWhite"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools">
+        android:background="@color/colorWhite">
+
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/registration_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="match_parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:context=".view.activity.RegistrationActivity"
-              >
+                tools:context=".view.activity.RegistrationActivity">
+
                 <RelativeLayout
                     android:id="@+id/rvone"
                     android:layout_width="match_parent"
@@ -27,25 +26,27 @@
                     android:background="@drawable/field_shape"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/_10sdp"
                         android:orientation="vertical">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/blue_gray"
-                            android:text="Date" />
+                            android:text="Date"
+                            android:textColor="@color/blue_gray" />
+
                         <EditText
                             android:id="@+id/tv_date"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:imeOptions="actionNext"
-                            android:maxLines="1"
-                            android:focusable="false"
                             android:drawableRight="@drawable/calendar"
-                            />
+                            android:focusable="false"
+                            android:imeOptions="actionNext"
+                            android:maxLines="1" />
 
                     </LinearLayout>
 
@@ -70,22 +71,24 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/blue_gray"
+                            android:text="Time"
 
-                            android:text="Time" />
+                            android:textColor="@color/blue_gray" />
+
                         <EditText
                             android:id="@+id/tv_time"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:drawableRight="@drawable/stopwatch"
+                            android:focusable="false"
                             android:imeOptions="actionNext"
                             android:inputType="number"
-                            android:focusable="false"
-                            android:drawableRight="@drawable/stopwatch"
                             android:maxLines="1" />
 
                     </LinearLayout>
 
                 </RelativeLayout>
+
                 <RelativeLayout
                     android:id="@+id/rv_cat"
                     android:layout_width="match_parent"
@@ -99,16 +102,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/_10sdp"
-                        android:textColor="@color/blue_gray"
+                        android:orientation="vertical"
 
-                        android:orientation="vertical">
+                        android:textColor="@color/blue_gray">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/blue_gray"
+                            android:text="Visit Type"
+                            android:textColor="@color/blue_gray" />
 
-                            android:text="Visit area" />
                         <Spinner
                             android:id="@+id/spiner_cat"
                             android:layout_width="match_parent"
@@ -137,9 +140,10 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/blue_gray"
+                            android:text="Visit area"
 
-                            android:text="Visit area" />
+                            android:textColor="@color/blue_gray" />
+
                         <Spinner
                             android:id="@+id/spiner_area"
                             android:layout_width="match_parent"
@@ -157,25 +161,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_30sdp"
                 android:layout_gravity="bottom"
-                android:clickable="true"
-                android:backgroundTint="@color/colorPrimary" >
+                android:backgroundTint="@color/colorPrimary"
+                android:clickable="true">
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center">
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Save"
-                        android:textColor="#FFF"
                         android:textAlignment="center"
-                        android:textStyle="bold"
+                        android:textColor="#FFF"
                         android:textSize="@dimen/_15sdp"
-                        />
+                        android:textStyle="bold" />
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
 
 
     </RelativeLayout>

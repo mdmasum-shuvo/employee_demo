@@ -67,7 +67,7 @@ public abstract class BaseFragment extends Fragment {
         }
     }
 
-    public void toast(String msg){
+    public void toast(String msg) {
         Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
 
     }
@@ -141,7 +141,7 @@ public abstract class BaseFragment extends Fragment {
     public void showAlertDialog(String title, String message) {
         AlertDialog.Builder builder;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            builder = new AlertDialog.Builder(getContext(), android.R.style.Theme_Material_Light_Dialog_Alert);
+            builder = new AlertDialog.Builder(getContext(), R.style.DialogTheme);
         } else {
             builder = new AlertDialog.Builder(getContext());
         }

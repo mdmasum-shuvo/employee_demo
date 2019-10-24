@@ -11,6 +11,7 @@ import com.google.gson.JsonParser;
 import com.nuveq.sojibdemo.R;
 import com.nuveq.sojibdemo.datamodel.global.CategoryDatum;
 import com.nuveq.sojibdemo.datamodel.global.area.AreaPost;
+import com.nuveq.sojibdemo.datamodel.global.area.AreaResponse;
 import com.nuveq.sojibdemo.datamodel.global.area.Emp;
 import com.nuveq.sojibdemo.datamodel.registration.Registration;
 import com.nuveq.sojibdemo.listener.ServerResponseFailedCallback;
@@ -82,18 +83,25 @@ public class GlobalRepository {
         String jsonString = gson.toJson(areaPost);
         JsonObject jsonObject = new JsonParser().parse(jsonString).getAsJsonObject();
 
-        CommonUtils.getApiService().getAreaData(jsonObject).enqueue(new Callback<ArrayList<Emp>>() {
+        CommonUtils.getApiService().getAreaData(jsonObject).enqueue(new Callback<AreaResponse>() {
             @Override
-            public void onResponse(Call<ArrayList<Emp>> call, Response<ArrayList<Emp>> response) {
+            public void onResponse(Call<AreaResponse> call, Response<AreaResponse> response) {
                 if (response.isSuccessful()) {
                     if (response.body() != null) {
-                        visitAreaDataList.setValue(response.body());
+                        if (response.body().getStatus()) {
+                            visitAreaDataList.setValue(response.body().getEmp());
+                        } else {
+                            if (mListener != null) {
+                                mListener.onFailed("Area " + response.body().getMessage());
+                            }
+                        }
+
                     }
                 }
             }
 
             @Override
-            public void onFailure(Call<ArrayList<Emp>> call, Throwable t) {
+            public void onFailure(Call<AreaResponse> call, Throwable t) {
 
             }
         });
