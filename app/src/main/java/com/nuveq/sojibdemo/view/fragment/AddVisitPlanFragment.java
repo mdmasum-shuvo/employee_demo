@@ -131,6 +131,7 @@ public class AddVisitPlanFragment extends BaseFragment implements ServerResponse
                 VisitPlanDataPost post = new VisitPlanDataPost();
                 post.setDate(date);
                 post.setTime(time);
+                post.setStatus("pending");
                 post.setVisitAreaId("" + areaIdList.get(areaItemPosition));
                 viewModel.getVisitPlanData(post).observe(getActivity(), data -> {
                     if (data != null) {
