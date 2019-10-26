@@ -47,7 +47,7 @@ public class VisitPlanListFragment extends BaseFragment implements ServerRespons
 
     @Override
     protected void initFragmentFunctionality() {
-        callApi("2019/10/1", CommonUtils.currentDate());
+
     }
 
     @Override
@@ -76,7 +76,7 @@ public class VisitPlanListFragment extends BaseFragment implements ServerRespons
         }
 
         AttendDatePost post = new AttendDatePost();
-        post.setEmpid(String.valueOf(16));
+        post.setEmpid(String.valueOf(SharedPreferencesEnum.getInstance(getActivity()).getInt(SharedPreferencesEnum.Key.USER_ID)));
         post.setFromdate(from);
         post.setTodate(to);
         showProgressDialog();
