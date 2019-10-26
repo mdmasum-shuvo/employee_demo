@@ -1,4 +1,4 @@
-package com.nuveq.sojibdemo.view;
+package com.nuveq.sojibdemo.view.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -14,14 +14,14 @@ import com.nuveq.sojibdemo.utils.CommonUtils;
 
 import java.util.List;
 
-public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.ViewFilesHolder> {
+public class AttendanceAdapter extends RecyclerView.Adapter<AttendanceAdapter.ViewFilesHolder> {
     private Context context;
     private List<Emp> list;
     private LayoutInflater layoutInflater;
     public static final int REQUEST_UPDATE = 100;
 
 
-    public DashboardAdapter(Context context, List<Emp> list) {
+    public AttendanceAdapter(Context context, List<Emp> list) {
         this.context = context;
         this.list = list;
 
@@ -30,19 +30,19 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.View
     }
 
     @Override
-    public DashboardAdapter.ViewFilesHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public AttendanceAdapter.ViewFilesHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (layoutInflater == null) {
             layoutInflater = LayoutInflater.from(parent.getContext());
         }
         ItemDetailsBinding binding =
                 DataBindingUtil.inflate(layoutInflater, R.layout.item_details, parent, false);
-        return new DashboardAdapter.ViewFilesHolder(binding);
+        return new AttendanceAdapter.ViewFilesHolder(binding);
 
 
     }
 
     @Override
-    public void onBindViewHolder(DashboardAdapter.ViewFilesHolder holder, int position) {
+    public void onBindViewHolder(AttendanceAdapter.ViewFilesHolder holder, int position) {
         Emp emp = new Emp();
         emp.setCheckInTime("CHECK IN\n" + CommonUtils.currentTime(list.get(position).getCheckInTime()));
         emp.setCheckOutTime("CHECK OUT\n" + CommonUtils.currentTime(list.get(position).getCheckOutTime()));

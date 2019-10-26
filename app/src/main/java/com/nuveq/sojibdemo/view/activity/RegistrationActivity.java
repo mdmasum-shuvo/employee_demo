@@ -184,11 +184,12 @@ public class RegistrationActivity extends BaseActivity implements ServerResponse
 
                 showProgressDialog();
                 viewModel.getRegistrationResponse(data).observe(RegistrationActivity.this, isSuccess -> {
-                    if (isSuccess) {
+                    if (isSuccess != null) {
                         hideProgressDialog();
-                        CommonUtils.showCustomAlert(RegistrationActivity.this, "succeed", "Registration successfully done", false);
+                        CommonUtils.showCustomAlert(RegistrationActivity.this, "succeed", isSuccess, false);
                         binding.registrationContainer.setVisibility(View.GONE);
                         binding.loginLayout.setVisibility(View.VISIBLE);
+                        binding.etUsername.setText(binding.etPhone.getText().toString());
 
                     }
 

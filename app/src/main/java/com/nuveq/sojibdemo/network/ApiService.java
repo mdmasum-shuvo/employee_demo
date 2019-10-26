@@ -2,30 +2,20 @@ package com.nuveq.sojibdemo.network;
 
 
 import com.google.gson.JsonObject;
-import com.nuveq.sojibdemo.datamodel.AuthenticationPost;
 import com.nuveq.sojibdemo.datamodel.LoginResponse;
-import com.nuveq.sojibdemo.datamodel.MacResponse;
-import com.nuveq.sojibdemo.datamodel.VisitPlanDataPost;
 import com.nuveq.sojibdemo.datamodel.attendance.AttendanceDataResponse;
 import com.nuveq.sojibdemo.datamodel.global.CategoryDatum;
 import com.nuveq.sojibdemo.datamodel.global.area.AreaResponse;
-import com.nuveq.sojibdemo.datamodel.global.area.Emp;
 import com.nuveq.sojibdemo.datamodel.registration.Registration;
+import com.nuveq.sojibdemo.datamodel.visitplan.VisitPlanResponse;
 
-import java.text.Normalizer;
 import java.util.ArrayList;
-import java.util.Map;
 
-import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.Field;
-import retrofit2.http.FieldMap;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
-import retrofit2.http.Part;
-import retrofit2.http.Query;
 
 /**
  * Contains all API call declarations
@@ -34,7 +24,7 @@ public interface ApiService {
 
 
     @POST(HTTP_PARAM.REGISTRATION)
-    Call<Registration> register(@Body JsonObject object);
+    Call<String> register(@Body JsonObject object);
 
 
     @POST(HTTP_PARAM.LOGIN)
@@ -72,6 +62,9 @@ public interface ApiService {
 
     @POST(HTTP_PARAM.AREA)
     Call<AreaResponse> getAreaData(@Body JsonObject object);
+
+    @POST(HTTP_PARAM.PLAN_DATA)
+    Call<VisitPlanResponse> getVisitPlanData(@Body JsonObject object);
 
 
 }

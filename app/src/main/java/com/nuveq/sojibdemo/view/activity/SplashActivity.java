@@ -60,22 +60,19 @@ public class SplashActivity extends BaseActivity implements ServerResponseFailed
         showLoader();
         ANDROID_ID = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
 
-        viewModel.getMacData(ANDROID_ID).observe(SplashActivity.this, data -> {
-            if (data != null) {
-                SharedPreferencesEnum.getInstance(SplashActivity.this).put(SharedPreferencesEnum.Key.PHONE_NUMBER, data);
-                startActivity(new Intent(SplashActivity.this, RegistrationActivity.class).putExtra(AppConstants.PHONE_NUMBER, data));
-                finish();
-            }
-        });
 
-
-   /*     new Handler().postDelayed(new Runnable() {
+        new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActvity(SplashActivity.this, RegistrationActivity.class, true);
-
+                viewModel.getMacData(ANDROID_ID).observe(SplashActivity.this, data -> {
+                    if (data != null) {
+                        SharedPreferencesEnum.getInstance(SplashActivity.this).put(SharedPreferencesEnum.Key.PHONE_NUMBER, data);
+                        startActivity(new Intent(SplashActivity.this, RegistrationActivity.class).putExtra(AppConstants.PHONE_NUMBER, data));
+                        finish();
+                    }
+                });
             }
-        }, 2000);*/
+        }, 2000);
     }
 
     @Override

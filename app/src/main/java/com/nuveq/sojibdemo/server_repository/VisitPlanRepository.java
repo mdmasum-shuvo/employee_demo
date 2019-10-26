@@ -5,9 +5,14 @@ import androidx.lifecycle.MutableLiveData;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.nuveq.sojibdemo.datamodel.VisitPlanDataPost;
+import com.nuveq.sojibdemo.datamodel.AttendDatePost;
+import com.nuveq.sojibdemo.datamodel.visitplan.Plan;
+import com.nuveq.sojibdemo.datamodel.visitplan.VisitPlanDataPost;
+import com.nuveq.sojibdemo.datamodel.visitplan.VisitPlanResponse;
 import com.nuveq.sojibdemo.listener.ServerResponseFailedCallback;
 import com.nuveq.sojibdemo.utils.CommonUtils;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -16,6 +21,7 @@ import retrofit2.Response;
 public class VisitPlanRepository {
 
     private MutableLiveData<String> addPlanResponse;
+    private MutableLiveData<List<Plan>> planDataList;
     private ServerResponseFailedCallback mListener;
     Gson gson = new Gson();
 
@@ -49,6 +55,40 @@ public class VisitPlanRepository {
             }
         });
         return addPlanResponse;
+    }
+
+
+    public MutableLiveData<List<Plan>> getPlanDataList(AttendDatePost post) {
+        planDataList = new MutableLiveData<>();
+        String jsonString = gson.toJson(post);
+        JsonObject jsonObject = new JsonParser().parse(jsonString).getAsJsonObject();
+        CommonUtils.getApiService().getVisitPlanData(jsonObject).enqueue(new Callback<VisitPlanResponse>() {
+            @Override
+            public void onResponse(Call<VisitPlanResponse> call, Response<VisitPlanResponse> response) {
+                if (response.isSuccessful()) {
+                    if (response.body().getStatus()) {
+                        planDataList.setValue(response.body().getPlan());
+
+                    } else {
+                        if (mListener != null) {
+                            mListener.onFailed(response.body().getMessage());
+                        }
+                    }
+                } else {
+                    if (mListener != null) {
+                        mListener.onFailed(response.message());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<VisitPlanResponse> call, Throwable t) {
+                if (mListener != null) {
+                    mListener.onFailed("Something went wrong on server\ntry again");
+                }
+            }
+        });
+        return planDataList;
     }
 
     public void setCallbackListener(ServerResponseFailedCallback mListener) {

@@ -30,23 +30,23 @@ import retrofit2.Response;
 
 public class AuthenticationRepository {
 
-    private MutableLiveData<Boolean> isRegister;
+    private MutableLiveData<String> isRegister;
     private MutableLiveData<String> getMacData;
     private MutableLiveData<LoginResponse> getLoginData;
     private Gson gson = new Gson();
     private ServerResponseFailedCallback mListener;
 
-    public MutableLiveData<Boolean> getRegistrationResponse(Data data) {
+    public MutableLiveData<String> getRegistrationResponse(Data data) {
         isRegister = new MutableLiveData<>();
         String jsonString = gson.toJson(data);
         JsonObject jsonObject = new JsonParser().parse(jsonString).getAsJsonObject();
 
-        CommonUtils.getApiService().register(jsonObject).enqueue(new Callback<Registration>() {
+        CommonUtils.getApiService().register(jsonObject).enqueue(new Callback<String>() {
             @Override
-            public void onResponse(Call<Registration> call, Response<Registration> response) {
+            public void onResponse(Call<String> call, Response<String> response) {
                 if (response.isSuccessful()) {
                     if (mListener != null) {
-                        mListener.onFailed(response.body().getMessage());
+                        isRegister.setValue(response.body());
                     }
                 } else {
                     if (mListener != null) {
@@ -56,7 +56,7 @@ public class AuthenticationRepository {
             }
 
             @Override
-            public void onFailure(Call<Registration> call, Throwable t) {
+            public void onFailure(Call<String> call, Throwable t) {
                 if (mListener != null) {
                     mListener.onFailed(t.getMessage());
                 }

@@ -3,14 +3,13 @@ package com.nuveq.sojibdemo.view.fragment;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Toast;
 
 import androidx.lifecycle.ViewModelProviders;
 
 import com.nuveq.sojibdemo.R;
 import com.nuveq.sojibdemo.common.BaseFragment;
-import com.nuveq.sojibdemo.databinding.FragmentPlanListBinding;
-import com.nuveq.sojibdemo.datamodel.VisitPlanDataPost;
+import com.nuveq.sojibdemo.databinding.FragmentAddPlanBinding;
+import com.nuveq.sojibdemo.datamodel.visitplan.VisitPlanDataPost;
 import com.nuveq.sojibdemo.listener.ServerResponseFailedCallback;
 import com.nuveq.sojibdemo.utils.CommonUtils;
 import com.nuveq.sojibdemo.viewmodel.Viewmodel;
@@ -20,7 +19,7 @@ import java.util.Calendar;
 
 public class AddVisitPlanFragment extends BaseFragment implements ServerResponseFailedCallback {
 
-    FragmentPlanListBinding binding;
+    FragmentAddPlanBinding binding;
     Calendar calendar;
 
     ArrayList<String> catList = new ArrayList<>();
@@ -34,12 +33,12 @@ public class AddVisitPlanFragment extends BaseFragment implements ServerResponse
 
     @Override
     protected Integer layoutResourceId() {
-        return R.layout.fragment_plan_list;
+        return R.layout.fragment_add_plan;
     }
 
     @Override
     protected void initFragmentComponents() {
-        binding = (FragmentPlanListBinding) getBinding();
+        binding = (FragmentAddPlanBinding) getBinding();
         calendar = Calendar.getInstance();
         viewModel = ViewModelProviders.of(this).get(Viewmodel.class);
         viewModel.getplanRespository().setCallbackListener(this);
@@ -131,7 +130,7 @@ public class AddVisitPlanFragment extends BaseFragment implements ServerResponse
                 VisitPlanDataPost post = new VisitPlanDataPost();
                 post.setDate(date);
                 post.setTime(time);
-                post.setStatus("pending");
+                post.setStatus("Pending");
                 post.setVisitAreaId("" + areaIdList.get(areaItemPosition));
                 viewModel.getVisitPlanData(post).observe(getActivity(), data -> {
                     if (data != null) {

@@ -99,7 +99,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:backgroundTint="@color/lightgray"
-                                            android:text="01680021468"
+                                            tools:text="01680021468"
                                             android:enabled="false"
                                             android:drawableLeft="@drawable/ic_person"
                                             android:inputType="textEmailAddress"

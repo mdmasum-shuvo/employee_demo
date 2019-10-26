@@ -6,18 +6,16 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
-import com.google.gson.JsonObject;
 import com.nuveq.sojibdemo.datamodel.AttendDatePost;
 import com.nuveq.sojibdemo.datamodel.AttendancePost;
 import com.nuveq.sojibdemo.datamodel.AuthenticationPost;
 import com.nuveq.sojibdemo.datamodel.CheckOutPost;
 import com.nuveq.sojibdemo.datamodel.LoginResponse;
-import com.nuveq.sojibdemo.datamodel.MacResponse;
 import com.nuveq.sojibdemo.datamodel.TrackingPost;
-import com.nuveq.sojibdemo.datamodel.VisitPlanDataPost;
+import com.nuveq.sojibdemo.datamodel.visitplan.Plan;
+import com.nuveq.sojibdemo.datamodel.visitplan.VisitPlanDataPost;
 import com.nuveq.sojibdemo.datamodel.attendance.Emp;
 import com.nuveq.sojibdemo.datamodel.global.CategoryDatum;
-import com.nuveq.sojibdemo.datamodel.global.area.AreaPost;
 import com.nuveq.sojibdemo.datamodel.registration.Data;
 import com.nuveq.sojibdemo.datamodel.registration.Registration;
 import com.nuveq.sojibdemo.server_repository.AttendanceRepository;
@@ -44,7 +42,7 @@ public class Viewmodel extends AndroidViewModel {
     }
 
 
-    public MutableLiveData<Boolean> getRegistrationResponse(Data jsonObject) {
+    public MutableLiveData<String> getRegistrationResponse(Data jsonObject) {
 
         return repository.getRegistrationResponse(jsonObject);
 
@@ -114,5 +112,7 @@ public class Viewmodel extends AndroidViewModel {
 
     public MutableLiveData<String> getVisitPlanData(VisitPlanDataPost post) {
         return visitRepository.getAddPlanResponse(post);
+    }  public MutableLiveData<List<Plan>> getVisitPlanDataList(AttendDatePost post) {
+        return visitRepository.getPlanDataList(post);
     }
 }

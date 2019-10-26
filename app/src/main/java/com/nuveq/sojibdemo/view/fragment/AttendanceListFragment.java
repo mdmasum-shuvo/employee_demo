@@ -1,10 +1,7 @@
 package com.nuveq.sojibdemo.view.fragment;
 
-import android.content.Intent;
-import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,8 +14,7 @@ import com.nuveq.sojibdemo.datamodel.AttendDatePost;
 import com.nuveq.sojibdemo.datamodel.attendance.Emp;
 import com.nuveq.sojibdemo.listener.ServerResponseFailedCallback;
 import com.nuveq.sojibdemo.utils.CommonUtils;
-import com.nuveq.sojibdemo.utils.MyThread;
-import com.nuveq.sojibdemo.view.DashboardAdapter;
+import com.nuveq.sojibdemo.view.adapter.AttendanceAdapter;
 import com.nuveq.sojibdemo.viewmodel.Viewmodel;
 
 import java.util.ArrayList;
@@ -31,7 +27,7 @@ public class AttendanceListFragment extends BaseFragment implements ServerRespon
     private Viewmodel viewModel;
     private Calendar calendar;
     private List<Emp> empList = new ArrayList<>();
-    private DashboardAdapter adapter;
+    private AttendanceAdapter adapter;
 
     @Override
 
@@ -46,7 +42,7 @@ public class AttendanceListFragment extends BaseFragment implements ServerRespon
         viewModel.getAttendanceRepository().setCallbackListener(this);
         binding.rv.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        adapter = new DashboardAdapter(getActivity(), empList);
+        adapter = new AttendanceAdapter(getActivity(), empList);
         binding.rv.setAdapter(adapter);
         binding.checkContainer.setVisibility(View.GONE);
         binding.containerAttendList.setVisibility(View.VISIBLE);
@@ -95,8 +91,6 @@ public class AttendanceListFragment extends BaseFragment implements ServerRespon
         viewModel.getAttenDataList(post).observe(this, data -> {
             if (data != null) {
                 hideProgressDialog();
-                empList.addAll(data);
-                empList.addAll(data);
                 empList.addAll(data);
                 adapter.notifyDataSetChanged();
             }
