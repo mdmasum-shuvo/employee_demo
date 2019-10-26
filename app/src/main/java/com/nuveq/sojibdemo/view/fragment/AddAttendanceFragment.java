@@ -112,7 +112,7 @@ public class AddAttendanceFragment extends BaseFragment implements ServerRespons
                 if (data != null) {
                     startLocationService();
                     hideProgressDialog();
-                    CommonUtils.showCustomAlert(getActivity(), "Success", data, false);
+                    CommonUtils.showCustomAlert(getActivity(), "Info", data, false);
 
 
                 }
@@ -163,7 +163,7 @@ public class AddAttendanceFragment extends BaseFragment implements ServerRespons
                 if (data != null) {
                     stopService();
                     hideProgressDialog();
-                    CommonUtils.showCustomAlert(getActivity(), "Success", data, false);
+                    CommonUtils.showCustomAlert(getActivity(), "Info", data, false);
                 }
             });
         });

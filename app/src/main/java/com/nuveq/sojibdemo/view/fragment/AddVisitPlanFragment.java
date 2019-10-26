@@ -7,6 +7,7 @@ import android.widget.ArrayAdapter;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.nuveq.sojibdemo.R;
+import com.nuveq.sojibdemo.appdata.SharedPreferencesEnum;
 import com.nuveq.sojibdemo.common.BaseFragment;
 import com.nuveq.sojibdemo.databinding.FragmentAddPlanBinding;
 import com.nuveq.sojibdemo.datamodel.visitplan.VisitPlanDataPost;
@@ -128,6 +129,7 @@ public class AddVisitPlanFragment extends BaseFragment implements ServerResponse
             if (isValid()) {
                 showProgressDialog();
                 VisitPlanDataPost post = new VisitPlanDataPost();
+                post.setEmpId(String.valueOf(SharedPreferencesEnum.getInstance(getActivity()).getInt(SharedPreferencesEnum.Key.USER_ID)));
                 post.setDate(date);
                 post.setTime(time);
                 post.setStatus("Pending");
