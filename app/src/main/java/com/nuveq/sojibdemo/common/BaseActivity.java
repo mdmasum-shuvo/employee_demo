@@ -59,9 +59,11 @@ import com.nuveq.sojibdemo.utils.maputils.GPSTracker;
 import com.nuveq.sojibdemo.view.activity.RegistrationActivity;
 import com.nuveq.sojibdemo.view.activity.SplashActivity;
 import com.nuveq.sojibdemo.view.fragment.AddAttendanceFragment;
+import com.nuveq.sojibdemo.view.fragment.AddSalesFragment;
 import com.nuveq.sojibdemo.view.fragment.AddVisitPlanFragment;
 import com.nuveq.sojibdemo.view.fragment.AttendanceListFragment;
 import com.nuveq.sojibdemo.view.fragment.ProfileFragment;
+import com.nuveq.sojibdemo.view.fragment.SalesListFragment;
 import com.nuveq.sojibdemo.view.fragment.VisitPlanListFragment;
 
 
@@ -312,9 +314,17 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
                 AttendanceListFragment attendanceListFragment = new AttendanceListFragment();
                 loadFragment(attendanceListFragment, getResources().getString(R.string.attend_list));
                 break;
-
+            case R.id.nav_add_sale:
+                AddSalesFragment addSalesFragment = new AddSalesFragment();
+                loadFragment(addSalesFragment, getResources().getString(R.string.add_sale));
+                break;
+            case R.id.nav_sales_list:
+                SalesListFragment salesListFragment = new SalesListFragment();
+                loadFragment(salesListFragment, getResources().getString(R.string.sales_list));
+                break;
             case R.id.nav_log_out:
 
+                logout();
                 break;
             default:
                 break;
