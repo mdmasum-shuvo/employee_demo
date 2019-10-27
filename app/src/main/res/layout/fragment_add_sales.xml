@@ -11,192 +11,196 @@
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/registration_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="match_parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="match_parent">
 
-                >
-                <RelativeLayout
-                    android:id="@+id/rvone"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_15sdp"
-                    android:background="@drawable/field_shape"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-                    <LinearLayout
+                    android:layout_height="match_parent"
+
+                    >
+
+                    <RelativeLayout
+                        android:id="@+id/rvone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/_10sdp"
-                        android:orientation="vertical">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/blue_gray"
-                            android:text="Patient Name" />
-                        <EditText
-                            android:id="@+id/tv_name"
+                        android:layout_margin="@dimen/_15sdp"
+                        android:background="@drawable/field_shape"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:imeOptions="actionNext"
-                            android:maxLines="1" />
+                            android:layout_margin="@dimen/_10sdp"
+                            android:orientation="vertical">
 
-                    </LinearLayout>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Patient Name"
+                                android:textColor="@color/blue_gray" />
 
-                </RelativeLayout>
+                            <EditText
+                                android:id="@+id/tv_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:imeOptions="actionNext"
+                                android:maxLines="1" />
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
 
 
-                <RelativeLayout
-                    android:id="@+id/rv_phone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_15sdp"
-                    android:background="@drawable/field_shape"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/rvone">
-
-                    <LinearLayout
+                    <RelativeLayout
+                        android:id="@+id/rv_phone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/_10sdp"
-                        android:orientation="vertical">
+                        android:layout_margin="@dimen/_15sdp"
+                        android:background="@drawable/field_shape"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/rvone">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/blue_gray"
-                            android:text="Phone Number" />
-                        <EditText
-                            android:id="@+id/et_phone"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:imeOptions="actionNext"
-                            android:inputType="number"
-                            android:maxLines="1" />
+                            android:layout_margin="@dimen/_10sdp"
+                            android:orientation="vertical">
 
-                    </LinearLayout>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Phone Number"
+                                android:textColor="@color/blue_gray" />
 
-                </RelativeLayout>
-                <RelativeLayout
-                    android:id="@+id/rv_pass"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_15sdp"
-                    android:background="@drawable/field_shape"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/rv_phone">
+                            <EditText
+                                android:id="@+id/et_phone"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:imeOptions="actionNext"
+                                android:inputType="number"
+                                android:maxLines="1" />
 
-                    <LinearLayout
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rv_pass"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/_10sdp"
-                        android:orientation="vertical">
+                        android:layout_margin="@dimen/_15sdp"
+                        android:background="@drawable/field_shape"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/rv_phone">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/blue_gray"
-                            android:text="Address" />
-                        <EditText
-                            android:id="@+id/et_address"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:imeOptions="actionNext"
-                            android:inputType="textPassword"
-                            android:maxLines="1" />
+                            android:layout_margin="@dimen/_10sdp"
+                            android:orientation="vertical">
 
-                    </LinearLayout>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Address"
+                                android:textColor="@color/blue_gray" />
 
-                </RelativeLayout>
+                            <EditText
+                                android:id="@+id/et_address"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:imeOptions="actionNext"
+                                android:inputType="textPassword"
+                                android:maxLines="1" />
 
-                <RelativeLayout
-                    android:id="@+id/rv_bracnh"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_15sdp"
-                    android:background="@drawable/field_shape"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/rv_pass">
+                        </LinearLayout>
 
-                    <LinearLayout
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rv_bracnh"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/_10sdp"
-                        android:orientation="vertical">
+                        android:layout_margin="@dimen/_15sdp"
+                        android:background="@drawable/field_shape"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/rv_pass">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/blue_gray"
-                            android:text="Reference" />
-                        <Spinner
-                            android:id="@+id/spiner"
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"></Spinner>
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/_10sdp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Reference"
+                                android:textColor="@color/blue_gray" />
+
+                            <Spinner
+                                android:id="@+id/spiner"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"></Spinner>
 
 
-                    </LinearLayout>
+                        </LinearLayout>
 
-                </RelativeLayout>
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_15sdp"
-                    android:background="@drawable/field_shape"
-                    app:layout_constraintTop_toBottomOf="@+id/rv_bracnh">
+                    </RelativeLayout>
 
-                    <LinearLayout
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/_10sdp"
-                        android:orientation="vertical">
+                        android:layout_margin="@dimen/_15sdp"
+                        android:background="@drawable/field_shape"
+                        app:layout_constraintTop_toBottomOf="@+id/rv_bracnh">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Date"
-                            android:textColor="@color/blue_gray" />
-
-                        <EditText
-                            android:id="@+id/tv_date"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:drawableRight="@drawable/calendar"
-                            android:focusable="false"
-                            android:imeOptions="actionNext"
-                            android:maxLines="1" />
+                            android:layout_margin="@dimen/_10sdp"
+                            android:orientation="vertical">
 
-                    </LinearLayout>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Date"
+                                android:textColor="@color/blue_gray" />
 
-                </RelativeLayout>
+                            <EditText
+                                android:id="@+id/tv_date"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:drawableRight="@drawable/calendar"
+                                android:focusable="false"
+                                android:imeOptions="actionNext"
+                                android:maxLines="1" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                        </LinearLayout>
 
-            <androidx.cardview.widget.CardView
+                    </RelativeLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </ScrollView>
+
+            <TextView
                 android:id="@+id/btn_save"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_30sdp"
                 android:layout_gravity="bottom"
+                android:background="@color/colorPrimary"
                 android:clickable="true"
-                android:backgroundTint="@color/colorPrimary" >
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Save"
-                        android:textColor="#FFF"
-                        android:textAlignment="center"
-                        android:textStyle="bold"
-                        android:textSize="@dimen/_15sdp"
-                        />
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
+                android:gravity="center"
+                android:textStyle="bold"
+                android:text="SAVE"
+                android:textColor="#FFFF" />
+
+
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 
