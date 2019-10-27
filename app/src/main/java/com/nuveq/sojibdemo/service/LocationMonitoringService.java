@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
 
 import android.util.Log;
@@ -30,6 +31,9 @@ import com.nuveq.sojibdemo.datamodel.TrackingPost;
 import com.nuveq.sojibdemo.utils.CommonUtils;
 import com.nuveq.sojibdemo.viewmodel.Viewmodel;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -48,10 +52,16 @@ public class LocationMonitoringService extends Service implements
     public static final String ACTION_LOCATION_BROADCAST = LocationMonitoringService.class.getName() + "LocationBroadcast";
     public static final String EXTRA_LATITUDE = "extra_latitude";
     public static final String EXTRA_LONGITUDE = "extra_longitude";
-
+    public static final long NOTIFY_INTERVAL = (5 * 1000);// 10 seconds
+    // run on another Thread to avoid crash
+    private Handler mHandler =new Handler();
+    // timer handling
+    private Timer mTimer;
+    private TimerTask mTimerTask;
+    int count =0;
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        mLocationClient = new GoogleApiClient.Builder(this)
+/*        mLocationClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
@@ -66,11 +76,27 @@ public class LocationMonitoringService extends Service implements
 
 
         mLocationRequest.setPriority(priority);
-        mLocationClient.connect();
+        mLocationClient.connect();*/
+        if (mTimer != null) {
+            mTimer.cancel();
+            mTimerTask.cancel();
+        } else {
+            // recreate new
+            mTimer = new Timer();
+        }
+        mTimerTask = new TimerTask() {
+            @Override
+            public void run() {
+                mHandler.post(()->{
+                    Log.e("run", "service task running:" + ++count);
 
+                });
+            }
+        };
+
+        mTimer.scheduleAtFixedRate(mTimerTask, 0, NOTIFY_INTERVAL);
         //Make it stick to the notification panel so it is less prone to get cancelled by the Operating System.
-        return START_STICKY;
-    }
+        return super.onStartCommand(intent, flags, startId);    }
 
     @Nullable
     @Override
