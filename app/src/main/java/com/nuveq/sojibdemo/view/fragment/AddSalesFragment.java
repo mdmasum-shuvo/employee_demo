@@ -8,8 +8,8 @@ import com.nuveq.sojibdemo.utils.CommonUtils;
 import java.util.Calendar;
 
 public class AddSalesFragment extends BaseFragment {
-    FragmentAddSalesBinding binding;
-    Calendar calendar;
+    private FragmentAddSalesBinding binding;
+    private Calendar calendar;
 
     @Override
     protected Integer layoutResourceId() {

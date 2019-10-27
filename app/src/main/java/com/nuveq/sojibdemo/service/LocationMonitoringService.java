@@ -119,7 +119,7 @@ public class LocationMonitoringService extends Service implements
 
         if (location != null) {
             Log.d(TAG, "== location != null");
-            Toast.makeText(this, String.valueOf(location.getLatitude()) + " \n" + String.valueOf(location.getLongitude()), Toast.LENGTH_SHORT).show();
+           // Toast.makeText(this, String.valueOf(location.getLatitude()) + " \n" + String.valueOf(location.getLongitude()), Toast.LENGTH_SHORT).show();
             //Send result to activities
             TrackingPost post = new TrackingPost();
             post.setDate(CommonUtils.currentDate());
@@ -134,6 +134,7 @@ public class LocationMonitoringService extends Service implements
                 public void onResponse(Call<String> call, Response<String> response) {
                     if (response.isSuccessful()) {
                         if (response.body() != null) {
+                            Log.e("call", "location data save");
 
                         } else {
                      /*   if (mListener != null) {
@@ -160,15 +161,6 @@ public class LocationMonitoringService extends Service implements
         }
     }
 
-    private void sendMessageToUI(String lat, String lng) {
-
-        Log.d(TAG, "Sending info...");
-
-        Intent intent = new Intent(ACTION_LOCATION_BROADCAST);
-        intent.putExtra(EXTRA_LATITUDE, lat);
-        intent.putExtra(EXTRA_LONGITUDE, lng);
-        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
-    }
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {

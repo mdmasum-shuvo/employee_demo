@@ -6,4 +6,5 @@
     android:layout_height="match_parent"
     tools:context=".view.activity.SplashActivity">
 
+    <include layout="@layout/view_common_loader" />
 </androidx.constraintlayout.widget.ConstraintLayout>

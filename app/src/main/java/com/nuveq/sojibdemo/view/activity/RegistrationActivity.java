@@ -80,14 +80,17 @@ public class RegistrationActivity extends BaseActivity implements ServerResponse
         viewModel = ViewModelProviders.of(this).get(Viewmodel.class);
         viewModel.getRepository().setCallbackListener(this);
         viewModel.getGlobalRepository().setCallbackListener(this);
-
+        initToolbar();
         if (getIntentData() != null) {
             binding.etUsername.setText(getIntentData());
             binding.registrationContainer.setVisibility(View.GONE);
             binding.loginLayout.setVisibility(View.VISIBLE);
+            setToolbarTitle("Login");
         } else {
             binding.registrationContainer.setVisibility(View.VISIBLE);
             binding.loginLayout.setVisibility(View.GONE);
+            setToolbarTitle("Registration");
+
         }
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -102,7 +105,6 @@ public class RegistrationActivity extends BaseActivity implements ServerResponse
             return;
         }
 
-        getGpsLocation();
     }
 
     @Override
@@ -143,7 +145,7 @@ public class RegistrationActivity extends BaseActivity implements ServerResponse
             @Override
             public void onClick(View v) {
 
-
+                getGpsLocation();
                 name = binding.tvName.getText().toString();
                 phone = binding.etPhone.getText().toString();
                 pass = binding.etPass.getText().toString();
@@ -154,7 +156,7 @@ public class RegistrationActivity extends BaseActivity implements ServerResponse
 
                 if (latitude == 0) {
                     getGpsLocation();
-                    Toast.makeText(RegistrationActivity.this, "GPS Error", Toast.LENGTH_LONG).show();
+                    Toast.makeText(RegistrationActivity.this, "GPS Error,please try again", Toast.LENGTH_LONG).show();
                     return;
                 } else {
                     Geocoder geocoder;
@@ -264,6 +266,8 @@ public class RegistrationActivity extends BaseActivity implements ServerResponse
         } else {
             enableMyLocation();
         }
+
+        getGpsLocation();
     }
 
 
@@ -271,9 +275,7 @@ public class RegistrationActivity extends BaseActivity implements ServerResponse
         if (PermissionUtils.isPermissionGranted(RegistrationActivity.this, PermissionUtils.LOCATION_PERMISSION, PermissionUtils.REQUEST_LOCATION)) {
 
             getGpsLocation();
-        } /*else {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-        }*/
+        }
 
     }
 
