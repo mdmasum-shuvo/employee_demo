@@ -25,8 +25,8 @@ public class AddVisitPlanFragment extends BaseFragment implements ServerResponse
 
     ArrayList<String> catList = new ArrayList<>();
     ArrayList<String> areaList = new ArrayList<>();
-    ArrayList<Integer> catIdList = new ArrayList<>();
     ArrayList<Integer> areaIdList = new ArrayList<>();
+    ArrayList<Integer> catIdList = new ArrayList<>();
     Viewmodel viewModel;
     ArrayAdapter<String> adapter, areaAdapter;
     int catItemPosition = -1, areaItemPosition = -1;
@@ -79,6 +79,7 @@ public class AddVisitPlanFragment extends BaseFragment implements ServerResponse
                     return;
                 }
 
+                showProgressDialog();
                 viewModel.getVisitAreaData("" + catIdList.get(catItemPosition)).observe(getActivity(), data -> {
                     if (data != null) {
                         if (!areaList.isEmpty() || !areaIdList.isEmpty()) {
@@ -87,8 +88,10 @@ public class AddVisitPlanFragment extends BaseFragment implements ServerResponse
                         }
                         for (int i = 0; i < data.size(); i++) {
                             try {
-                                areaList.add(data.get(i).getVisitLocation());
-                                areaIdList.add(data.get(i).getId());
+                                if (data.get(i).getName() != null) {
+                                    areaList.add(data.get(i).getName());
+                                    areaIdList.add(data.get(i).getId());
+                                }
                             } catch (Exception e) {
 
                             }
@@ -97,6 +100,8 @@ public class AddVisitPlanFragment extends BaseFragment implements ServerResponse
                         areaAdapter = new ArrayAdapter<>(getActivity(), R.layout.support_simple_spinner_dropdown_item, areaList);
                         binding.spinerArea.setAdapter(areaAdapter);
                     }
+
+                    hideProgressDialog();
                 });
             } // to close the onItemSelected
 

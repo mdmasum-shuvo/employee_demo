@@ -1,12 +1,11 @@
-package com.nuveq.sojibdemo.datamodel.global.area;
+package com.nuveq.sojibdemo.datamodel.global.branch;
 
 import java.util.List;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class AreaResponse {
-
-
+public class BranchResponse {
     @SerializedName("status")
     @Expose
     private Boolean status;
@@ -41,5 +40,5 @@ public class AreaResponse {
         this.result = result;
     }
 
-
 }
+

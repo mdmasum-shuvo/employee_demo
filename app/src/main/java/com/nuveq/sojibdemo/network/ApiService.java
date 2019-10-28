@@ -4,9 +4,9 @@ package com.nuveq.sojibdemo.network;
 import com.google.gson.JsonObject;
 import com.nuveq.sojibdemo.datamodel.LoginResponse;
 import com.nuveq.sojibdemo.datamodel.attendance.AttendanceDataResponse;
-import com.nuveq.sojibdemo.datamodel.global.CategoryDatum;
+import com.nuveq.sojibdemo.datamodel.global.branch.BranchResponse;
 import com.nuveq.sojibdemo.datamodel.global.area.AreaResponse;
-import com.nuveq.sojibdemo.datamodel.registration.Registration;
+import com.nuveq.sojibdemo.datamodel.global.cat.CatResponse;
 import com.nuveq.sojibdemo.datamodel.visitplan.VisitPlanResponse;
 
 import java.util.ArrayList;
@@ -55,16 +55,22 @@ public interface ApiService {
 
     //Global
     @GET(HTTP_PARAM.BRANCH)
-    Call<ArrayList<Registration>> getBranch();
+    Call<BranchResponse> getBranch();
 
     @GET(HTTP_PARAM.CATEGORY)
-    Call<ArrayList<CategoryDatum>> getCategoryData();
+    Call<CatResponse> getCategoryData();
 
     @POST(HTTP_PARAM.AREA)
     Call<AreaResponse> getAreaData(@Body JsonObject object);
 
+    @GET(HTTP_PARAM.DOCTOR)
+    Call<AreaResponse> getDoctor();
+
     @POST(HTTP_PARAM.PLAN_DATA)
     Call<VisitPlanResponse> getVisitPlanData(@Body JsonObject object);
+
+    @POST(HTTP_PARAM.SALES_ENTRY)
+    Call<String> salePost(@Body JsonObject object);
 
 
 }

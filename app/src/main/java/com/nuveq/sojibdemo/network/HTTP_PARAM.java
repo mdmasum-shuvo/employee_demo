@@ -16,5 +16,7 @@ public class HTTP_PARAM {
     public static final String AREA ="visitareainfo" ;
     public static final String ADD_VISIT ="visitplanadd" ;
     public static final String PLAN_DATA ="visitplanlist" ;
+    public static final String DOCTOR ="doctorlist" ;
+    public static final String SALES_ENTRY = "patientadd";
     public static String MAC_ADDRESS = "";
 }

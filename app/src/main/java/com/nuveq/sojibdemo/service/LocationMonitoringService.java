@@ -54,14 +54,15 @@ public class LocationMonitoringService extends Service implements
     public static final String EXTRA_LONGITUDE = "extra_longitude";
     public static final long NOTIFY_INTERVAL = (5 * 1000);// 10 seconds
     // run on another Thread to avoid crash
-    private Handler mHandler =new Handler();
+    private Handler mHandler = new Handler();
     // timer handling
     private Timer mTimer;
     private TimerTask mTimerTask;
-    int count =0;
+    int count = 0;
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-/*        mLocationClient = new GoogleApiClient.Builder(this)
+        mLocationClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
@@ -76,27 +77,10 @@ public class LocationMonitoringService extends Service implements
 
 
         mLocationRequest.setPriority(priority);
-        mLocationClient.connect();*/
-        if (mTimer != null) {
-            mTimer.cancel();
-            mTimerTask.cancel();
-        } else {
-            // recreate new
-            mTimer = new Timer();
-        }
-        mTimerTask = new TimerTask() {
-            @Override
-            public void run() {
-                mHandler.post(()->{
-                    Log.e("run", "service task running:" + ++count);
-
-                });
-            }
-        };
-
-        mTimer.scheduleAtFixedRate(mTimerTask, 0, NOTIFY_INTERVAL);
+        mLocationClient.connect();
         //Make it stick to the notification panel so it is less prone to get cancelled by the Operating System.
-        return super.onStartCommand(intent, flags, startId);    }
+        return super.onStartCommand(intent, flags, startId);
+    }
 
     @Nullable
     @Override
@@ -145,7 +129,7 @@ public class LocationMonitoringService extends Service implements
 
         if (location != null) {
             Log.d(TAG, "== location != null");
-           // Toast.makeText(this, String.valueOf(location.getLatitude()) + " \n" + String.valueOf(location.getLongitude()), Toast.LENGTH_SHORT).show();
+            // Toast.makeText(this, String.valueOf(location.getLatitude()) + " \n" + String.valueOf(location.getLongitude()), Toast.LENGTH_SHORT).show();
             //Send result to activities
             TrackingPost post = new TrackingPost();
             post.setDate(CommonUtils.currentDate());
@@ -160,7 +144,7 @@ public class LocationMonitoringService extends Service implements
                 public void onResponse(Call<String> call, Response<String> response) {
                     if (response.isSuccessful()) {
                         if (response.body() != null) {
-                            Log.e("call", "location data save");
+                            Log.e("run", "location data save");
 
                         } else {
                      /*   if (mListener != null) {
@@ -187,6 +171,12 @@ public class LocationMonitoringService extends Service implements
         }
     }
 
+    @Override
+    public void onDestroy() {
+        if (mLocationClient.isConnected())
+            mLocationClient.disconnect();
+        super.onDestroy();
+    }
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {

@@ -12,15 +12,16 @@ import com.nuveq.sojibdemo.datamodel.AuthenticationPost;
 import com.nuveq.sojibdemo.datamodel.CheckOutPost;
 import com.nuveq.sojibdemo.datamodel.LoginResponse;
 import com.nuveq.sojibdemo.datamodel.TrackingPost;
+import com.nuveq.sojibdemo.datamodel.global.branch.Result;
+import com.nuveq.sojibdemo.datamodel.sales.SalesPost;
 import com.nuveq.sojibdemo.datamodel.visitplan.Plan;
 import com.nuveq.sojibdemo.datamodel.visitplan.VisitPlanDataPost;
 import com.nuveq.sojibdemo.datamodel.attendance.Emp;
-import com.nuveq.sojibdemo.datamodel.global.CategoryDatum;
 import com.nuveq.sojibdemo.datamodel.registration.Data;
-import com.nuveq.sojibdemo.datamodel.registration.Registration;
 import com.nuveq.sojibdemo.server_repository.AttendanceRepository;
 import com.nuveq.sojibdemo.server_repository.AuthenticationRepository;
 import com.nuveq.sojibdemo.server_repository.GlobalRepository;
+import com.nuveq.sojibdemo.server_repository.SalesRepository;
 import com.nuveq.sojibdemo.server_repository.VisitPlanRepository;
 
 import java.util.List;
@@ -32,6 +33,7 @@ public class Viewmodel extends AndroidViewModel {
     private AttendanceRepository attendanceRepository;
     private GlobalRepository globalRepository;
     private VisitPlanRepository visitRepository;
+    private SalesRepository salesRepository;
 
     public Viewmodel(@NonNull Application application) {
         super(application);
@@ -39,6 +41,7 @@ public class Viewmodel extends AndroidViewModel {
         attendanceRepository = new AttendanceRepository();
         globalRepository = new GlobalRepository();
         visitRepository = new VisitPlanRepository();
+        salesRepository = new SalesRepository();
     }
 
 
@@ -93,26 +96,40 @@ public class Viewmodel extends AndroidViewModel {
         return visitRepository;
     }
 
+    public SalesRepository getSalesRepository() {
+        return salesRepository;
+    }
+
     public MutableLiveData<List<Emp>> getAttenDataList(AttendDatePost post) {
         return attendanceRepository.getEmpttendanceDataList(post);
     }
 
-    public MutableLiveData<List<Registration>> getBrachData() {
+    public MutableLiveData<List<Result>> getBrachData() {
         return globalRepository.getBranchDataList();
     }
 
 
-    public MutableLiveData<List<CategoryDatum>> getVisitCatData() {
+    public MutableLiveData<List<com.nuveq.sojibdemo.datamodel.global.cat.Result>> getVisitCatData() {
         return globalRepository.getVisitCatDataList();
     }
 
-    public MutableLiveData<List<com.nuveq.sojibdemo.datamodel.global.area.Emp>> getVisitAreaData(String post) {
+    public MutableLiveData<List<com.nuveq.sojibdemo.datamodel.global.area.Result>> getVisitAreaData(String post) {
         return globalRepository.getVisitAreaDataList(post);
+    }
+
+    public MutableLiveData<List<com.nuveq.sojibdemo.datamodel.global.area.Result>> getDoctorAreaData() {
+        return globalRepository.getDoctorDataList();
     }
 
     public MutableLiveData<String> getVisitPlanData(VisitPlanDataPost post) {
         return visitRepository.getAddPlanResponse(post);
-    }  public MutableLiveData<List<Plan>> getVisitPlanDataList(AttendDatePost post) {
+    }
+
+    public MutableLiveData<List<Plan>> getVisitPlanDataList(AttendDatePost post) {
         return visitRepository.getPlanDataList(post);
+    }
+
+    public MutableLiveData<String> getSalesEntry(SalesPost post) {
+        return salesRepository.getSalesEntryResponse(post);
     }
 }
