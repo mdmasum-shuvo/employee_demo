@@ -180,7 +180,5 @@ public class LocationMonitoringService extends Service implements
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
-        Log.d(TAG, "Failed to connect to Google API");
-
     }
 }

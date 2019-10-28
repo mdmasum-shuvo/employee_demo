@@ -132,4 +132,9 @@ public class Viewmodel extends AndroidViewModel {
     public MutableLiveData<String> getSalesEntry(SalesPost post) {
         return salesRepository.getSalesEntryResponse(post);
     }
+
+
+    public MutableLiveData<List<com.nuveq.sojibdemo.datamodel.sales.Result>> getSalesList(AttendDatePost post) {
+        return salesRepository.getSalesList(post);
+    }
 }

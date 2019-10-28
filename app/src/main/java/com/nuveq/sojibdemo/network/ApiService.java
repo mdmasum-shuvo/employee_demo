@@ -7,6 +7,7 @@ import com.nuveq.sojibdemo.datamodel.attendance.AttendanceDataResponse;
 import com.nuveq.sojibdemo.datamodel.global.branch.BranchResponse;
 import com.nuveq.sojibdemo.datamodel.global.area.AreaResponse;
 import com.nuveq.sojibdemo.datamodel.global.cat.CatResponse;
+import com.nuveq.sojibdemo.datamodel.sales.SalesResponse;
 import com.nuveq.sojibdemo.datamodel.visitplan.VisitPlanResponse;
 
 import java.util.ArrayList;
@@ -71,6 +72,9 @@ public interface ApiService {
 
     @POST(HTTP_PARAM.SALES_ENTRY)
     Call<String> salePost(@Body JsonObject object);
+
+    @POST(HTTP_PARAM.SALES_DATA)
+    Call<SalesResponse> getSalesData(@Body JsonObject object);
 
 
 }

@@ -1,20 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-
     <data>
 
         <variable
             name="model"
-            type="com.nuveq.sojibdemo.datamodel.visitplan.Plan" />
+            type="com.nuveq.sojibdemo.datamodel.sales.Result" />
     </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_70sdp"
-        android:background="@color/colorWhite"
-      >
+        android:layout_height="@dimen/_100sdp"
+        android:background="@color/colorWhite">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -24,7 +21,7 @@
             android:paddingBottom="@dimen/_5sdp">
 
             <LinearLayout
-                android:id="@+id/ln_area"
+                android:id="@+id/ln_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_15sdp"
@@ -37,7 +34,57 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Visit area:"
+                    android:text="Patient Name:"
+                    android:textColor="@color/blue_gray"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:text="@{model.name}"
+                    android:textColor="@color/blue_gray" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ln_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ln_name">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Phone:"
+                    android:textColor="@color/blue_gray"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:text="@{model.phone}"
+                    android:textColor="@color/blue_gray" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ln_area"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ln_phone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Address:"
                     android:textColor="@color/blue_gray"
                     android:textStyle="bold" />
 
@@ -46,7 +93,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_5sdp"
-                    android:text="@{model.visitArea}"
+                    android:text="@{model.address}"
                     android:textColor="@color/blue_gray" />
             </LinearLayout>
 
@@ -99,4 +146,5 @@
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </RelativeLayout>
+
 </layout>

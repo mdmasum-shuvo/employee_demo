@@ -80,6 +80,8 @@ public class RegistrationActivity extends BaseActivity implements ServerResponse
         viewModel = ViewModelProviders.of(this).get(Viewmodel.class);
         viewModel.getRepository().setCallbackListener(this);
         viewModel.getGlobalRepository().setCallbackListener(this);
+        initToolbar();
+        binding.Toolbar.logout.setVisibility(View.GONE);
         if (getIntentData() != null) {
             binding.etUsername.setText(getIntentData());
             binding.registrationContainer.setVisibility(View.GONE);

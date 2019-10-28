@@ -362,7 +362,8 @@
             </androidx.cardview.widget.CardView>
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-        <include layout="@layout/toolbar" />
+        <include android:id="@+id/Toolbar"
+            layout="@layout/toolbar" />
 
 
     </RelativeLayout>
