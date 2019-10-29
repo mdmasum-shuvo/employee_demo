@@ -18,15 +18,19 @@ import com.nuveq.sojibdemo.viewmodel.Viewmodel;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import jrizani.jrspinner.JRSpinner;
+
 public class AddVisitPlanFragment extends BaseFragment implements ServerResponseFailedCallback {
 
     FragmentAddPlanBinding binding;
     Calendar calendar;
 
-    ArrayList<String> catList = new ArrayList<>();
-    ArrayList<String> areaList = new ArrayList<>();
-    ArrayList<Integer> areaIdList = new ArrayList<>();
-    ArrayList<Integer> catIdList = new ArrayList<>();
+    String[] catList;
+    String[] areaList;
+    Integer[] areaIdList;
+    Integer[] catIdList;
+
+    //String[] spinnerTitleList = new String[spinnerList.size()];
     Viewmodel viewModel;
     ArrayAdapter<String> adapter, areaAdapter;
     int catItemPosition = -1, areaItemPosition = -1;
@@ -53,71 +57,73 @@ public class AddVisitPlanFragment extends BaseFragment implements ServerResponse
         viewModel.getVisitCatData().observe(getActivity(), data -> {
             if (data != null) {
                 hideProgressDialog();
+                catList = new String[data.size()];
+                catIdList = new Integer[data.size()];
                 for (int i = 0; i < data.size(); i++) {
                     try {
-                        catList.add(data.get(i).getCategory());
-                        catIdList.add(data.get(i).getId());
+                        catList[i] = data.get(i).getCategory();
+                        catIdList[i] = data.get(i).getId();
                     } catch (Exception e) {
 
                     }
                 }
 
-                adapter = new ArrayAdapter<>(getActivity(), R.layout.support_simple_spinner_dropdown_item, catList);
-                binding.spinerCat.setAdapter(adapter);
+                binding.spinerCat.setItems(catList);
             }
         });
 
+        binding.spinerCat.setMultiple(false);
+        binding.spinerArea.setMultiple(false);
+        binding.spinerArea.setSelected(true);
+        binding.spinerCat.setSelected(true);
 
     }
 
     @Override
     protected void initFragmentListener() {
-        binding.spinerCat.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+        binding.spinerCat.setOnItemClickListener(new JRSpinner.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
                 catItemPosition = position;
+                areaItemPosition = -1;
                 if (catItemPosition < 0) {
                     return;
                 }
+                areaList = new String[0];
+                areaIdList = new Integer[0];
 
                 showProgressDialog();
-                viewModel.getVisitAreaData("" + catIdList.get(catItemPosition)).observe(getActivity(), data -> {
+                viewModel.getVisitAreaData("" + catIdList[catItemPosition]).observe(getActivity(), data -> {
                     if (data != null) {
-                        if (!areaList.isEmpty() || !areaIdList.isEmpty()) {
-                            areaList.clear();
-                            areaIdList.clear();
-                        }
+                        areaList = new String[data.size()];
+                        areaIdList = new Integer[data.size()];
                         for (int i = 0; i < data.size(); i++) {
                             try {
                                 if (data.get(i).getName() != null) {
-                                    areaList.add(data.get(i).getName());
-                                    areaIdList.add(data.get(i).getId());
+                                    areaList[i] = data.get(i).getName();
+                                    areaIdList[i] = data.get(i).getId();
                                 }
                             } catch (Exception e) {
 
                             }
                         }
 
-                        areaAdapter = new ArrayAdapter<>(getActivity(), R.layout.support_simple_spinner_dropdown_item, areaList);
-                        binding.spinerArea.setAdapter(areaAdapter);
+                        binding.spinerArea.setText("");
+                        binding.spinerArea.setHint("Select one");
+                        binding.spinerArea.setItems(areaList);
                     }
+
 
                     hideProgressDialog();
                 });
-            } // to close the onItemSelected
-
-            public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
 
-        binding.spinerArea.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        binding.spinerArea.setOnItemClickListener(new JRSpinner.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
                 areaItemPosition = position;
-
-            } // to close the onItemSelected
-
-            public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
 
@@ -138,7 +144,7 @@ public class AddVisitPlanFragment extends BaseFragment implements ServerResponse
                 post.setDate(date);
                 post.setTime(time);
                 post.setStatus("Pending");
-                post.setVisitAreaId("" + areaIdList.get(areaItemPosition));
+                post.setVisitAreaId("" + areaIdList[areaItemPosition]);
                 viewModel.getVisitPlanData(post).observe(getActivity(), data -> {
                     if (data != null) {
                         hideProgressDialog();

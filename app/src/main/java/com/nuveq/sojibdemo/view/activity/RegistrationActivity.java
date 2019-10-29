@@ -51,7 +51,6 @@ public class RegistrationActivity extends BaseActivity implements ServerResponse
     ActivityRegistrationBinding binding;
     private boolean mPermissionDenied = false;
     private double latitude, longitude;
-    Gson gson = new Gson();
     private GPSTracker gps;
     int itemPosition = -1;
     String name;

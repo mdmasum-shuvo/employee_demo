@@ -103,7 +103,6 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/_10sdp"
                         android:orientation="vertical"
-
                         android:textColor="@color/blue_gray">
 
                         <TextView
@@ -112,10 +111,15 @@
                             android:text="Visit Type"
                             android:textColor="@color/blue_gray" />
 
-                        <Spinner
+                        <jrizani.jrspinner.JRSpinner
                             android:id="@+id/spiner_cat"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"></Spinner>
+                            android:layout_height="wrap_content"
+                            android:hint="select one"
+                            android:textColor="@color/blue_gray"
+                            app:backgroundTint="@color/gray"
+                            app:jrs_icon_tint="@color/gray"
+                         />
 
 
                     </LinearLayout>
@@ -144,10 +148,14 @@
 
                             android:textColor="@color/blue_gray" />
 
-                        <Spinner
+                        <jrizani.jrspinner.JRSpinner
                             android:id="@+id/spiner_area"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"></Spinner>
+                            android:layout_height="wrap_content"
+                            android:hint="select one"
+                            android:textColor="@color/blue_gray"
+                            app:backgroundTint="@color/gray"
+                            app:jrs_icon_tint="@color/gray"/>
 
 
                     </LinearLayout>

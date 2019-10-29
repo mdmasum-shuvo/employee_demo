@@ -35,14 +35,12 @@
         android:layout_height="match_parent"
         android:background="@color/colorWhite"
         android:gravity="center"
-        android:visibility="gone"
         android:orientation="vertical">
 
         <ProgressBar
             android:id="@+id/progressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:indeterminateTint="@color/deep_red"
             android:indeterminate="true" />
 

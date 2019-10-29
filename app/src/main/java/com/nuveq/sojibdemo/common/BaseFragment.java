@@ -152,7 +152,7 @@ public abstract class BaseFragment extends Fragment {
                         dialog.dismiss();
                     }
                 })
-                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setIcon(R.drawable.sync)
                 .show();
     }
 
