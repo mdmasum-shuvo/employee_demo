@@ -58,11 +58,77 @@ public class VisitPlanRepository {
     }
 
 
-    public MutableLiveData<List<Plan>> getPlanDataList(AttendDatePost post) {
+    public MutableLiveData<List<Plan>> getPendingPlanList(AttendDatePost post) {
         planDataList = new MutableLiveData<>();
         String jsonString = gson.toJson(post);
         JsonObject jsonObject = new JsonParser().parse(jsonString).getAsJsonObject();
-        CommonUtils.getApiService().getVisitPlanData(jsonObject).enqueue(new Callback<VisitPlanResponse>() {
+        CommonUtils.getApiService().getPendingPlanData(jsonObject).enqueue(new Callback<VisitPlanResponse>() {
+            @Override
+            public void onResponse(Call<VisitPlanResponse> call, Response<VisitPlanResponse> response) {
+                if (response.isSuccessful()) {
+                    if (response.body().getStatus()) {
+                        planDataList.setValue(response.body().getPlan());
+
+                    } else {
+                        if (mListener != null) {
+                            mListener.onFailed(response.body().getMessage());
+                        }
+                    }
+                } else {
+                    if (mListener != null) {
+                        mListener.onFailed(response.message());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<VisitPlanResponse> call, Throwable t) {
+                if (mListener != null) {
+                    mListener.onFailed("Something went wrong on server\ntry again");
+                }
+            }
+        });
+        return planDataList;
+    }
+
+    public MutableLiveData<List<Plan>> getApprovedPlanList(AttendDatePost post) {
+        planDataList = new MutableLiveData<>();
+        String jsonString = gson.toJson(post);
+        JsonObject jsonObject = new JsonParser().parse(jsonString).getAsJsonObject();
+        CommonUtils.getApiService().getApprovedPlanList(jsonObject).enqueue(new Callback<VisitPlanResponse>() {
+            @Override
+            public void onResponse(Call<VisitPlanResponse> call, Response<VisitPlanResponse> response) {
+                if (response.isSuccessful()) {
+                    if (response.body().getStatus()) {
+                        planDataList.setValue(response.body().getPlan());
+
+                    } else {
+                        if (mListener != null) {
+                            mListener.onFailed(response.body().getMessage());
+                        }
+                    }
+                } else {
+                    if (mListener != null) {
+                        mListener.onFailed(response.message());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<VisitPlanResponse> call, Throwable t) {
+                if (mListener != null) {
+                    mListener.onFailed("Something went wrong on server\ntry again");
+                }
+            }
+        });
+        return planDataList;
+    }
+
+    public MutableLiveData<List<Plan>> getVisitedPlanList(AttendDatePost post) {
+        planDataList = new MutableLiveData<>();
+        String jsonString = gson.toJson(post);
+        JsonObject jsonObject = new JsonParser().parse(jsonString).getAsJsonObject();
+        CommonUtils.getApiService().getVisitedPlanList(jsonObject).enqueue(new Callback<VisitPlanResponse>() {
             @Override
             public void onResponse(Call<VisitPlanResponse> call, Response<VisitPlanResponse> response) {
                 if (response.isSuccessful()) {

@@ -125,8 +125,16 @@ public class Viewmodel extends AndroidViewModel {
         return visitRepository.getAddPlanResponse(post);
     }
 
-    public MutableLiveData<List<Plan>> getVisitPlanDataList(AttendDatePost post) {
-        return visitRepository.getPlanDataList(post);
+    public MutableLiveData<List<Plan>> getPendingPlanDataList(AttendDatePost post) {
+        return visitRepository.getPendingPlanList(post);
+    }
+
+    public MutableLiveData<List<Plan>> getApprovedPlanDataList(AttendDatePost post) {
+        return visitRepository.getApprovedPlanList(post);
+    }
+
+    public MutableLiveData<List<Plan>> getVisitedPlanDataList(AttendDatePost post) {
+        return visitRepository.getVisitedPlanList(post);
     }
 
     public MutableLiveData<String> getSalesEntry(SalesPost post) {

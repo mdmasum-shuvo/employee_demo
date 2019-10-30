@@ -15,7 +15,9 @@ public class HTTP_PARAM {
     public static final String REGISTRATION = "EmpInfoes";
     public static final String AREA ="visitareainfo" ;
     public static final String ADD_VISIT ="visitplanadd" ;
-    public static final String PLAN_DATA ="visitplanlist" ;
+    public static final String PENDING_PLAN_DATA ="pendingplanlist" ;
+    public static final String APPROVED_PLAN_LIST ="approvedplanlist" ;
+    public static final String VISITED_PLAN_LIST ="visitedplanlist" ;
     public static final String DOCTOR ="doctorlist" ;
     public static final String SALES_ENTRY = "patientadd";
     public static final String SALES_DATA ="patientlist" ;

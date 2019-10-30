@@ -10,8 +10,6 @@ import com.nuveq.sojibdemo.datamodel.global.cat.CatResponse;
 import com.nuveq.sojibdemo.datamodel.sales.SalesResponse;
 import com.nuveq.sojibdemo.datamodel.visitplan.VisitPlanResponse;
 
-import java.util.ArrayList;
-
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -67,8 +65,15 @@ public interface ApiService {
     @GET(HTTP_PARAM.DOCTOR)
     Call<AreaResponse> getDoctor();
 
-    @POST(HTTP_PARAM.PLAN_DATA)
-    Call<VisitPlanResponse> getVisitPlanData(@Body JsonObject object);
+    //plan data
+    @POST(HTTP_PARAM.PENDING_PLAN_DATA)
+    Call<VisitPlanResponse> getPendingPlanData(@Body JsonObject object);
+
+    @POST(HTTP_PARAM.APPROVED_PLAN_LIST)
+    Call<VisitPlanResponse> getApprovedPlanList(@Body JsonObject object);
+
+    @POST(HTTP_PARAM.VISITED_PLAN_LIST)
+    Call<VisitPlanResponse> getVisitedPlanList(@Body JsonObject object);
 
     @POST(HTTP_PARAM.SALES_ENTRY)
     Call<String> salePost(@Body JsonObject object);

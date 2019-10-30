@@ -1,4 +1,4 @@
-package com.nuveq.sojibdemo.view.fragment;
+package com.nuveq.sojibdemo.view.fragment.visitplan;
 
 import android.view.View;
 import android.widget.AdapterView;

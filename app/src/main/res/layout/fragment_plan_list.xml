@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <FrameLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorWhite">
@@ -16,8 +16,8 @@
             android:id="@+id/container_attend_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/_15sdp"
             android:layout_marginLeft="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_15sdp"
             android:layout_marginRight="@dimen/_15sdp"
 
             >
@@ -25,11 +25,12 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/dateFilterLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
                 app:cardCornerRadius="@dimen/_5sdp"
                 app:cardElevation="@dimen/_5sdp"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                app:layout_constraintTop_toTopOf="parent">
 
                 <LinearLayout
 
@@ -40,6 +41,17 @@
 
 
                     <!--1st-->
+                    <Button
+                        android:id="@+id/btnFilter"
+                        android:layout_width="@dimen/_100sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:background="@drawable/border_round_blue"
+                        android:text="SEARCH"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="@dimen/_10sdp" />
+
                     <LinearLayout
 
                         android:layout_width="match_parent"
@@ -111,28 +123,27 @@
 
                         </LinearLayout>
                     </LinearLayout>
-
-                    <Button
-                        android:id="@+id/btnFilter"
-                        android:layout_width="@dimen/_100sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:layout_gravity="center"
-                        android:layout_marginBottom="@dimen/_5sdp"
-                        android:background="@drawable/border_round_blue"
-                        android:text="SEARCH"
-                        android:textColor="@color/colorWhite"
-                        android:textSize="@dimen/_10sdp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv"
-                app:layout_constraintTop_toBottomOf="@+id/dateFilterLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_15sdp" />
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/_15sdp"
+                app:layout_constraintTop_toBottomOf="@+id/dateFilterLayout" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_float_filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginRight="@dimen/_15sdp"
+            android:layout_marginBottom="@dimen/_15sdp"
+            android:backgroundTint="@color/colorPrimary"
+            android:src="@drawable/filter" />
 
-    </FrameLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

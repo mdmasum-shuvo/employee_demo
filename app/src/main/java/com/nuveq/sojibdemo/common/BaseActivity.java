@@ -49,7 +49,6 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonNull;
 import com.nuveq.sojibdemo.appdata.AppConstants;
-import com.nuveq.sojibdemo.datamodel.LoginResponse;
 import com.nuveq.sojibdemo.network.ApiService;
 import com.nuveq.sojibdemo.R;
 import com.nuveq.sojibdemo.network.RestClient;
@@ -57,14 +56,13 @@ import com.nuveq.sojibdemo.appdata.SharedPreferencesEnum;
 import com.nuveq.sojibdemo.service.LocationMonitoringService;
 import com.nuveq.sojibdemo.utils.maputils.GPSTracker;
 import com.nuveq.sojibdemo.view.activity.RegistrationActivity;
-import com.nuveq.sojibdemo.view.activity.SplashActivity;
 import com.nuveq.sojibdemo.view.fragment.AddAttendanceFragment;
 import com.nuveq.sojibdemo.view.fragment.AddSalesFragment;
-import com.nuveq.sojibdemo.view.fragment.AddVisitPlanFragment;
+import com.nuveq.sojibdemo.view.fragment.visitplan.AddVisitPlanFragment;
 import com.nuveq.sojibdemo.view.fragment.AttendanceListFragment;
 import com.nuveq.sojibdemo.view.fragment.ProfileFragment;
 import com.nuveq.sojibdemo.view.fragment.SalesListFragment;
-import com.nuveq.sojibdemo.view.fragment.VisitPlanListFragment;
+import com.nuveq.sojibdemo.view.fragment.visitplan.VisitFragmentList;
 
 
 import java.io.IOException;
@@ -300,7 +298,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
                 loadFragment(addVisitPlanFragment, getResources().getString(R.string.add_plan));
                 break;
             case R.id.nav_plan_list:
-                VisitPlanListFragment myPlannerFragment = new VisitPlanListFragment();
+                VisitFragmentList myPlannerFragment = new VisitFragmentList();
                 loadFragment(myPlannerFragment, getResources().getString(R.string.plan_list));
 
                 break;
@@ -342,6 +340,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
                 android.R.anim.fade_out);
         fragmentTransaction.replace(R.id.frame, fragment, CURRENT_TAG);
         fragmentTransaction.commitAllowingStateLoss();
+
 
 
     }

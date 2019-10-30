@@ -47,7 +47,7 @@ public class PlanListAdapter extends RecyclerView.Adapter<PlanListAdapter.ViewFi
     public void onBindViewHolder(PlanListAdapter.ViewFilesHolder holder, int position) {
         Plan plan = new Plan();
         try {
-            plan.setVisitArea(list.get(position).getVisitArea());
+            plan.setVisitarea(list.get(position).getVisitarea());
             plan.setDate(CommonUtils.currentDate(list.get(position).getDate()));
             plan.setTime(CommonUtils.currentTime(list.get(position).getTime()));
             holder.binding.setModel(plan);

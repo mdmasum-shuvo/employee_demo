@@ -92,6 +92,8 @@
     <string name="share">share</string>
     <string name="add_sale">Add sale</string>
     <string name="sales_list">Sales list</string>
+    <string name="failed">Failed</string>
+    <string name="user_empty">please select both dates</string>
 
 
 </resources>

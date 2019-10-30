@@ -1,7 +1,13 @@
-package com.nuveq.sojibdemo.view.fragment;
+package com.nuveq.sojibdemo.view.fragment.visitplan;
 
+import android.content.Intent;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -13,7 +19,6 @@ import com.nuveq.sojibdemo.datamodel.AttendDatePost;
 import com.nuveq.sojibdemo.datamodel.visitplan.Plan;
 import com.nuveq.sojibdemo.listener.ServerResponseFailedCallback;
 import com.nuveq.sojibdemo.utils.CommonUtils;
-import com.nuveq.sojibdemo.view.adapter.AttendanceAdapter;
 import com.nuveq.sojibdemo.view.adapter.PlanListAdapter;
 import com.nuveq.sojibdemo.viewmodel.Viewmodel;
 
@@ -21,12 +26,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class VisitPlanListFragment extends BaseFragment implements ServerResponseFailedCallback {
+public class VisitPendingFragment extends BaseFragment implements ServerResponseFailedCallback {
     private FragmentPlanListBinding binding;
     private Viewmodel viewModel;
     private Calendar calendar;
     private List<Plan> planList = new ArrayList<>();
-    PlanListAdapter adapter;
+    private PlanListAdapter adapter;
+    private AlertDialog askIdDialog;
 
     @Override
     protected Integer layoutResourceId() {
@@ -47,26 +53,16 @@ public class VisitPlanListFragment extends BaseFragment implements ServerRespons
 
     @Override
     protected void initFragmentFunctionality() {
+        callApi("2019/11/1", CommonUtils.currentDate());
 
     }
 
     @Override
     protected void initFragmentListener() {
-        binding.etDateFrom.setOnClickListener(v -> {
-            CommonUtils.showDatePicker(getContext(), binding.etDateFrom, calendar);
-        });
-        binding.etDateTo.setOnClickListener(v -> {
-            CommonUtils.showDatePicker(getContext(), binding.etDateTo, calendar);
-        });
 
 
-        binding.btnFilter.setOnClickListener(v -> {
-            if ((!TextUtils.isEmpty(binding.etDateFrom.getText())) && ((!TextUtils.isEmpty(binding.etDateTo.getText())))) {
-                callApi(binding.etDateFrom.getText().toString(), binding.etDateTo.getText().toString());
-            } else {
-                showToast("please select both dates");
-            }
-
+        binding.btnFloatFilter.setOnClickListener(v -> {
+            showAskIdDialog();
         });
     }
 
@@ -80,7 +76,7 @@ public class VisitPlanListFragment extends BaseFragment implements ServerRespons
         post.setFromdate(from);
         post.setTodate(to);
         showProgressDialog();
-        viewModel.getVisitPlanDataList(post).observe(this, data -> {
+        viewModel.getPendingPlanDataList(post).observe(this, data -> {
             if (data != null) {
                 hideProgressDialog();
                 planList.addAll(data);
@@ -88,6 +84,42 @@ public class VisitPlanListFragment extends BaseFragment implements ServerRespons
             }
         });
     }
+
+    private void showAskIdDialog() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        View view = LayoutInflater.from(getActivity()).inflate(R.layout.date_filter_layout, null, false);
+        builder.setView(view);
+        final EditText etDateFrom = view.findViewById(R.id.etDateFrom);
+        final EditText etDateTo = view.findViewById(R.id.etDateTo);
+        Button btnSearch = view.findViewById(R.id.btnFilter);
+
+        etDateFrom.setOnClickListener(v -> {
+            CommonUtils.showDatePicker(getContext(), etDateFrom, calendar);
+        });
+        etDateTo.setOnClickListener(v -> {
+            CommonUtils.showDatePicker(getContext(), etDateTo, calendar);
+        });
+
+        askIdDialog = builder.create();
+        askIdDialog.show();
+        //         //user="demo1254";
+        //         //pass="demo#123";
+        btnSearch.setOnClickListener(view1 -> {
+            String fromDate = etDateFrom.getText().toString();
+            String toDate = etDateTo.getText().toString();
+            if (fromDate.equals("") || toDate.equals("")) {
+                hideProgressDialog();
+                CommonUtils.showCustomAlert(getActivity(), getString(R.string.failed), getString(R.string.user_empty), false);
+                return;
+            }
+
+            askIdDialog.dismiss();
+            callApi(fromDate, toDate);
+
+
+        });
+    }
+
 
     @Override
     public void onFailed(String msg) {
