@@ -17,5 +17,16 @@
 
     />
 
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:layout_gravity="bottom"
+        android:padding="@dimen/_2sdp"
+        android:text="@string/it_support"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/_10sdp" />
 
 </FrameLayout>
