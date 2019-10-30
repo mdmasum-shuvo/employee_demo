@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Saic Group</string>
+    <string name="app_name">Demo</string>
     <string name="gps_setting">GPS settings</string>
     <string name="gps_settting_mesg">GPS is not enabled. Do you want to go to settings menu?</string>
     <string name="cancel">Cancel</string>

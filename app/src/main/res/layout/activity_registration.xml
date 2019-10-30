@@ -10,7 +10,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/login_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/imageView2"
@@ -196,7 +197,7 @@
             android:id="@+id/registration_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone">
+          >
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -223,6 +224,10 @@
                             android:layout_margin="@dimen/_10sdp"
                             android:orientation="vertical">
 
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Name" />
                             <EditText
                                 android:id="@+id/tv_name"
                                 android:layout_width="match_parent"
@@ -230,10 +235,6 @@
                                 android:imeOptions="actionNext"
                                 android:maxLines="1" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Name" />
 
                         </LinearLayout>
 
@@ -255,6 +256,10 @@
                             android:layout_margin="@dimen/_10sdp"
                             android:orientation="vertical">
 
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Phone Number" />
                             <EditText
                                 android:id="@+id/et_phone"
                                 android:layout_width="match_parent"
@@ -263,10 +268,6 @@
                                 android:inputType="number"
                                 android:maxLines="1" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Phone Number" />
 
                         </LinearLayout>
 
@@ -287,18 +288,25 @@
                             android:layout_margin="@dimen/_10sdp"
                             android:orientation="vertical">
 
-                            <EditText
-                                android:id="@+id/et_pass"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:imeOptions="actionNext"
-                                android:inputType="textPassword"
-                                android:maxLines="1" />
-
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Pasword" />
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:passwordToggleEnabled="true">
+                                <EditText
+                                    android:id="@+id/et_pass"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="textPassword"
+                                    android:maxLines="1"
+                                    />
+                            </com.google.android.material.textfield.TextInputLayout>
+
 
                         </LinearLayout>
 
@@ -319,15 +327,19 @@
                             android:layout_margin="@dimen/_10sdp"
                             android:orientation="vertical">
 
-                            <Spinner
-                                android:id="@+id/spiner"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"></Spinner>
-
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Branch" />
+                            <jrizani.jrspinner.JRSpinner
+                                android:id="@+id/spiner"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="select one"
+                                android:textColor="@color/blue_gray"
+                                app:backgroundTint="@color/gray"
+                                app:jrs_icon_tint="@color/gray"/>
+
 
 
                         </LinearLayout>

@@ -42,6 +42,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import jrizani.jrspinner.JRSpinner;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -57,8 +58,8 @@ public class RegistrationActivity extends BaseActivity implements ServerResponse
     String phone;
     String pass;
     String location = null;
-    ArrayList<String> branchResponseArrayList = new ArrayList<>();
-    ArrayList<Integer> branchIdList = new ArrayList<>();
+    String[] branchResponseArrayList;
+    Integer[] branchIdList;
     ArrayAdapter<String> adapter;
     private Viewmodel viewModel;
 
@@ -110,34 +111,33 @@ public class RegistrationActivity extends BaseActivity implements ServerResponse
     @Override
     protected void initFunctionality() {
         showProgressDialog();
+        binding.spiner.setMultiple(false);
+        binding.spiner.setSelected(true);
         viewModel.getBrachData().observe(this, data -> {
             if (data != null) {
+                branchResponseArrayList = new String[data.size()];
+                branchIdList = new Integer[data.size()];
                 hideProgressDialog();
                 for (int i = 0; i < data.size(); i++) {
                     try {
-                        branchResponseArrayList.add(data.get(i).getBranch());
-                        branchIdList.add(data.get(i).getBranchId());
+                        branchResponseArrayList[i] = data.get(i).getBranch();
+                        branchIdList[i] = data.get(i).getBranchId();
                     } catch (Exception e) {
 
                     }
                 }
 
-                adapter = new ArrayAdapter<>(getApplicationContext(), R.layout.support_simple_spinner_dropdown_item, branchResponseArrayList);
-                binding.spiner.setAdapter(adapter);
+                binding.spiner.setItems(branchResponseArrayList);
             }
         });
     }
 
     @Override
     protected void initListener() {
-        binding.spiner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        binding.spiner.setOnItemClickListener(new JRSpinner.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
                 itemPosition = position;
-
-            } // to close the onItemSelected
-
-            public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
 
@@ -182,7 +182,7 @@ public class RegistrationActivity extends BaseActivity implements ServerResponse
                 data.setPassword(pass);
                 data.setLocation(location);
                 data.setMacAddress(AppConstants.ANDROID_ID);
-                data.setBranchId(branchIdList.get(itemPosition));
+                data.setBranchId(branchIdList[itemPosition]);
 
                 showProgressDialog();
                 viewModel.getRegistrationResponse(data).observe(RegistrationActivity.this, isSuccess -> {
