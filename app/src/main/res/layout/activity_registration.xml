@@ -227,11 +227,14 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:textColor="@color/blue_gray"
                                 android:text="Name" />
                             <EditText
                                 android:id="@+id/tv_name"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:textColor="@color/blue_gray"
+
                                 android:imeOptions="actionNext"
                                 android:maxLines="1" />
 
@@ -259,13 +262,16 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:textColor="@color/blue_gray"
+
                                 android:text="Phone Number" />
                             <EditText
                                 android:id="@+id/et_phone"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:imeOptions="actionNext"
-                                android:inputType="number"
+                                android:textColor="@color/blue_gray"
+                                android:inputType="phone"
                                 android:maxLines="1" />
 
 
@@ -291,11 +297,13 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Pasword" />
+                                android:textColor="@color/blue_gray"
+                                android:text="Password" />
 
                             <com.google.android.material.textfield.TextInputLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                app:passwordToggleTint="@color/blue_gray"
                                 app:passwordToggleEnabled="true">
                                 <EditText
                                     android:id="@+id/et_pass"
@@ -303,6 +311,7 @@
                                     android:layout_height="wrap_content"
                                     android:imeOptions="actionNext"
                                     android:inputType="textPassword"
+                                    android:textColor="@color/blue_gray"
                                     android:maxLines="1"
                                     />
                             </com.google.android.material.textfield.TextInputLayout>
@@ -330,6 +339,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:textColor="@color/blue_gray"
                                 android:text="Branch" />
                             <jrizani.jrspinner.JRSpinner
                                 android:id="@+id/spiner"
