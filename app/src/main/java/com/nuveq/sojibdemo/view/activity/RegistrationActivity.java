@@ -60,7 +60,6 @@ public class RegistrationActivity extends BaseActivity implements ServerResponse
     String location = null;
     String[] branchResponseArrayList;
     Integer[] branchIdList;
-    ArrayAdapter<String> adapter;
     private Viewmodel viewModel;
 
     @Override

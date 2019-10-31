@@ -52,7 +52,7 @@ public class AttendanceListFragment extends BaseFragment implements ServerRespon
 
     @Override
     protected void initFragmentFunctionality() {
-        callApi("2019/10/1", CommonUtils.currentDate());
+        callApi("2019/11/1", CommonUtils.currentDate());
     }
 
     @Override

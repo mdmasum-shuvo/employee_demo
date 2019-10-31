@@ -21,5 +21,7 @@ public class HTTP_PARAM {
     public static final String DOCTOR ="doctorlist" ;
     public static final String SALES_ENTRY = "patientadd";
     public static final String SALES_DATA ="patientlist" ;
+    public static final String VISIT_ENTRY = "visitadd";
+    public static final String SHIFT_LIST ="shiftlist" ;
     public static String MAC_ADDRESS = "";
 }

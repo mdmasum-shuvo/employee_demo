@@ -67,7 +67,6 @@ public class AddSalesFragment extends BaseFragment implements ServerResponseFail
                 binding.spiner.setItems(areaList);
             }
 
-            hideProgressDialog();
         });
 
     }

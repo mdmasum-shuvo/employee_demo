@@ -14,6 +14,7 @@ import com.nuveq.sojibdemo.datamodel.LoginResponse;
 import com.nuveq.sojibdemo.datamodel.TrackingPost;
 import com.nuveq.sojibdemo.datamodel.global.branch.Result;
 import com.nuveq.sojibdemo.datamodel.sales.SalesPost;
+import com.nuveq.sojibdemo.datamodel.visitplan.AddVisitPost;
 import com.nuveq.sojibdemo.datamodel.visitplan.Plan;
 import com.nuveq.sojibdemo.datamodel.visitplan.VisitPlanDataPost;
 import com.nuveq.sojibdemo.datamodel.attendance.Emp;
@@ -144,5 +145,13 @@ public class Viewmodel extends AndroidViewModel {
 
     public MutableLiveData<List<com.nuveq.sojibdemo.datamodel.sales.Result>> getSalesList(AttendDatePost post) {
         return salesRepository.getSalesList(post);
+    }
+
+    public MutableLiveData<String> addVisit(AddVisitPost post) {
+        return visitRepository.getAddVisitResponse(post);
+    }
+
+    public MutableLiveData<List<com.nuveq.sojibdemo.datamodel.global.area.Result>> getShiftList() {
+        return globalRepository.getShiftList();
     }
 }

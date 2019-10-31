@@ -3,6 +3,7 @@ package com.nuveq.sojibdemo.network;
 
 import com.google.gson.JsonObject;
 import com.nuveq.sojibdemo.datamodel.LoginResponse;
+import com.nuveq.sojibdemo.datamodel.ServerResponse;
 import com.nuveq.sojibdemo.datamodel.attendance.AttendanceDataResponse;
 import com.nuveq.sojibdemo.datamodel.global.branch.BranchResponse;
 import com.nuveq.sojibdemo.datamodel.global.area.AreaResponse;
@@ -75,11 +76,18 @@ public interface ApiService {
     @POST(HTTP_PARAM.VISITED_PLAN_LIST)
     Call<VisitPlanResponse> getVisitedPlanList(@Body JsonObject object);
 
+
+    @POST(HTTP_PARAM.VISIT_ENTRY)
+    Call<ServerResponse> addVisit(@Body JsonObject object);
+
     @POST(HTTP_PARAM.SALES_ENTRY)
     Call<String> salePost(@Body JsonObject object);
 
     @POST(HTTP_PARAM.SALES_DATA)
     Call<SalesResponse> getSalesData(@Body JsonObject object);
+
+    @GET(HTTP_PARAM.SHIFT_LIST)
+    Call<AreaResponse> getShiftList();
 
 
 }

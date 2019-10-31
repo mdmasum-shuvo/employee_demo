@@ -5,49 +5,63 @@ import com.google.gson.annotations.SerializedName;
 
 public class AttendancePost {
 
-@SerializedName("empid")
-@Expose
-private String empid;
-@SerializedName("date")
-@Expose
-private String date;
-@SerializedName("checkintime")
-@Expose
-private String checkintime;
-@SerializedName("checkinlocation")
-@Expose
-private String checkinlocation;
+    @SerializedName("shift")
+    @Expose
+    private String shift;
 
-public String getEmpid() {
-return empid;
-}
 
-public void setEmpid(String empid) {
-this.empid = empid;
-}
+    @SerializedName("empid")
+    @Expose
+    private String empid;
 
-public String getDate() {
-return date;
-}
+    @SerializedName("date")
+    @Expose
+    private String date;
+    @SerializedName("checkintime")
+    @Expose
+    private String checkintime;
+    @SerializedName("checkinlocation")
+    @Expose
+    private String checkinlocation;
 
-public void setDate(String date) {
-this.date = date;
-}
+    public String getEmpid() {
+        return empid;
+    }
 
-public String getCheckintime() {
-return checkintime;
-}
+    public void setEmpid(String empid) {
+        this.empid = empid;
+    }
 
-public void setCheckintime(String checkintime) {
-this.checkintime = checkintime;
-}
+    public String getDate() {
+        return date;
+    }
 
-public String getCheckinlocation() {
-return checkinlocation;
-}
+    public void setDate(String date) {
+        this.date = date;
+    }
 
-public void setCheckinlocation(String checkinlocation) {
-this.checkinlocation = checkinlocation;
-}
+    public String getCheckintime() {
+        return checkintime;
+    }
 
+    public void setCheckintime(String checkintime) {
+        this.checkintime = checkintime;
+    }
+
+    public String getCheckinlocation() {
+        return checkinlocation;
+    }
+
+    public void setCheckinlocation(String checkinlocation) {
+        this.checkinlocation = checkinlocation;
+    }
+
+
+    public String getShift() {
+        return shift;
+    }
+
+    public void setShift(String shift) {
+        this.shift = shift;
+    }
 }

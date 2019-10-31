@@ -51,7 +51,7 @@ public class VisitedFragment extends BaseFragment implements ServerResponseFaile
 
     @Override
     protected void initFragmentFunctionality() {
-        callApi("2019/10/1", CommonUtils.currentDate());
+        callApi("2019/11/1", CommonUtils.currentDate());
 
     }
 

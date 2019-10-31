@@ -4,9 +4,16 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Plan {
+
+
+    @SerializedName("id")
+    @Expose
+    private Integer id;
+
     @SerializedName("visitarea")
     @Expose
     private String visitarea;
+
     @SerializedName("category")
     @Expose
     private String category;
@@ -19,7 +26,6 @@ public class Plan {
     @SerializedName("status")
     @Expose
     private String status;
-
     public String getVisitarea() {
         return visitarea;
     }
@@ -58,5 +64,13 @@ public class Plan {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }

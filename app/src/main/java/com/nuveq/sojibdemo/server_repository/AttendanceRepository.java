@@ -13,6 +13,8 @@ import com.nuveq.sojibdemo.datamodel.CheckOutPost;
 import com.nuveq.sojibdemo.datamodel.TrackingPost;
 import com.nuveq.sojibdemo.datamodel.attendance.AttendanceDataResponse;
 import com.nuveq.sojibdemo.datamodel.attendance.Emp;
+import com.nuveq.sojibdemo.datamodel.global.area.AreaResponse;
+import com.nuveq.sojibdemo.datamodel.global.area.Result;
 import com.nuveq.sojibdemo.listener.ServerResponseFailedCallback;
 import com.nuveq.sojibdemo.utils.CommonUtils;
 
@@ -27,6 +29,7 @@ public class AttendanceRepository {
     Gson gson = new Gson();
     private ServerResponseFailedCallback mListener;
     private MutableLiveData<List<Emp>> empttendanceDataList;
+
 
     public void setCallbackListener(ServerResponseFailedCallback mListener) {
         this.mListener = mListener;
@@ -179,5 +182,8 @@ public class AttendanceRepository {
         return checkData;
 
     }
+
+
+
 
 }

@@ -6,6 +6,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.nuveq.sojibdemo.datamodel.AttendDatePost;
+import com.nuveq.sojibdemo.datamodel.ServerResponse;
+import com.nuveq.sojibdemo.datamodel.visitplan.AddVisitPost;
 import com.nuveq.sojibdemo.datamodel.visitplan.Plan;
 import com.nuveq.sojibdemo.datamodel.visitplan.VisitPlanDataPost;
 import com.nuveq.sojibdemo.datamodel.visitplan.VisitPlanResponse;
@@ -155,6 +157,40 @@ public class VisitPlanRepository {
             }
         });
         return planDataList;
+    }
+
+    public MutableLiveData<String> getAddVisitResponse(AddVisitPost post) {
+        addPlanResponse = new MutableLiveData<>();
+        String jsonString = gson.toJson(post);
+        JsonObject jsonObject = new JsonParser().parse(jsonString).getAsJsonObject();
+        CommonUtils.getApiService().addVisit(jsonObject).enqueue(new Callback<ServerResponse>() {
+            @Override
+            public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                if (response.isSuccessful()) {
+                    if (response.body().getStatus()) {
+                        if (mListener != null) {
+                            addPlanResponse.setValue(response.body().getMessage());
+                        }
+                    } else {
+                        if (mListener != null) {
+                            mListener.onFailed(response.body().getMessage());
+                        }
+                    }
+                } else {
+                    if (mListener != null) {
+                        mListener.onFailed(response.message());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ServerResponse> call, Throwable t) {
+                if (mListener != null) {
+                    mListener.onFailed("Something went wrong on server\ntry again");
+                }
+            }
+        });
+        return addPlanResponse;
     }
 
     public void setCallbackListener(ServerResponseFailedCallback mListener) {

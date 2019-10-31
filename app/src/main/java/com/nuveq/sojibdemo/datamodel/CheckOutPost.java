@@ -5,49 +5,61 @@ import com.google.gson.annotations.SerializedName;
 
 public class CheckOutPost {
 
-@SerializedName("empid")
-@Expose
-private String empid;
-@SerializedName("date")
-@Expose
-private String date;
-@SerializedName("checkouttime")
-@Expose
-private String checkouttime;
-@SerializedName("checkoutlocation")
-@Expose
-private String checkoutlocation;
+    @SerializedName("shift")
+    @Expose
+    private String shift;
 
-public String getEmpid() {
-return empid;
-}
+    @SerializedName("empid")
+    @Expose
+    private String empid;
 
-public void setEmpid(String empid) {
-this.empid = empid;
-}
+    @SerializedName("date")
+    @Expose
+    private String date;
+    @SerializedName("checkouttime")
+    @Expose
+    private String checkouttime;
+    @SerializedName("checkoutlocation")
+    @Expose
+    private String checkoutlocation;
+    public String getEmpid() {
+        return empid;
+    }
 
-public String getDate() {
-return date;
-}
+    public void setEmpid(String empid) {
+        this.empid = empid;
+    }
 
-public void setDate(String date) {
-this.date = date;
-}
+    public String getDate() {
+        return date;
+    }
 
-public String getCheckouttime() {
-return checkouttime;
-}
+    public void setDate(String date) {
+        this.date = date;
+    }
 
-public void setCheckouttime(String checkouttime) {
-this.checkouttime = checkouttime;
-}
+    public String getCheckouttime() {
+        return checkouttime;
+    }
 
-public String getCheckoutlocation() {
-return checkoutlocation;
-}
+    public void setCheckouttime(String checkouttime) {
+        this.checkouttime = checkouttime;
+    }
 
-public void setCheckoutlocation(String checkoutlocation) {
-this.checkoutlocation = checkoutlocation;
-}
+    public String getCheckoutlocation() {
+        return checkoutlocation;
+    }
 
+    public void setCheckoutlocation(String checkoutlocation) {
+        this.checkoutlocation = checkoutlocation;
+    }
+
+
+    public String getShift() {
+        return shift;
+    }
+
+    public void setShift(String shift) {
+        this.shift = shift;
+    }
 }

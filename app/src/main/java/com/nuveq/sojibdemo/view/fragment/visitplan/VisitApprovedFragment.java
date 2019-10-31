@@ -14,7 +14,9 @@ import com.nuveq.sojibdemo.appdata.SharedPreferencesEnum;
 import com.nuveq.sojibdemo.common.BaseFragment;
 import com.nuveq.sojibdemo.databinding.FragmentPlanListBinding;
 import com.nuveq.sojibdemo.datamodel.AttendDatePost;
+import com.nuveq.sojibdemo.datamodel.visitplan.AddVisitPost;
 import com.nuveq.sojibdemo.datamodel.visitplan.Plan;
+import com.nuveq.sojibdemo.listener.OnItemClickListener;
 import com.nuveq.sojibdemo.listener.ServerResponseFailedCallback;
 import com.nuveq.sojibdemo.utils.CommonUtils;
 import com.nuveq.sojibdemo.view.adapter.PlanListAdapter;
@@ -51,16 +53,36 @@ public class VisitApprovedFragment extends BaseFragment implements ServerRespons
 
     @Override
     protected void initFragmentFunctionality() {
-        callApi("2019/10/1", CommonUtils.currentDate());
+        callApi("2019/11/1", CommonUtils.currentDate());
 
     }
 
     @Override
     protected void initFragmentListener() {
 
-
         binding.btnFloatFilter.setOnClickListener(v -> {
             showAskIdDialog();
+        });
+
+        adapter.setOnitemClickListener(new OnItemClickListener() {
+            @Override
+            public void itemClickListener(View view, int position) {
+                showProgressDialog();
+                getGpsLocation();
+                AddVisitPost post = new AddVisitPost();
+                post.setId("" + planList.get(position).getId());
+                post.setLat("" + latitude);
+                post.setLog("" + longitude);
+                viewModel.addVisit(post).observe(getActivity(), data -> {
+                    if (data != null) {
+                        hideProgressDialog();
+                        CommonUtils.showCustomAlert(getActivity(), "Info", data, false);
+                        planList.remove(position);
+                        adapter.notifyItemRemoved(position);
+                    }
+                });
+
+            }
         });
     }
 
@@ -78,10 +100,12 @@ public class VisitApprovedFragment extends BaseFragment implements ServerRespons
             if (data != null) {
                 hideProgressDialog();
                 planList.addAll(data);
+                adapter.setVisitButton(true);
                 adapter.notifyDataSetChanged();
             }
         });
     }
+
 
     private void showAskIdDialog() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());

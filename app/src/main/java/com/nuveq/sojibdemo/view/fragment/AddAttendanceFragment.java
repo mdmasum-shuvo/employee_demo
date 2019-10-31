@@ -46,16 +46,18 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
+import jrizani.jrspinner.JRSpinner;
+
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class AddAttendanceFragment extends BaseFragment implements ServerResponseFailedCallback {
 
     private Viewmodel viewModel;
     private FragmentAttendanceListBinding binding;
-    String location = null;
-    private static final int REQUEST_PERMISSIONS_REQUEST_CODE = 34;
-    private boolean mAlreadyStartedService = false;
-
+    private String location = null;
+    int areaItemPosition = -1;
+    private String[] areaList;
+    private Integer[] areaIdList;
 
     @Override
     protected Integer layoutResourceId() {
@@ -67,103 +69,35 @@ public class AddAttendanceFragment extends BaseFragment implements ServerRespons
         binding = (FragmentAttendanceListBinding) getBinding();
         viewModel = ViewModelProviders.of(getActivity()).get(Viewmodel.class);
         viewModel.getAttendanceRepository().setCallbackListener(this);
+        viewModel.getGlobalRepository().setCallbackListener(this);
         binding.checkContainer.setVisibility(View.VISIBLE);
         binding.containerAttendList.setVisibility(View.GONE);
+        binding.spiner.setMultiple(false);
+        binding.spiner.setSelected(true);
     }
 
 
     @Override
     protected void initFragmentFunctionality() {
-        Intent intent = new Intent(getActivity(), LocationMonitoringService.class);
-        binding.btnCheckIn.setOnClickListener(view -> {
-            resetAllButton();
-            binding.btnCheckIn.setCardBackgroundColor(getResources().getColor(R.color.gray));
-            if (latitude == 0) {
-                getGpsLocation();
-                Toast.makeText(getActivity(), "GPS Error", Toast.LENGTH_LONG).show();
-                return;
-            } else {
-                Geocoder geocoder;
-                List<Address> addresses;
-                geocoder = new Geocoder(getActivity(), Locale.getDefault());
 
+        viewModel.getShiftList().observe(getActivity(), data -> {
+            hideProgressDialog();
+            areaList = new String[data.size()];
+            areaIdList = new Integer[data.size()];
+            for (int i = 0; i < data.size(); i++) {
                 try {
-                    addresses = geocoder.getFromLocation(latitude, longitude, 1);
-                    String address = addresses.get(0).getFeatureName(); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
-                    String city = addresses.get(0).getLocality();
-                    String state = addresses.get(0).getSubLocality();
-                    location = address + "," + state + "," + city;
+                    if (data.get(i).getName() != null) {
+                        areaList[i] = data.get(i).getName();
+                        areaIdList[i] = data.get(i).getId();
+                    }
+                } catch (Exception e) {
 
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
             }
 
-            AttendancePost attendancePost = new AttendancePost();
-            attendancePost.setEmpid(String.valueOf(SharedPreferencesEnum.getInstance(getActivity()).getInt(SharedPreferencesEnum.Key.USER_ID)));
-            attendancePost.setDate(CommonUtils.currentDate());
-            attendancePost.setCheckintime(CommonUtils.currentTime());
-            attendancePost.setCheckinlocation(location);
-            showProgressDialog();
-            viewModel.getCheckIn(attendancePost).observe(getActivity(), data -> {
-                if (data != null) {
-                    startLocationService(intent);
-                    hideProgressDialog();
-                    CommonUtils.showCustomAlert(getActivity(), "Info", data, false);
-
-
-                }
-            });
-
+            binding.spiner.setItems(areaList);
         });
-        binding.btnCheckOut.setOnClickListener(view -> {
-            resetAllButton();
-            binding.btnCheckOut.setCardBackgroundColor(getResources().getColor(R.color.gray));
 
-            TrackingPost post = new TrackingPost();
-            post.setDate(CommonUtils.currentDate());
-            post.setEmpid(String.valueOf(SharedPreferencesEnum.getInstance(getActivity()).getInt(SharedPreferencesEnum.Key.USER_ID)));
-            post.setLatpoint("" + latitude);
-            post.setLogpoint("" + longitude);
-            post.setTime(CommonUtils.currentTime());
-
-            if (latitude == 0) {
-                getGpsLocation();
-                Toast.makeText(getActivity(), "GPS Error", Toast.LENGTH_LONG).show();
-                return;
-            } else {
-                Geocoder geocoder;
-                List<Address> addresses;
-                geocoder = new Geocoder(getActivity(), Locale.getDefault());
-
-                try {
-                    addresses = geocoder.getFromLocation(latitude, longitude, 1);
-                    String address = addresses.get(0).getFeatureName(); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
-                    String city = addresses.get(0).getLocality();
-                    String state = addresses.get(0).getSubLocality();
-                    location = address + "," + state + "," + city;
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-
-            }
-
-            CheckOutPost attendancePost = new CheckOutPost();
-            attendancePost.setCheckoutlocation(location);
-            attendancePost.setCheckouttime(CommonUtils.currentTime());
-            attendancePost.setDate(CommonUtils.currentDate());
-            attendancePost.setEmpid(String.valueOf(SharedPreferencesEnum.getInstance(getActivity()).getInt(SharedPreferencesEnum.Key.USER_ID)));
-            showProgressDialog();
-            viewModel.getCheckOut(attendancePost).observe(getActivity(), data -> {
-                if (data != null) {
-                    stopService(intent);
-                    hideProgressDialog();
-                    CommonUtils.showCustomAlert(getActivity(), "Info", data, false);
-                }
-            });
-        });
 
     }
 
@@ -176,8 +110,123 @@ public class AddAttendanceFragment extends BaseFragment implements ServerRespons
 
     @Override
     protected void initFragmentListener() {
+        Intent intent = new Intent(getActivity(), LocationMonitoringService.class);
+        binding.btnCheckIn.setOnClickListener(view -> {
+            if (isValid()) {
+                resetAllButton();
+                binding.btnCheckIn.setCardBackgroundColor(getResources().getColor(R.color.gray));
+
+                getGpsLocation();
+
+                Geocoder geocoder;
+                List<Address> addresses;
+                geocoder = new Geocoder(getActivity(), Locale.getDefault());
+
+                if (longitude == 0) {
+                    showAlertDialog("GPS ERROR", "Please check your gps connection");
+                    return;
+                }
+
+                try {
+                    addresses = geocoder.getFromLocation(latitude, longitude, 1);
+                    String address = addresses.get(0).getFeatureName(); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
+                    String city = addresses.get(0).getLocality();
+                    String state = addresses.get(0).getSubLocality();
+                    location = address + "," + state + "," + city;
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (Exception e) {
+                }
 
 
+                AttendancePost attendancePost = new AttendancePost();
+                attendancePost.setEmpid(String.valueOf(SharedPreferencesEnum.getInstance(getActivity()).getInt(SharedPreferencesEnum.Key.USER_ID)));
+                attendancePost.setDate(CommonUtils.currentDate());
+                attendancePost.setCheckintime(CommonUtils.currentTime());
+                attendancePost.setCheckinlocation(location);
+                attendancePost.setShift("" + areaIdList[areaItemPosition]);
+                showProgressDialog();
+                viewModel.getCheckIn(attendancePost).observe(getActivity(), data -> {
+                    if (data != null) {
+                        startLocationService(intent);
+                        hideProgressDialog();
+                        CommonUtils.showCustomAlert(getActivity(), "Info", data, false);
+
+
+                    }
+                });
+            }
+        });
+        binding.btnCheckOut.setOnClickListener(view -> {
+            if (isValid()) {
+                resetAllButton();
+                binding.btnCheckOut.setCardBackgroundColor(getResources().getColor(R.color.gray));
+
+                TrackingPost post = new TrackingPost();
+                post.setDate(CommonUtils.currentDate());
+                post.setEmpid(String.valueOf(SharedPreferencesEnum.getInstance(getActivity()).getInt(SharedPreferencesEnum.Key.USER_ID)));
+                post.setLatpoint("" + latitude);
+                post.setLogpoint("" + longitude);
+                post.setTime(CommonUtils.currentTime());
+
+                getGpsLocation();
+
+
+                Geocoder geocoder;
+                List<Address> addresses;
+                geocoder = new Geocoder(getActivity(), Locale.getDefault());
+                if (longitude == 0) {
+                    showAlertDialog("GPS ERROR", "Please check your gps connection");
+                    return;
+                }
+                try {
+                    addresses = geocoder.getFromLocation(latitude, longitude, 1);
+                    String address = addresses.get(0).getFeatureName(); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
+                    String city = addresses.get(0).getLocality();
+                    String state = addresses.get(0).getSubLocality();
+                    location = address + "," + state + "," + city;
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
+                CheckOutPost attendancePost = new CheckOutPost();
+                attendancePost.setCheckoutlocation(location);
+                attendancePost.setCheckouttime(CommonUtils.currentTime());
+                attendancePost.setDate(CommonUtils.currentDate());
+                attendancePost.setEmpid(String.valueOf(SharedPreferencesEnum.getInstance(getActivity()).getInt(SharedPreferencesEnum.Key.USER_ID)));
+                attendancePost.setShift("" + areaIdList[areaItemPosition]);
+                showProgressDialog();
+                viewModel.getCheckOut(attendancePost).observe(getActivity(), data -> {
+                    if (data != null) {
+                        stopService(intent);
+                        hideProgressDialog();
+                        CommonUtils.showCustomAlert(getActivity(), "Info", data, false);
+                    }
+                });
+
+            }
+        });
+
+
+        binding.spiner.setOnItemClickListener(new JRSpinner.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                areaItemPosition = position;
+            }
+        });
+
+
+    }
+
+    private boolean isValid() {
+        if (areaItemPosition < 0) {
+            showAlertDialog("ERROR", "Please Select and confirm your shift first");
+            return false;
+        }
+        return true;
     }
 
     @Override
