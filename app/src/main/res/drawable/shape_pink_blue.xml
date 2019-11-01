@@ -9,7 +9,7 @@
         android:bottomLeftRadius="5dp"
         android:bottomRightRadius="5dp" />
 
-    <solid android:color="@color/colorGreenText" />
+    <solid android:color="@color/pink_blue" />
     <stroke
         android:color="@color/black"
         android:width="0dp" />

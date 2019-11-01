@@ -1,5 +1,6 @@
 package com.nuveq.sojibdemo.view.fragment.visitplan;
 
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +15,7 @@ import com.nuveq.sojibdemo.appdata.SharedPreferencesEnum;
 import com.nuveq.sojibdemo.common.BaseFragment;
 import com.nuveq.sojibdemo.databinding.FragmentPlanListBinding;
 import com.nuveq.sojibdemo.datamodel.AttendDatePost;
+import com.nuveq.sojibdemo.datamodel.sales.SalesPost;
 import com.nuveq.sojibdemo.datamodel.visitplan.AddVisitPost;
 import com.nuveq.sojibdemo.datamodel.visitplan.Plan;
 import com.nuveq.sojibdemo.listener.OnItemClickListener;
@@ -67,24 +69,45 @@ public class VisitApprovedFragment extends BaseFragment implements ServerRespons
         adapter.setOnitemClickListener(new OnItemClickListener() {
             @Override
             public void itemClickListener(View view, int position) {
-                showProgressDialog();
                 getGpsLocation();
-                AddVisitPost post = new AddVisitPost();
-                post.setId("" + planList.get(position).getId());
-                post.setLat("" + latitude);
-                post.setLog("" + longitude);
-                viewModel.addVisit(post).observe(getActivity(), data -> {
-                    if (data != null) {
-                        hideProgressDialog();
-                        CommonUtils.showCustomAlert(getActivity(), "Info", data, false);
-                        planList.remove(position);
-                        adapter.notifyItemRemoved(position);
-                    }
-                });
+                saveAlert(position);
+
 
             }
         });
     }
+
+
+    private void saveAlert(int position) {
+        android.app.AlertDialog.Builder builder;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            builder = new android.app.AlertDialog.Builder(getActivity(), R.style.DialogTheme);
+        } else {
+            builder = new android.app.AlertDialog.Builder(getActivity());
+        }
+        builder.setTitle(getString(R.string.alert));
+        builder.setMessage(getString(R.string.visited_alert));
+        builder.setIcon(R.drawable.bell);
+        builder.setNegativeButton("No", null);
+        builder.setPositiveButton("Yes", (dialog, which) -> {
+            showProgressDialog();
+            AddVisitPost post = new AddVisitPost();
+            post.setId("" + planList.get(position).getId());
+            post.setLat("" + latitude);
+            post.setLog("" + longitude);
+            viewModel.addVisit(post).observe(getActivity(), data -> {
+                if (data != null) {
+                    hideProgressDialog();
+                    CommonUtils.showCustomAlert(getActivity(), "Info", data, false);
+                    planList.remove(position);
+                    adapter.notifyItemRemoved(position);
+                }
+            });
+        });
+        android.app.AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
 
     private void callApi(String from, String to) {
         if (!planList.isEmpty()) {
@@ -124,8 +147,8 @@ public class VisitApprovedFragment extends BaseFragment implements ServerRespons
 
         askIdDialog = builder.create();
         askIdDialog.show();
-        //         //user="demo1254";
-        //         //pass="demo#123";
+        // user="demo1254";
+        // pass="demo#123";
         btnSearch.setOnClickListener(view1 -> {
             String fromDate = etDateFrom.getText().toString();
             String toDate = etDateTo.getText().toString();

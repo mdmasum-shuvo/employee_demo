@@ -85,7 +85,7 @@ public class CommonUtils {
             return strDate;
         } catch (Exception e) {
         }
-        return null;
+        return "";
     }
 
     public static void showDatePicker(Context context, final EditText editText, Calendar c) {

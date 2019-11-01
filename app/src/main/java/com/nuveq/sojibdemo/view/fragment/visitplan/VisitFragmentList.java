@@ -31,7 +31,7 @@ public class VisitFragmentList extends BaseFragment {
         visitApprovedFragment = new VisitApprovedFragment();
         visitedFragment = new VisitedFragment();
         setupViewPager(binding.viewpager);
-        binding.viewpager.setOffscreenPageLimit(1);
+        binding.viewpager.setOffscreenPageLimit(0);
         binding.tab.setupWithViewPager(binding.viewpager);
     }
 

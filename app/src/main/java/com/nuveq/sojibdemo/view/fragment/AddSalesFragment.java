@@ -1,5 +1,6 @@
 package com.nuveq.sojibdemo.view.fragment;
 
+import android.os.Build;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -11,6 +12,7 @@ import com.nuveq.sojibdemo.appdata.SharedPreferencesEnum;
 import com.nuveq.sojibdemo.common.BaseFragment;
 import com.nuveq.sojibdemo.databinding.FragmentAddSalesBinding;
 import com.nuveq.sojibdemo.datamodel.sales.SalesPost;
+import com.nuveq.sojibdemo.datamodel.visitplan.VisitPlanDataPost;
 import com.nuveq.sojibdemo.listener.ServerResponseFailedCallback;
 import com.nuveq.sojibdemo.utils.CommonUtils;
 import com.nuveq.sojibdemo.viewmodel.Viewmodel;
@@ -27,7 +29,7 @@ public class AddSalesFragment extends BaseFragment implements ServerResponseFail
     int areaItemPosition = -1;
     String[] areaList;
     Integer[] areaIdList;
-    private String date, name, phone, address;
+    private String date, name, phone, address, desc;
 
     @Override
     protected Integer layoutResourceId() {
@@ -93,28 +95,47 @@ public class AddSalesFragment extends BaseFragment implements ServerResponseFail
             name = binding.tvName.getText().toString();
             address = binding.etAddress.getText().toString();
             phone = binding.etPhone.getText().toString();
-            String desc = binding.etDesc.getText().toString();
-
+            desc = binding.etDesc.getText().toString();
             if (isValid()) {
-                showProgressDialog();
-                SalesPost post = new SalesPost();
-                post.setDate(date);
-                post.setName(name);
-                post.setAddress(address);
-                post.setPhone(phone);
-                post.setReferbydr("" + areaIdList[areaItemPosition]);
-                post.setReferbyemp("" + SharedPreferencesEnum.getInstance(getActivity()).getInt(SharedPreferencesEnum.Key.USER_ID));
-                post.setDescription(desc);
-
-                viewmodel.getSalesEntry(post).observe(getActivity(), data -> {
-                    if (data != null) {
-                        hideProgressDialog();
-                        CommonUtils.showCustomAlert(getActivity(), "Info", data, false);
-                    }
-                });
+                saveAlert();
             }
         });
     }
+
+
+    private void saveAlert() {
+        android.app.AlertDialog.Builder builder;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            builder = new android.app.AlertDialog.Builder(getActivity(), R.style.DialogTheme);
+        } else {
+            builder = new android.app.AlertDialog.Builder(getActivity());
+        }
+        builder.setTitle(getString(R.string.alert));
+        builder.setMessage(getString(R.string.save_alert));
+        builder.setIcon(R.drawable.bell);
+        builder.setNegativeButton("No", null);
+        builder.setPositiveButton("Yes", (dialog, which) -> {
+            showProgressDialog();
+            SalesPost post = new SalesPost();
+            post.setDate(date);
+            post.setName(name);
+            post.setAddress(address);
+            post.setPhone(phone);
+            post.setReferbydr("" + areaIdList[areaItemPosition]);
+            post.setReferbyemp("" + SharedPreferencesEnum.getInstance(getActivity()).getInt(SharedPreferencesEnum.Key.USER_ID));
+            post.setDescription(desc);
+
+            viewmodel.getSalesEntry(post).observe(getActivity(), data -> {
+                if (data != null) {
+                    hideProgressDialog();
+                    CommonUtils.showCustomAlert(getActivity(), "Info", data, false);
+                }
+            });
+        });
+        android.app.AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
 
     private boolean isValid() {
 

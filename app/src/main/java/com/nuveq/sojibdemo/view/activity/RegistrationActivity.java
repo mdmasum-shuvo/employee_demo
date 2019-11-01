@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
@@ -143,60 +144,8 @@ public class RegistrationActivity extends BaseActivity implements ServerResponse
         binding.btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 getGpsLocation();
-                name = binding.tvName.getText().toString();
-                phone = binding.etPhone.getText().toString();
-                pass = binding.etPass.getText().toString();
-
-                if (!isValid()) {
-                    return;
-                }
-
-                if (latitude == 0) {
-                    getGpsLocation();
-                    Toast.makeText(RegistrationActivity.this, "GPS Error,please try again", Toast.LENGTH_LONG).show();
-                    return;
-                } else {
-                    Geocoder geocoder;
-                    List<Address> addresses;
-                    geocoder = new Geocoder(RegistrationActivity.this, Locale.getDefault());
-
-                    try {
-                        addresses = geocoder.getFromLocation(latitude, longitude, 1);
-                        String address = addresses.get(0).getFeatureName(); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
-                        String city = addresses.get(0).getLocality();
-                        String state = addresses.get(0).getSubLocality();
-                        location = address + "," + state + "," + city;
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-
-                }
-                Data data = new Data();
-                data.setName(name);
-                data.setPhoneNumber(phone);
-                data.setPassword(pass);
-                data.setLocation(location);
-                data.setMacAddress(AppConstants.ANDROID_ID);
-                data.setBranchId(branchIdList[itemPosition]);
-
-                showProgressDialog();
-                viewModel.getRegistrationResponse(data).observe(RegistrationActivity.this, isSuccess -> {
-                    if (isSuccess != null) {
-                        hideProgressDialog();
-                        CommonUtils.showCustomAlert(RegistrationActivity.this, "succeed", isSuccess, false);
-                        binding.registrationContainer.setVisibility(View.GONE);
-                        binding.loginLayout.setVisibility(View.VISIBLE);
-                        binding.etUsername.setText(binding.etPhone.getText().toString());
-
-                    }
-
-                });
-
-
+                alertDialog();
             }
         });
 
@@ -286,6 +235,74 @@ public class RegistrationActivity extends BaseActivity implements ServerResponse
         }
 
         return null;
+    }
+
+    private void alertDialog() {
+        android.app.AlertDialog.Builder builder;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            builder = new android.app.AlertDialog.Builder(this, R.style.DialogTheme);
+        } else {
+            builder = new android.app.AlertDialog.Builder(this);
+        }
+        builder.setTitle(getString(R.string.alert));
+        builder.setMessage(getString(R.string.save_alert));
+        builder.setIcon(R.drawable.bell);
+        builder.setNegativeButton("No", null);
+        builder.setPositiveButton("Yes", (dialog, which) -> {
+            name = binding.tvName.getText().toString();
+            phone = binding.etPhone.getText().toString();
+            pass = binding.etPass.getText().toString();
+
+            if (!isValid()) {
+                return;
+            }
+
+            if (latitude == 0) {
+                getGpsLocation();
+                Toast.makeText(RegistrationActivity.this, "GPS Error,please try again", Toast.LENGTH_LONG).show();
+                return;
+            } else {
+                Geocoder geocoder;
+                List<Address> addresses;
+                geocoder = new Geocoder(RegistrationActivity.this, Locale.getDefault());
+
+                try {
+                    addresses = geocoder.getFromLocation(latitude, longitude, 1);
+                    String address = addresses.get(0).getFeatureName(); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
+                    String city = addresses.get(0).getLocality();
+                    String state = addresses.get(0).getSubLocality();
+                    location = address + "," + state + "," + city;
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+            Data data = new Data();
+            data.setName(name);
+            data.setPhoneNumber(phone);
+            data.setPassword(pass);
+            data.setLocation(location);
+            data.setMacAddress(AppConstants.ANDROID_ID);
+            data.setBranchId(branchIdList[itemPosition]);
+
+            showProgressDialog();
+            viewModel.getRegistrationResponse(data).observe(RegistrationActivity.this, isSuccess -> {
+                if (isSuccess != null) {
+                    hideProgressDialog();
+                    CommonUtils.showCustomAlert(RegistrationActivity.this, "succeed", isSuccess, false);
+                    binding.registrationContainer.setVisibility(View.GONE);
+                    binding.loginLayout.setVisibility(View.VISIBLE);
+                    binding.etUsername.setText(binding.etPhone.getText().toString());
+
+                }
+
+            });
+
+        });
+        android.app.AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     public ApiService getApiService() {

@@ -27,6 +27,7 @@ public class GlobalRepository {
     private MutableLiveData<List<com.nuveq.sojibdemo.datamodel.global.area.Result>> visitAreaDataList;
     private ServerResponseFailedCallback mListener;
     private MutableLiveData<List<com.nuveq.sojibdemo.datamodel.global.area.Result>> shiftList;
+
     public MutableLiveData<List<Result>> getBranchDataList() {
         brachDataList = new MutableLiveData<>();
         CommonUtils.getApiService().getBranch().enqueue(new Callback<BranchResponse>() {
@@ -136,12 +137,26 @@ public class GlobalRepository {
 
         return visitAreaDataList;
     }
-    public MutableLiveData<List<com.nuveq.sojibdemo.datamodel.global.area.Result>> getShiftList(){
-        shiftList=new MutableLiveData<>();
+
+    public MutableLiveData<List<com.nuveq.sojibdemo.datamodel.global.area.Result>> getShiftList() {
+        shiftList = new MutableLiveData<>();
 
         CommonUtils.getApiService().getShiftList().enqueue(new Callback<AreaResponse>() {
             @Override
             public void onResponse(Call<AreaResponse> call, Response<AreaResponse> response) {
+                if (response.isSuccessful()) {
+                    if (response.body().getStatus()) {
+                        shiftList.setValue(response.body().getResult());
+                    } else {
+                        if (mListener != null) {
+                            mListener.onFailed(response.body().getMessage());
+                        }
+                    }
+                } else {
+                    if (mListener != null) {
+                        mListener.onFailed(response.message());
+                    }
+                }
 
             }
 

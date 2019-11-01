@@ -138,7 +138,7 @@
             android:layout_gravity="bottom|end"
             android:layout_marginRight="@dimen/_15sdp"
             android:layout_marginBottom="@dimen/_15sdp"
-            android:backgroundTint="@color/colorPrimary"
+            android:backgroundTint="@color/pink_blue"
             android:src="@drawable/filter" />
 
 

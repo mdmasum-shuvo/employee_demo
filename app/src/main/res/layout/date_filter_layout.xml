@@ -27,7 +27,7 @@
     android:gravity="center"
     android:textStyle="bold"
     android:textColor="@color/colorWhite"
-    android:background="@color/colorPrimary"
+    android:background="@color/pink_blue"
     android:text="Filter List"/>
             <!--1st-->
             <LinearLayout
@@ -106,7 +106,7 @@
                 android:layout_height="@dimen/_25sdp"
                 android:layout_gravity="center"
                 android:layout_marginBottom="@dimen/_5sdp"
-                android:background="@drawable/red_shape"
+                android:background="@drawable/shape_pink_blue"
                 android:text="SEARCH"
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/_10sdp" />

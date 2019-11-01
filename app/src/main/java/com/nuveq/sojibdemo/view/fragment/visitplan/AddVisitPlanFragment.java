@@ -1,5 +1,9 @@
 package com.nuveq.sojibdemo.view.fragment.visitplan;
 
+import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
+import android.os.Build;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -10,13 +14,18 @@ import com.nuveq.sojibdemo.R;
 import com.nuveq.sojibdemo.appdata.SharedPreferencesEnum;
 import com.nuveq.sojibdemo.common.BaseFragment;
 import com.nuveq.sojibdemo.databinding.FragmentAddPlanBinding;
+import com.nuveq.sojibdemo.datamodel.CheckOutPost;
+import com.nuveq.sojibdemo.datamodel.TrackingPost;
 import com.nuveq.sojibdemo.datamodel.visitplan.VisitPlanDataPost;
 import com.nuveq.sojibdemo.listener.ServerResponseFailedCallback;
 import com.nuveq.sojibdemo.utils.CommonUtils;
 import com.nuveq.sojibdemo.viewmodel.Viewmodel;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
+import java.util.Locale;
 
 import jrizani.jrspinner.JRSpinner;
 
@@ -138,25 +147,44 @@ public class AddVisitPlanFragment extends BaseFragment implements ServerResponse
             date = binding.tvDate.getText().toString();
             time = binding.tvTime.getText().toString();
             if (isValid()) {
-                showProgressDialog();
-                VisitPlanDataPost post = new VisitPlanDataPost();
-                post.setEmpId(String.valueOf(SharedPreferencesEnum.getInstance(getActivity()).getInt(SharedPreferencesEnum.Key.USER_ID)));
-                post.setDate(date);
-                post.setTime(time);
-                post.setStatus("Pending");
-                post.setVisitAreaId("" + areaIdList[areaItemPosition]);
-                viewModel.getVisitPlanData(post).observe(getActivity(), data -> {
-                    if (data != null) {
-                        hideProgressDialog();
-                        CommonUtils.showCustomAlert(getActivity(), "Success", data, false);
-                    }
-                });
+                saveAlert();
             }
-
 
             //toast("feature is on test");
         });
     }
+
+
+    private void saveAlert() {
+        android.app.AlertDialog.Builder builder;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            builder = new android.app.AlertDialog.Builder(getActivity(), R.style.DialogTheme);
+        } else {
+            builder = new android.app.AlertDialog.Builder(getActivity());
+        }
+        builder.setTitle(getString(R.string.alert));
+        builder.setMessage(getString(R.string.save_alert));
+        builder.setIcon(R.drawable.bell);
+        builder.setNegativeButton("No", null);
+        builder.setPositiveButton("Yes", (dialog, which) -> {
+            showProgressDialog();
+            VisitPlanDataPost post = new VisitPlanDataPost();
+            post.setEmpId(String.valueOf(SharedPreferencesEnum.getInstance(getActivity()).getInt(SharedPreferencesEnum.Key.USER_ID)));
+            post.setDate(date);
+            post.setTime(time);
+            post.setStatus("Pending");
+            post.setVisitAreaId("" + areaIdList[areaItemPosition]);
+            viewModel.getVisitPlanData(post).observe(getActivity(), data -> {
+                if (data != null) {
+                    hideProgressDialog();
+                    CommonUtils.showCustomAlert(getActivity(), "Success", data, false);
+                }
+            });
+        });
+        android.app.AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
 
     private boolean isValid() {
 
@@ -177,7 +205,5 @@ public class AddVisitPlanFragment extends BaseFragment implements ServerResponse
     public void onFailed(String msg) {
         hideProgressDialog();
         areaAdapter.notifyDataSetChanged();
-        CommonUtils.showCustomAlert(getActivity(), "Failed", msg, false);
-
     }
 }

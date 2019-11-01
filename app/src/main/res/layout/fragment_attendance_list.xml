@@ -33,7 +33,7 @@
                     android:id="@+id/spiner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="select one"
+                    android:hint="Select shift"
                     android:textColor="@color/blue_gray"
                     app:backgroundTint="@color/gray"
                     app:jrs_icon_tint="@color/gray"
@@ -72,7 +72,7 @@
                         android:layout_below="@+id/img"
                         android:gravity="center"
                         android:text="Check In"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/blue_gray"
                         android:textSize="@dimen/_13sdp" />
                 </RelativeLayout>
 
@@ -109,13 +109,21 @@
                         android:layout_below="@+id/img1"
                         android:gravity="center"
                         android:text="Check Out"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/deep_red"
                         android:textSize="@dimen/_13sdp" />
                 </RelativeLayout>
 
 
             </androidx.cardview.widget.CardView>
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/app_icon"
+                app:layout_constraintBottom_toTopOf="@+id/textView4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_Check_in" />
 
             <TextView
                 android:id="@+id/textView4"
@@ -129,6 +137,8 @@
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/_10sdp"
                 app:layout_constraintBottom_toBottomOf="parent"/>
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
