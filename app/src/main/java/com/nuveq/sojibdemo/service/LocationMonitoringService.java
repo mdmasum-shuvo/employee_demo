@@ -47,9 +47,6 @@ public class LocationMonitoringService extends Service implements
     GoogleApiClient mLocationClient;
     LocationRequest mLocationRequest = new LocationRequest();
 
-
-    Viewmodel viewmodel;
-    public static final String ACTION_LOCATION_BROADCAST = LocationMonitoringService.class.getName() + "LocationBroadcast";
     public static final String EXTRA_LATITUDE = "extra_latitude";
     public static final String EXTRA_LONGITUDE = "extra_longitude";
     public static final long NOTIFY_INTERVAL = (5 * 1000);// 10 seconds
@@ -79,7 +76,7 @@ public class LocationMonitoringService extends Service implements
         mLocationRequest.setPriority(priority);
         mLocationClient.connect();
         //Make it stick to the notification panel so it is less prone to get cancelled by the Operating System.
-        return super.onStartCommand(intent, flags, startId);
+        return START_STICKY;
     }
 
     @Nullable

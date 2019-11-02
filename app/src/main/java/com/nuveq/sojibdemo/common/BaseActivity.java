@@ -594,22 +594,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
     }
 
 
-    public void locationBroadcast() {
 
-        LocalBroadcastManager.getInstance(this).registerReceiver(
-                new BroadcastReceiver() {
-                    @Override
-                    public void onReceive(Context context, Intent intent) {
-                        String latitude = intent.getStringExtra(LocationMonitoringService.EXTRA_LATITUDE);
-                        String longitude = intent.getStringExtra(LocationMonitoringService.EXTRA_LONGITUDE);
-
-                        if (latitude != null && longitude != null) {
-                            Log.e("location:", "service:" + "\n Latitude : " + latitude + "\n Longitude: " + longitude);
-                        }
-                    }
-                }, new IntentFilter(LocationMonitoringService.ACTION_LOCATION_BROADCAST)
-        );
-    }
 
     @Override
     protected void onDestroy() {

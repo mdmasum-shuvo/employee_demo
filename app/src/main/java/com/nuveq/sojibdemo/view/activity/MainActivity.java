@@ -36,7 +36,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void initFunctionality() {
         //binding.recyclerView.setAdapter(adapter);
-        locationBroadcast();
+
     }
 
     @Override
