@@ -19,13 +19,13 @@ import jrizani.jrspinner.JRSpinner;
 public class ProfileFragment extends BaseFragment implements ServerResponseFailedCallback {
 
     private FragmentProfileBinding binding;
-    String[] catList;
-    String[] areaList;
-    Integer[] areaIdList;
-    Integer[] catIdList;
+    private String[] catList;
+    private String[] areaList;
+    private Integer[] areaIdList;
+    private Integer[] catIdList;
 
-    Viewmodel viewModel;
-    int catItemPosition = -1, areaItemPosition = -1;
+    private Viewmodel viewModel;
+    private int catItemPosition = -1, areaItemPosition = -1;
 
     @Override
     protected Integer layoutResourceId() {
