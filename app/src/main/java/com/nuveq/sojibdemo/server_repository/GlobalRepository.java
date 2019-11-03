@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.nuveq.sojibdemo.datamodel.VisitLocationPost;
 import com.nuveq.sojibdemo.datamodel.global.branch.BranchResponse;
 import com.nuveq.sojibdemo.datamodel.global.branch.Result;
 import com.nuveq.sojibdemo.datamodel.global.area.AreaPost;
@@ -23,10 +24,12 @@ import retrofit2.Response;
 
 public class GlobalRepository {
     private MutableLiveData<List<Result>> brachDataList;
+    private MutableLiveData<String> locationDataResponse;
     private MutableLiveData<List<com.nuveq.sojibdemo.datamodel.global.cat.Result>> visitCatDataList;
     private MutableLiveData<List<com.nuveq.sojibdemo.datamodel.global.area.Result>> visitAreaDataList;
     private ServerResponseFailedCallback mListener;
     private MutableLiveData<List<com.nuveq.sojibdemo.datamodel.global.area.Result>> shiftList;
+    Gson gson = new Gson();
 
     public MutableLiveData<List<Result>> getBranchDataList() {
         brachDataList = new MutableLiveData<>();
@@ -75,9 +78,30 @@ public class GlobalRepository {
         return visitCatDataList;
     }
 
+    public MutableLiveData<String> locationPost(VisitLocationPost post) {
+        locationDataResponse = new MutableLiveData<>();
+
+        String jsonString = gson.toJson(post);
+        JsonObject jsonObject = new JsonParser().parse(jsonString).getAsJsonObject();
+        CommonUtils.getApiService().locationPost(jsonObject).enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if (response.isSuccessful()) {
+                    locationDataResponse.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
+        return locationDataResponse;
+
+    }
+
     public MutableLiveData<List<com.nuveq.sojibdemo.datamodel.global.area.Result>> getVisitAreaDataList(String id) {
         visitAreaDataList = new MutableLiveData<>();
-        Gson gson = new Gson();
         AreaPost areaPost = new AreaPost();
         areaPost.setCategoryid(id);
         String jsonString = gson.toJson(areaPost);

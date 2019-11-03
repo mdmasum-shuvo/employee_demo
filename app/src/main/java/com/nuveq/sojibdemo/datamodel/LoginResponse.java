@@ -6,61 +6,83 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 public class LoginResponse implements Serializable {
+    @SerializedName("status")
+    @Expose
+    private Boolean status;
+    @SerializedName("message")
+    @Expose
+    private String message;
+    @SerializedName("empId")
+    @Expose
+    private Integer empId;
+    @SerializedName("name")
+    @Expose
+    private String name;
+    @SerializedName("marketingCode")
+    @Expose
+    private String marketingCode;
+    @SerializedName("picture")
+    @Expose
+    private Object picture;
+    @SerializedName("branch")
+    @Expose
+    private String branch;
 
-@SerializedName("status")
-@Expose
-private Boolean status;
-@SerializedName("empId")
-@Expose
-private Integer empId;
-@SerializedName("name")
-@Expose
-private String name;
-@SerializedName("macAddress")
-@Expose
-private String macAddress;
-@SerializedName("picture")
-@Expose
-private String picture;
+    public Boolean getStatus() {
+        return status;
+    }
 
-public Boolean getStatus() {
-return status;
-}
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
 
-public void setStatus(Boolean status) {
-this.status = status;
-}
+    public String getMessage() {
+        return message;
+    }
 
-public Integer getEmpId() {
-return empId;
-}
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
-public void setEmpId(Integer empId) {
-this.empId = empId;
-}
+    public Integer getEmpId() {
+        return empId;
+    }
 
-public String getName() {
-return name;
-}
+    public void setEmpId(Integer empId) {
+        this.empId = empId;
+    }
 
-public void setName(String name) {
-this.name = name;
-}
+    public String getName() {
+        return name;
+    }
 
-public String getMacAddress() {
-return macAddress;
-}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-public void setMacAddress(String macAddress) {
-this.macAddress = macAddress;
-}
+    public String getMarketingCode() {
+        return marketingCode;
+    }
 
-public String getPicture() {
-return picture;
-}
+    public void setMarketingCode(String marketingCode) {
+        this.marketingCode = marketingCode;
+    }
 
-public void setPicture(String picture) {
-this.picture = picture;
-}
+    public Object getPicture() {
+        return picture;
+    }
+
+    public void setPicture(Object picture) {
+        this.picture = picture;
+    }
+
+    public String getBranch() {
+        return branch;
+    }
+
+    public void setBranch(String branch) {
+        this.branch = branch;
+    }
+
 
 }

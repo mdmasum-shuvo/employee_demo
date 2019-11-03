@@ -12,6 +12,7 @@ import com.nuveq.sojibdemo.datamodel.AuthenticationPost;
 import com.nuveq.sojibdemo.datamodel.CheckOutPost;
 import com.nuveq.sojibdemo.datamodel.LoginResponse;
 import com.nuveq.sojibdemo.datamodel.TrackingPost;
+import com.nuveq.sojibdemo.datamodel.VisitLocationPost;
 import com.nuveq.sojibdemo.datamodel.global.branch.Result;
 import com.nuveq.sojibdemo.datamodel.sales.SalesPost;
 import com.nuveq.sojibdemo.datamodel.visitplan.AddVisitPost;
@@ -153,5 +154,9 @@ public class Viewmodel extends AndroidViewModel {
 
     public MutableLiveData<List<com.nuveq.sojibdemo.datamodel.global.area.Result>> getShiftList() {
         return globalRepository.getShiftList();
+    }
+
+    public MutableLiveData<String> locationPost(VisitLocationPost post) {
+        return globalRepository.locationPost(post);
     }
 }

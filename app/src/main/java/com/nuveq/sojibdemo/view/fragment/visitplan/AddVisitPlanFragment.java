@@ -39,9 +39,7 @@ public class AddVisitPlanFragment extends BaseFragment implements ServerResponse
     Integer[] areaIdList;
     Integer[] catIdList;
 
-    //String[] spinnerTitleList = new String[spinnerList.size()];
     Viewmodel viewModel;
-    ArrayAdapter<String> adapter, areaAdapter;
     int catItemPosition = -1, areaItemPosition = -1;
     private String date, time;
 
@@ -55,8 +53,8 @@ public class AddVisitPlanFragment extends BaseFragment implements ServerResponse
         binding = (FragmentAddPlanBinding) getBinding();
         calendar = Calendar.getInstance();
         viewModel = ViewModelProviders.of(this).get(Viewmodel.class);
-        viewModel.getplanRespository().setCallbackListener(this);
         viewModel.getGlobalRepository().setCallbackListener(this);
+        viewModel.getplanRespository().setCallbackListener(this);
     }
 
     @Override
@@ -204,6 +202,5 @@ public class AddVisitPlanFragment extends BaseFragment implements ServerResponse
     @Override
     public void onFailed(String msg) {
         hideProgressDialog();
-        areaAdapter.notifyDataSetChanged();
     }
 }

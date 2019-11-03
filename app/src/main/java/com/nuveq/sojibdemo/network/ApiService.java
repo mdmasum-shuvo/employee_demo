@@ -80,6 +80,10 @@ public interface ApiService {
     @POST(HTTP_PARAM.VISIT_ENTRY)
     Call<ServerResponse> addVisit(@Body JsonObject object);
 
+    @POST(HTTP_PARAM.VISIT_AREA_ENTRY)
+    Call<String> locationPost(@Body JsonObject jsonObject);
+
+
     @POST(HTTP_PARAM.SALES_ENTRY)
     Call<String> salePost(@Body JsonObject object);
 
@@ -88,6 +92,7 @@ public interface ApiService {
 
     @GET(HTTP_PARAM.SHIFT_LIST)
     Call<AreaResponse> getShiftList();
+
 
 
 }

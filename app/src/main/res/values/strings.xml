@@ -25,6 +25,7 @@
     <string name="communicate">Communicate</string>
 
     <string name="logout_title">Logout</string>
+    <string name="gps_chec">Please check your gps connection</string>
     <string name="logout_message">Are you sure you want to logout?</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
