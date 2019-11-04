@@ -123,6 +123,5 @@ public class VisitedFragment extends BaseFragment implements ServerResponseFaile
     public void onFailed(String msg) {
         hideProgressDialog();
         adapter.notifyDataSetChanged();
-        CommonUtils.showCustomAlert(getActivity(), "Failed", msg, false);
     }
 }

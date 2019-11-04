@@ -128,6 +128,7 @@ public class ProfileFragment extends BaseFragment implements ServerResponseFaile
 
 
         binding.btnSave.setOnClickListener(view -> {
+            getGpsLocation();
             if (areaItemPosition < 0) {
                 showAlertDialog("Error", "Please select Type and Area");
                 return;

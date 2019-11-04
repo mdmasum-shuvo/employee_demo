@@ -53,7 +53,7 @@ public class VisitPendingFragment extends BaseFragment implements ServerResponse
 
     @Override
     protected void initFragmentFunctionality() {
-        callApi("2019/11/1", CommonUtils.currentDate());
+        callApi( CommonUtils.currentDate(),CommonUtils.getLastDateOfMoth());
 
     }
 
@@ -125,6 +125,5 @@ public class VisitPendingFragment extends BaseFragment implements ServerResponse
     public void onFailed(String msg) {
         hideProgressDialog();
         adapter.notifyDataSetChanged();
-        CommonUtils.showCustomAlert(getActivity(), "Failed", msg, false);
     }
 }

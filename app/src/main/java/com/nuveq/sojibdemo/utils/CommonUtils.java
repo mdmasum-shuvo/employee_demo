@@ -15,6 +15,7 @@ import com.nuveq.sojibdemo.network.RestClient;
 import com.nuveq.sojibdemo.utils.custom_dialog.Activity.SmartDialog;
 import com.nuveq.sojibdemo.utils.custom_dialog.ListenerCallBack.SmartDialogClickListener;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -86,6 +87,23 @@ public class CommonUtils {
         } catch (Exception e) {
         }
         return "";
+    }
+
+    public static String getLastDateOfMoth() {
+        Date today = new Date();
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(today);
+
+        calendar.add(Calendar.MONTH, 1);
+        calendar.set(Calendar.DAY_OF_MONTH, 1);
+        calendar.add(Calendar.DATE, -1);
+
+        Date lastDayOfMonth = calendar.getTime();
+
+        DateFormat sdf = new SimpleDateFormat(AppConstants.DATE_PATTERN);
+
+        return sdf.format(lastDayOfMonth);
     }
 
     public static void showDatePicker(Context context, final EditText editText, Calendar c) {
