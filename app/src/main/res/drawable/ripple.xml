@@ -6,7 +6,7 @@
             <solid android:color="@color/gray"></solid>
         </shape>
     </item>
-    <item>
+    <item android:state_first="true">
         <shape>
             <solid android:color="@color/colorPrimary"></solid>
         </shape>

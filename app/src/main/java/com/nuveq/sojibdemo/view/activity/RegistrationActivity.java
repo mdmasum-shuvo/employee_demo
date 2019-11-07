@@ -51,7 +51,7 @@ import retrofit2.Response;
 public class RegistrationActivity extends BaseActivity implements ServerResponseFailedCallback {
 
     ActivityRegistrationBinding binding;
-    private boolean mPermissionDenied = false;
+    private boolean mPermissionDenied = false, phonePermissionDenied = false;
     private double latitude, longitude;
     private GPSTracker gps;
     int itemPosition = -1;
@@ -63,11 +63,6 @@ public class RegistrationActivity extends BaseActivity implements ServerResponse
     Integer[] branchIdList;
     private Viewmodel viewModel;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
 
     @Override
     protected int getLayoutResourceFile() {
@@ -94,17 +89,8 @@ public class RegistrationActivity extends BaseActivity implements ServerResponse
 
         }
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-            return;
-        }
+
+
 
     }
 
@@ -146,6 +132,13 @@ public class RegistrationActivity extends BaseActivity implements ServerResponse
             public void onClick(View v) {
                 getGpsLocation();
                 alertDialog();
+                name = binding.tvName.getText().toString();
+                phone = binding.etPhone.getText().toString();
+                pass = binding.etPass.getText().toString();
+
+                if (!isValid()) {
+                    return;
+                }
             }
         });
 
@@ -215,13 +208,13 @@ public class RegistrationActivity extends BaseActivity implements ServerResponse
             enableMyLocation();
         }
 
+
         getGpsLocation();
     }
 
 
     private void enableMyLocation() {
         if (PermissionUtils.isPermissionGranted(RegistrationActivity.this, PermissionUtils.LOCATION_PERMISSION, PermissionUtils.REQUEST_LOCATION)) {
-
             getGpsLocation();
         }
 
@@ -249,13 +242,7 @@ public class RegistrationActivity extends BaseActivity implements ServerResponse
         builder.setIcon(R.drawable.bell);
         builder.setNegativeButton("No", null);
         builder.setPositiveButton("Yes", (dialog, which) -> {
-            name = binding.tvName.getText().toString();
-            phone = binding.etPhone.getText().toString();
-            pass = binding.etPass.getText().toString();
 
-            if (!isValid()) {
-                return;
-            }
 
             if (latitude == 0) {
                 getGpsLocation();
@@ -286,7 +273,6 @@ public class RegistrationActivity extends BaseActivity implements ServerResponse
             data.setLocation(location);
             data.setMacAddress(AppConstants.ANDROID_ID);
             data.setBranchId(branchIdList[itemPosition]);
-
             showProgressDialog();
             viewModel.getRegistrationResponse(data).observe(RegistrationActivity.this, isSuccess -> {
                 if (isSuccess != null) {

@@ -11,7 +11,8 @@
             android:id="@+id/login_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-           >
+
+            >
 
             <ImageView
                 android:id="@+id/imageView2"
@@ -166,6 +167,9 @@
                         app:cardBackgroundColor="@color/colorPrimary"
                         app:cardCornerRadius="@dimen/_5sdp"
                         app:cardElevation="@dimen/_5sdp"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:clickable="true"
+
                         app:layout_constraintEnd_toEndOf="@+id/linearLayout2"
                         app:layout_constraintStart_toStartOf="@+id/linearLayout2"
                         app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
@@ -192,7 +196,6 @@
             android:id="@+id/registration_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone"
           >
 
             <ScrollView
@@ -202,7 +205,6 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="?actionBarSize"
                     tools:context=".view.activity.RegistrationActivity">
 
                     <RelativeLayout
@@ -346,8 +348,6 @@
                                 app:backgroundTint="@color/gray"
                                 app:jrs_icon_tint="@color/gray"/>
 
-
-
                         </LinearLayout>
 
                     </RelativeLayout>
@@ -355,29 +355,17 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </ScrollView>
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/btn_save"
+            <TextView
+                android:id="@+id/btnSave"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_30sdp"
                 android:layout_gravity="bottom"
-                android:backgroundTint="@color/colorPrimary"
-                android:clickable="true">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Registration"
-                        android:textAlignment="center"
-                        android:textColor="#FFF"
-                        android:textSize="@dimen/_15sdp"
-                        android:textStyle="bold" />
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
+                android:background="@drawable/ripple"
+                android:gravity="center"
+                android:text="Save"
+                android:textColor="#FFF"
+                android:textSize="@dimen/_15sdp"
+                android:textStyle="bold" />
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
         <include android:id="@+id/Toolbar"

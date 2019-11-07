@@ -451,7 +451,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
     public void showAlertDialog(String title, String message) {
         AlertDialog.Builder builder;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            builder = new AlertDialog.Builder(getContext(), android.R.style.Theme_Material_Light_Dialog_Alert);
+            builder = new AlertDialog.Builder(getContext(), R.style.DialogTheme);
         } else {
             builder = new AlertDialog.Builder(getContext());
         }
@@ -463,7 +463,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
 
                     }
                 })
-                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setIcon(R.drawable.sync)
                 .show();
     }
 

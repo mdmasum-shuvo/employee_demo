@@ -29,7 +29,7 @@ public class AddSalesFragment extends BaseFragment implements ServerResponseFail
     int areaItemPosition = -1;
     String[] areaList;
     Integer[] areaIdList;
-    private String date, name, phone, address, desc;
+    private String date, time, name, phone, address, desc;
 
     @Override
     protected Integer layoutResourceId() {
@@ -92,6 +92,8 @@ public class AddSalesFragment extends BaseFragment implements ServerResponseFail
 
         binding.btnSave.setOnClickListener(view -> {
             date = binding.tvDate.getText().toString();
+            time = binding.tvTime.getText().toString();
+
             name = binding.tvName.getText().toString();
             address = binding.etAddress.getText().toString();
             phone = binding.etPhone.getText().toString();
@@ -118,6 +120,7 @@ public class AddSalesFragment extends BaseFragment implements ServerResponseFail
             showProgressDialog();
             SalesPost post = new SalesPost();
             post.setDate(date);
+            post.setTime(CommonUtils.currentTime_24(time));
             post.setName(name);
             post.setAddress(address);
             post.setPhone(phone);
@@ -152,6 +155,9 @@ public class AddSalesFragment extends BaseFragment implements ServerResponseFail
             showAlertDialog("Error", "Please select Reference doctor");
             return false;
         } else if (date.equals("")) {
+            showAlertDialog("Error", "Please pick up a visit date");
+            return false;
+        } else if (time.equals("")) {
             showAlertDialog("Error", "Please pick up a visit date");
             return false;
         }

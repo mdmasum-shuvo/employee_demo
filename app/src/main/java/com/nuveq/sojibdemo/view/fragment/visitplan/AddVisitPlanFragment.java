@@ -169,7 +169,7 @@ public class AddVisitPlanFragment extends BaseFragment implements ServerResponse
             VisitPlanDataPost post = new VisitPlanDataPost();
             post.setEmpId(String.valueOf(SharedPreferencesEnum.getInstance(getActivity()).getInt(SharedPreferencesEnum.Key.USER_ID)));
             post.setDate(date);
-            post.setTime(time);
+            post.setTime(CommonUtils.currentTime_24(time));
             post.setStatus("Pending");
             post.setVisitAreaId("" + areaIdList[areaItemPosition]);
             viewModel.getVisitPlanData(post).observe(getActivity(), data -> {

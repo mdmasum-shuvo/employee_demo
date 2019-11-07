@@ -59,7 +59,7 @@ public class CommonUtils {
 
     public static String currentTime() {
         Date date = new Date();
-        SimpleDateFormat formatter2 = new SimpleDateFormat(AppConstants.TIME_PATTERN);
+        SimpleDateFormat formatter2 = new SimpleDateFormat(AppConstants.TIME_PATTERN_24);
         String strDate = formatter2.format(date);
         return strDate;
     }
@@ -78,10 +78,22 @@ public class CommonUtils {
     }
 
     public static String currentTime(String currentTime) {
-        SimpleDateFormat currentFormatter = new SimpleDateFormat(AppConstants.TIME_PATTERN);
+        SimpleDateFormat currentFormatter = new SimpleDateFormat(AppConstants.TIME_PATTERN_24);
         try {
             Date date = currentFormatter.parse(currentTime);
-            SimpleDateFormat formatter2 = new SimpleDateFormat("HH:mm");
+            SimpleDateFormat formatter2 = new SimpleDateFormat("hh:mm a");
+            String strDate = formatter2.format(date);
+            return strDate;
+        } catch (Exception e) {
+        }
+        return "";
+    }
+
+    public static String currentTime_24(String currentTime) {
+        SimpleDateFormat currentFormatter = new SimpleDateFormat(AppConstants.TIME_PATTERN_12);
+        try {
+            Date date = currentFormatter.parse(currentTime);
+            SimpleDateFormat formatter2 = new SimpleDateFormat(AppConstants.TIME_PATTERN_24);
             String strDate = formatter2.format(date);
             return strDate;
         } catch (Exception e) {
@@ -130,9 +142,9 @@ public class CommonUtils {
                 new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker tp, int sHour, int sMinute) {
-                        editText.setText(sHour + ":" + sMinute);
+                        editText.setText(currentTime(sHour+":"+sMinute));
                     }
-                }, hour, minutes, true);
+                }, hour, minutes, false);
         picker.show();
     }
 
