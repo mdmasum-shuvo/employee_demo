@@ -59,8 +59,8 @@ public class SplashActivity extends AppCompatActivity implements ServerResponseF
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_PHONE_STATE}, 2);
         } else {
             TelephonyManager tManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-            // ANDROID_ID = tManager.getDeviceId();
-            ANDROID_ID = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
+             ANDROID_ID = tManager.getDeviceId();
+            //ANDROID_ID = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
 
             new Handler().postDelayed(new Runnable() {
                 @Override

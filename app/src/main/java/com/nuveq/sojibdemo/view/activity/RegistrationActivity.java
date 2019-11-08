@@ -131,14 +131,16 @@ public class RegistrationActivity extends BaseActivity implements ServerResponse
             @Override
             public void onClick(View v) {
                 getGpsLocation();
-                alertDialog();
+
                 name = binding.tvName.getText().toString();
                 phone = binding.etPhone.getText().toString();
                 pass = binding.etPass.getText().toString();
 
                 if (!isValid()) {
-                    return;
+                    alertDialog();
                 }
+
+
             }
         });
 
