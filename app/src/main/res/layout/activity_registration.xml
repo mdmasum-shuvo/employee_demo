@@ -24,14 +24,14 @@
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="@dimen/_50sdp"
-                android:layout_height="@dimen/_50sdp"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_80sdp"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
-                android:src="@drawable/app_icon"
+                android:src="@drawable/saic_logo"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -64,6 +64,7 @@
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/_18sdp"
                 android:textStyle="bold"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="@+id/imageView"
                 app:layout_constraintStart_toStartOf="@+id/imageView"
                 app:layout_constraintTop_toBottomOf="@+id/imageView" />
@@ -196,7 +197,9 @@
             android:id="@+id/registration_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-          >
+            android:visibility="gone"
+
+            >
 
             <ScrollView
                 android:layout_width="match_parent"
