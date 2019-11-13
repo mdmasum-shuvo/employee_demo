@@ -136,7 +136,7 @@ public class RegistrationActivity extends BaseActivity implements ServerResponse
                 phone = binding.etPhone.getText().toString();
                 pass = binding.etPass.getText().toString();
 
-                if (!isValid()) {
+                if (isValid()) {
                     alertDialog();
                 }
 
@@ -175,7 +175,6 @@ public class RegistrationActivity extends BaseActivity implements ServerResponse
             return false;
         } else if (pass.equals("")) {
             showAlertDialog("Error", "password can't be empty");
-
             return false;
         } else if (phone.equals("")) {
             showAlertDialog("Error", "phone number can't be empty");

@@ -366,6 +366,7 @@
                 android:background="@drawable/ripple"
                 android:gravity="center"
                 android:text="Save"
+                android:clickable="true"
                 android:textColor="#FFF"
                 android:textSize="@dimen/_15sdp"
                 android:textStyle="bold" />

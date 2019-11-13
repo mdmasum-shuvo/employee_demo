@@ -83,6 +83,7 @@ public class SplashActivity extends AppCompatActivity implements ServerResponseF
     public void onFailed(String msg) {
         loadingView.setVisibility(View.GONE);
         startActivity(new Intent(this, RegistrationActivity.class));
+        finish();
     }
 
 }

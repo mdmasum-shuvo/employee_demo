@@ -90,7 +90,13 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
     private static final String TAG_NOTIFICATIONS = "notifications";
     private static final String TAG_SETTINGS = "settings";
     public static String CURRENT_TAG = TAG_HOME;
-
+    ProfileFragment profileFragment;
+    AddVisitPlanFragment addVisitPlanFragment;
+    VisitFragmentList myPlannerFragment;
+    AddAttendanceFragment addAttendanceFragment;
+    AttendanceListFragment attendanceListFragment;
+    AddSalesFragment addSalesFragment;
+    SalesListFragment salesListFragment;
     // toolbar titles respected to selected nav menu item
     private String[] activityTitles;
 
@@ -105,7 +111,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initVariable();
-
+        initAllFragment();
         mHandler = new Handler();
         binding = DataBindingUtil.setContentView(this, getLayoutResourceFile());
         initComponent();
@@ -229,8 +235,18 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
     }
 
 
+    private void initAllFragment() {
+        profileFragment = new ProfileFragment();
+        addVisitPlanFragment = new AddVisitPlanFragment();
+        myPlannerFragment = new VisitFragmentList();
+        addAttendanceFragment = new AddAttendanceFragment();
+        attendanceListFragment = new AttendanceListFragment();
+        addSalesFragment = new AddSalesFragment();
+        salesListFragment = new SalesListFragment();
+    }
+
+
     public void loadHomeFragment() {
-        ProfileFragment profileFragment = new ProfileFragment();
         profileFragment.setArguments(getIntentData());
 
         Runnable mPendingRunnable = new Runnable() {
@@ -294,30 +310,25 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
                 break;
 
             case R.id.nav_add_plan:
-                AddVisitPlanFragment addVisitPlanFragment = new AddVisitPlanFragment();
                 loadFragment(addVisitPlanFragment, getResources().getString(R.string.add_plan));
                 break;
             case R.id.nav_plan_list:
-                VisitFragmentList myPlannerFragment = new VisitFragmentList();
                 loadFragment(myPlannerFragment, getResources().getString(R.string.plan_list));
 
                 break;
 
             case R.id.nav_add_attendance:
-                AddAttendanceFragment addAttendanceFragment = new AddAttendanceFragment();
                 loadFragment(addAttendanceFragment, getResources().getString(R.string.attend_add));
                 break;
 
             case R.id.nav_attendance_list:
-                AttendanceListFragment attendanceListFragment = new AttendanceListFragment();
                 loadFragment(attendanceListFragment, getResources().getString(R.string.attend_list));
                 break;
             case R.id.nav_add_sale:
-                AddSalesFragment addSalesFragment = new AddSalesFragment();
                 loadFragment(addSalesFragment, getResources().getString(R.string.add_sale));
                 break;
             case R.id.nav_sales_list:
-                SalesListFragment salesListFragment = new SalesListFragment();
+
                 loadFragment(salesListFragment, getResources().getString(R.string.sales_list));
                 break;
             case R.id.nav_log_out:
@@ -340,7 +351,6 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
                 android.R.anim.fade_out);
         fragmentTransaction.replace(R.id.frame, fragment, CURRENT_TAG);
         fragmentTransaction.commitAllowingStateLoss();
-
 
 
     }
@@ -592,8 +602,6 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         }
         return null;
     }
-
-
 
 
     @Override

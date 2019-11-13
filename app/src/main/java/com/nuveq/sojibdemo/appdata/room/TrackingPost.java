@@ -3,11 +3,13 @@ package com.nuveq.sojibdemo.appdata.room;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 @Entity(tableName = RoomConstant.TRACKING_TABLE)
 public class TrackingPost {
 
-
+    @PrimaryKey(autoGenerate = true)
+    int id;
     @ColumnInfo(name = "empId")
     private String empid;
 
