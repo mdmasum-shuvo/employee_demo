@@ -10,7 +10,7 @@ import com.nuveq.sojibdemo.datamodel.AttendDatePost;
 import com.nuveq.sojibdemo.datamodel.AttendancePost;
 import com.nuveq.sojibdemo.datamodel.AuthenticationPost;
 import com.nuveq.sojibdemo.datamodel.CheckOutPost;
-import com.nuveq.sojibdemo.datamodel.LoginResponse;
+import com.nuveq.sojibdemo.datamodel.login.LoginResponse;
 import com.nuveq.sojibdemo.datamodel.TrackingPost;
 import com.nuveq.sojibdemo.datamodel.VisitLocationPost;
 import com.nuveq.sojibdemo.datamodel.global.branch.Result;
@@ -76,7 +76,7 @@ public class Viewmodel extends AndroidViewModel {
 
     }
 
-    public MutableLiveData<LoginResponse> getLoginResponse(AuthenticationPost object) {
+    public MutableLiveData<com.nuveq.sojibdemo.datamodel.login.Result> getLoginResponse(AuthenticationPost object) {
 
         return repository.getLoginData(object);
 

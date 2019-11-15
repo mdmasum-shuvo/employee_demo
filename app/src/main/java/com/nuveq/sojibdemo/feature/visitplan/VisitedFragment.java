@@ -1,4 +1,4 @@
-package com.nuveq.sojibdemo.view.fragment.visitplan;
+package com.nuveq.sojibdemo.feature.visitplan;
 
 import android.view.LayoutInflater;
 import android.view.View;

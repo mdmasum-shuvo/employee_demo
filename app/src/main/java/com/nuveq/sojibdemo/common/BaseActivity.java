@@ -3,12 +3,10 @@ package com.nuveq.sojibdemo.common;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 
-import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.location.Address;
@@ -19,7 +17,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 
-import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -43,26 +41,27 @@ import androidx.databinding.ViewDataBinding;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonNull;
 import com.nuveq.sojibdemo.appdata.AppConstants;
+import com.nuveq.sojibdemo.datamodel.login.Result;
+import com.nuveq.sojibdemo.feature.admin.EmployeeFragment;
+import com.nuveq.sojibdemo.feature.admin.MapFragment;
 import com.nuveq.sojibdemo.network.ApiService;
 import com.nuveq.sojibdemo.R;
 import com.nuveq.sojibdemo.network.RestClient;
 import com.nuveq.sojibdemo.appdata.SharedPreferencesEnum;
-import com.nuveq.sojibdemo.service.LocationMonitoringService;
 import com.nuveq.sojibdemo.utils.maputils.GPSTracker;
 import com.nuveq.sojibdemo.view.activity.RegistrationActivity;
-import com.nuveq.sojibdemo.view.fragment.AddAttendanceFragment;
-import com.nuveq.sojibdemo.view.fragment.AddSalesFragment;
-import com.nuveq.sojibdemo.view.fragment.visitplan.AddVisitPlanFragment;
-import com.nuveq.sojibdemo.view.fragment.AttendanceListFragment;
+import com.nuveq.sojibdemo.feature.attendance.AddAttendanceFragment;
+import com.nuveq.sojibdemo.feature.sales.AddSalesFragment;
+import com.nuveq.sojibdemo.feature.visitplan.AddVisitPlanFragment;
+import com.nuveq.sojibdemo.feature.attendance.AttendanceListFragment;
 import com.nuveq.sojibdemo.view.fragment.ProfileFragment;
-import com.nuveq.sojibdemo.view.fragment.SalesListFragment;
-import com.nuveq.sojibdemo.view.fragment.visitplan.VisitFragmentList;
+import com.nuveq.sojibdemo.feature.sales.SalesListFragment;
+import com.nuveq.sojibdemo.feature.visitplan.VisitFragmentList;
 
 
 import java.io.IOException;
@@ -97,6 +96,8 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
     AttendanceListFragment attendanceListFragment;
     AddSalesFragment addSalesFragment;
     SalesListFragment salesListFragment;
+    MapFragment mapFragment;
+    EmployeeFragment employeeFragment;
     // toolbar titles respected to selected nav menu item
     private String[] activityTitles;
 
@@ -243,6 +244,8 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         attendanceListFragment = new AttendanceListFragment();
         addSalesFragment = new AddSalesFragment();
         salesListFragment = new SalesListFragment();
+        mapFragment = new MapFragment();
+        employeeFragment = new EmployeeFragment();
     }
 
 
@@ -282,10 +285,26 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
 
     public void initDrawer() {
 
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mNavigationView = (NavigationView) findViewById(R.id.nav_view);
+        mDrawerLayout = findViewById(R.id.drawer_layout);
+        mNavigationView = findViewById(R.id.nav_view);
         mNavigationView.setNavigationItemSelectedListener(this);
         mNavigationView.setItemIconTintList(null);
+        Menu nav_Menu = mNavigationView.getMenu();
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            Result result = (Result) bundle.getSerializable(AppConstants.INTENT_KEY);
+            if (result.getRoleId() == 1) {
+                nav_Menu.findItem(R.id.nav_add_attendance).setVisible(false);
+                nav_Menu.findItem(R.id.nav_add_plan).setVisible(false);
+                nav_Menu.findItem(R.id.nav_add_sale).setVisible(false);
+                nav_Menu.findItem(R.id.nav_attendance_list).setVisible(false);
+                nav_Menu.findItem(R.id.nav_plan_list).setVisible(false);
+                nav_Menu.findItem(R.id.nav_sales_list).setVisible(false);
+            } else if (result.getRoleId() == 3) {
+                nav_Menu.findItem(R.id.nav_map).setVisible(false);
+                // nav_Menu.findItem(R.id.nav_sales_list).setVisible(false);
+            }
+        }
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 
@@ -330,6 +349,9 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
             case R.id.nav_sales_list:
 
                 loadFragment(salesListFragment, getResources().getString(R.string.sales_list));
+                break;
+            case R.id.nav_map:
+                loadFragment(mapFragment, getResources().getString(R.string.map));
                 break;
             case R.id.nav_log_out:
 

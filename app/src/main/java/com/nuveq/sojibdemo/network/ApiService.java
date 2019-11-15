@@ -2,7 +2,7 @@ package com.nuveq.sojibdemo.network;
 
 
 import com.google.gson.JsonObject;
-import com.nuveq.sojibdemo.datamodel.LoginResponse;
+import com.nuveq.sojibdemo.datamodel.login.LoginResponse;
 import com.nuveq.sojibdemo.datamodel.ServerResponse;
 import com.nuveq.sojibdemo.datamodel.attendance.AttendanceDataResponse;
 import com.nuveq.sojibdemo.datamodel.global.branch.BranchResponse;
@@ -10,6 +10,7 @@ import com.nuveq.sojibdemo.datamodel.global.area.AreaResponse;
 import com.nuveq.sojibdemo.datamodel.global.cat.CatResponse;
 import com.nuveq.sojibdemo.datamodel.sales.SalesResponse;
 import com.nuveq.sojibdemo.datamodel.visitplan.VisitPlanResponse;
+import com.nuveq.sojibdemo.feature.admin.datamodel.TrackingDataresponse;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -93,6 +94,9 @@ public interface ApiService {
     @GET(HTTP_PARAM.SHIFT_LIST)
     Call<AreaResponse> getShiftList();
 
+
+    @POST(HTTP_PARAM.TRACKING_LIST)
+    Call<TrackingDataresponse> getTrackingList(@Body JsonObject object);
 
 
 }

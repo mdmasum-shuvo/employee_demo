@@ -250,6 +250,6 @@
 
         <variable
             name="model"
-            type="com.nuveq.sojibdemo.datamodel.LoginResponse" />
+            type="com.nuveq.sojibdemo.datamodel.login.Result" />
     </data>
 </layout>

@@ -24,5 +24,6 @@ public class HTTP_PARAM {
     public static final String VISIT_ENTRY = "visitadd";
     public static final String SHIFT_LIST ="shiftlist" ;
     public static final String VISIT_AREA_ENTRY ="visitlocation" ;
+    public static final String TRACKING_LIST ="adm_trackinglist" ;
     public static String MAC_ADDRESS = "";
 }

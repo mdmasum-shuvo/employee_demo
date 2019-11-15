@@ -1,4 +1,4 @@
-package com.nuveq.sojibdemo.view.fragment;
+package com.nuveq.sojibdemo.feature.sales;
 
 import android.os.Build;
 import android.view.View;
@@ -26,9 +26,9 @@ public class AddSalesFragment extends BaseFragment implements ServerResponseFail
     private FragmentAddSalesBinding binding;
     private Calendar calendar;
     private Viewmodel viewmodel;
-    int areaItemPosition = -1;
-    String[] areaList;
-    Integer[] areaIdList;
+    private int areaItemPosition = -1;
+    private String[] areaList;
+    private Integer[] areaIdList;
     private String date, time, name, phone, address, desc;
 
     @Override

@@ -98,6 +98,7 @@
     <string name="check_in_alert">Are you sure, do you want to check in now?</string>
     <string name="check_out_alert">Are you sure, do you want to check out now?</string>
     <string name="visited_alert">Are you sure? Do  you want to complete this visit ?</string>
+    <string name="map">Track On Map</string>
 
 
 </resources>

@@ -54,13 +54,13 @@ public class RegistrationActivity extends BaseActivity implements ServerResponse
     private boolean mPermissionDenied = false, phonePermissionDenied = false;
     private double latitude, longitude;
     private GPSTracker gps;
-    int itemPosition = -1;
-    String name;
-    String phone;
-    String pass;
-    String location = null;
-    String[] branchResponseArrayList;
-    Integer[] branchIdList;
+    private int itemPosition = -1;
+    private String name;
+    private String phone;
+    private String pass;
+    private String location = null;
+    private String[] branchResponseArrayList;
+    private Integer[] branchIdList;
     private Viewmodel viewModel;
 
 
@@ -88,9 +88,6 @@ public class RegistrationActivity extends BaseActivity implements ServerResponse
             setToolbarTitle("Registration");
 
         }
-
-
-
 
     }
 
@@ -127,20 +124,15 @@ public class RegistrationActivity extends BaseActivity implements ServerResponse
             }
         });
 
-        binding.btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getGpsLocation();
+        binding.btnSave.setOnClickListener(view -> {
+            getGpsLocation();
 
-                name = binding.tvName.getText().toString();
-                phone = binding.etPhone.getText().toString();
-                pass = binding.etPass.getText().toString();
+            name = binding.tvName.getText().toString();
+            phone = binding.etPhone.getText().toString();
+            pass = binding.etPass.getText().toString();
 
-                if (isValid()) {
-                    alertDialog();
-                }
-
-
+            if (isValid()) {
+                alertDialog();
             }
         });
 
@@ -148,10 +140,15 @@ public class RegistrationActivity extends BaseActivity implements ServerResponse
             AuthenticationPost post = new AuthenticationPost();
             post.setMacaddress(AppConstants.ANDROID_ID);
             String pass = binding.etPassword.getText().toString().trim();
+            if (latitude == 0) {
+                getGpsLocation();
+                return;
+            }
             if (pass.equals("")) {
                 CommonUtils.showCustomAlert(this, "Error", "Please enter password", false);
                 return;
             }
+
             post.setPassword(pass);
             showProgressDialog();
             viewModel.getLoginResponse(post).observe(this, data -> {

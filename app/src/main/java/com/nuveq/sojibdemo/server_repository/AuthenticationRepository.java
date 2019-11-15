@@ -1,29 +1,17 @@
 package com.nuveq.sojibdemo.server_repository;
 
-import android.util.JsonReader;
-import android.util.Log;
-import android.widget.Toast;
-
 import androidx.lifecycle.MutableLiveData;
 
-import com.google.android.gms.common.internal.service.Common;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.nuveq.sojibdemo.datamodel.AuthenticationPost;
-import com.nuveq.sojibdemo.datamodel.LoginResponse;
-import com.nuveq.sojibdemo.datamodel.MacResponse;
+import com.nuveq.sojibdemo.datamodel.login.LoginResponse;
+import com.nuveq.sojibdemo.datamodel.login.Result;
 import com.nuveq.sojibdemo.datamodel.registration.Data;
-import com.nuveq.sojibdemo.datamodel.registration.Registration;
 import com.nuveq.sojibdemo.listener.ServerResponseFailedCallback;
-import com.nuveq.sojibdemo.network.HTTP_PARAM;
 import com.nuveq.sojibdemo.utils.CommonUtils;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -32,7 +20,7 @@ public class AuthenticationRepository {
 
     private MutableLiveData<String> isRegister;
     private MutableLiveData<String> getMacData;
-    private MutableLiveData<LoginResponse> getLoginData;
+    private MutableLiveData<Result> getLoginData;
     private Gson gson = new Gson();
     private ServerResponseFailedCallback mListener;
 
@@ -66,7 +54,7 @@ public class AuthenticationRepository {
         return isRegister;
     }
 
-    public MutableLiveData<LoginResponse> getLoginData(AuthenticationPost object) {
+    public MutableLiveData<Result> getLoginData(AuthenticationPost object) {
         getLoginData = new MutableLiveData<>();
         String jsonString = gson.toJson(object);
         JsonObject jsonObject = new JsonParser().parse(jsonString).getAsJsonObject();
@@ -77,7 +65,7 @@ public class AuthenticationRepository {
                 if (response.isSuccessful()) {
                     if (response.body() != null) {
                         if (response.body().getStatus()) {
-                            getLoginData.setValue(response.body());
+                            getLoginData.setValue(response.body().getResult().get(0));
                         } else {
                             if (mListener != null) {
                                 mListener.onFailed("Login Failed");

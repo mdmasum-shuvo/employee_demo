@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
+
+
+        <activity android:name=".view.activity.AdminActivity"></activity>
         <activity android:name=".view.activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,12 +20,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.activity.MainActivity">
-
-        </activity>
-        <activity android:name=".view.activity.RegistrationActivity">
-
-        </activity>
+        <activity android:name=".view.activity.MainActivity"></activity>
+        <activity android:name=".view.activity.RegistrationActivity"></activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -30,14 +29,12 @@
 
         <service android:name=".service.LocationMonitoringService" />
     </application>
-
-    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
-
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
 
 </manifest>

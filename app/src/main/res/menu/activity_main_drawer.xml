@@ -41,6 +41,10 @@
             android:id="@+id/nav_sales_list"
             android:icon="@drawable/planer_list"
             android:title="@string/sales_list" />
+        <item
+            android:id="@+id/nav_map"
+            android:icon="@drawable/map"
+            android:title="@string/map" />
 
 
         <!-- <item

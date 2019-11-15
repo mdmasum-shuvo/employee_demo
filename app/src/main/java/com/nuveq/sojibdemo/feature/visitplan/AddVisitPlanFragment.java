@@ -1,12 +1,6 @@
-package com.nuveq.sojibdemo.view.fragment.visitplan;
+package com.nuveq.sojibdemo.feature.visitplan;
 
-import android.content.Intent;
-import android.location.Address;
-import android.location.Geocoder;
 import android.os.Build;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 
 import androidx.lifecycle.ViewModelProviders;
 
@@ -14,18 +8,12 @@ import com.nuveq.sojibdemo.R;
 import com.nuveq.sojibdemo.appdata.SharedPreferencesEnum;
 import com.nuveq.sojibdemo.common.BaseFragment;
 import com.nuveq.sojibdemo.databinding.FragmentAddPlanBinding;
-import com.nuveq.sojibdemo.datamodel.CheckOutPost;
-import com.nuveq.sojibdemo.datamodel.TrackingPost;
 import com.nuveq.sojibdemo.datamodel.visitplan.VisitPlanDataPost;
 import com.nuveq.sojibdemo.listener.ServerResponseFailedCallback;
 import com.nuveq.sojibdemo.utils.CommonUtils;
 import com.nuveq.sojibdemo.viewmodel.Viewmodel;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
-import java.util.Locale;
 
 import jrizani.jrspinner.JRSpinner;
 

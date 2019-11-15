@@ -6,12 +6,10 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/login_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
             >
 
             <ImageView
@@ -165,11 +163,11 @@
                         android:layout_height="@dimen/_30sdp"
                         android:layout_gravity="end"
                         android:layout_marginTop="@dimen/_20sdp"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
                         app:cardBackgroundColor="@color/colorPrimary"
                         app:cardCornerRadius="@dimen/_5sdp"
                         app:cardElevation="@dimen/_5sdp"
-                        android:foreground="?android:attr/selectableItemBackground"
-                        android:clickable="true"
 
                         app:layout_constraintEnd_toEndOf="@+id/linearLayout2"
                         app:layout_constraintStart_toStartOf="@+id/linearLayout2"
@@ -193,188 +191,205 @@
             </androidx.cardview.widget.CardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/registration_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone"
+            android:visibility="gone">
 
-            >
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_220sdp"
+                android:background="@color/colorPrimary"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <ScrollView
+            <androidx.coordinatorlayout.widget.CoordinatorLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <ScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    tools:context=".view.activity.RegistrationActivity">
+                    android:layout_height="match_parent">
 
-                    <RelativeLayout
-                        android:id="@+id/rvone"
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card_regis"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/_15sdp"
-                        android:background="@drawable/field_shape"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_25sdp"
+                        android:layout_marginRight="@dimen/_15sdp"
+                        app:cardCornerRadius="@dimen/_5sdp"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
+                        app:layout_constraintTop_toBottomOf="@+id/textView2">
 
-                        <LinearLayout
+                        <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/_10sdp"
-                            android:orientation="vertical">
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="@dimen/_50sdp"
+                            tools:context=".view.activity.RegistrationActivity">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="@color/blue_gray"
-                                android:text="Name" />
-                            <EditText
-                                android:id="@+id/tv_name"
+                            <ImageView
+                                android:id="@+id/img_reg_logo"
+                                android:layout_width="@dimen/_70sdp"
+                                android:layout_height="@dimen/_70sdp"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginTop="@dimen/_20sdp"
+                                android:layout_marginEnd="8dp"
+                                android:layout_marginRight="8dp"
+                                android:src="@drawable/saic_logo"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <RelativeLayout
+                                android:id="@+id/rvone"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/blue_gray"
-
-                                android:imeOptions="actionNext"
-                                android:maxLines="1" />
-
-
-                        </LinearLayout>
-
-                    </RelativeLayout>
+                                android:layout_margin="@dimen/_15sdp"
+                                android:background="@drawable/field_shape"
+                                android:paddingTop="@dimen/_5sdp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/img_reg_logo">
 
 
-                    <RelativeLayout
-                        android:id="@+id/rv_phone"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/_15sdp"
-                        android:background="@drawable/field_shape"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/rvone">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/_10sdp"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="@color/blue_gray"
-
-                                android:text="Phone Number" />
-                            <EditText
-                                android:id="@+id/et_phone"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:imeOptions="actionNext"
-                                android:textColor="@color/blue_gray"
-                                android:inputType="phone"
-                                android:maxLines="1" />
-
-
-                        </LinearLayout>
-
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:id="@+id/rv_pass"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/_15sdp"
-                        android:background="@drawable/field_shape"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/rv_phone">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/_10sdp"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="@color/blue_gray"
-                                android:text="Password" />
-
-                            <com.google.android.material.textfield.TextInputLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                app:passwordToggleTint="@color/blue_gray"
-                                app:passwordToggleEnabled="true">
-                                <EditText
-                                    android:id="@+id/et_pass"
+                                <com.google.android.material.textfield.TextInputLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:imeOptions="actionNext"
-                                    android:inputType="textPassword"
-                                    android:textColor="@color/blue_gray"
-                                    android:maxLines="1"
-                                    />
-                            </com.google.android.material.textfield.TextInputLayout>
+                                    android:layout_marginBottom="@dimen/_10sdp"
+                                    android:backgroundTint="@color/colorPrimary"
+                                    android:defaultFocusHighlightEnabled="true"
+                                    android:textColorHint="@color/gray">
+
+                                    <EditText
+                                        android:id="@+id/tv_name"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:hint="Name"
+                                        android:imeOptions="actionNext"
+                                        android:maxLines="1"
+                                        android:textColor="@color/blue_gray" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                            </RelativeLayout>
 
 
-                        </LinearLayout>
-
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:id="@+id/rv_bracnh"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/_15sdp"
-                        android:background="@drawable/field_shape"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/rv_pass">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/_10sdp"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="@color/blue_gray"
-                                android:text="Branch" />
-                            <jrizani.jrspinner.JRSpinner
-                                android:id="@+id/spiner"
+                            <RelativeLayout
+                                android:id="@+id/rv_phone"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="select one"
-                                android:textColor="@color/blue_gray"
-                                app:backgroundTint="@color/gray"
-                                app:jrs_icon_tint="@color/gray"/>
+                                android:layout_margin="@dimen/_15sdp"
+                                android:background="@drawable/field_shape"
 
-                        </LinearLayout>
+                                android:paddingTop="@dimen/_5sdp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/rvone">
 
-                    </RelativeLayout>
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="@dimen/_10sdp"
+                                    android:backgroundTint="@color/colorPrimary"
+                                    android:defaultFocusHighlightEnabled="true"
+                                    android:textColorHint="@color/gray">
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </ScrollView>
 
-            <TextView
-                android:id="@+id/btnSave"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_30sdp"
-                android:layout_gravity="bottom"
-                android:background="@drawable/ripple"
-                android:gravity="center"
-                android:text="Save"
-                android:clickable="true"
-                android:textColor="#FFF"
-                android:textSize="@dimen/_15sdp"
-                android:textStyle="bold" />
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+                                    <EditText
+                                        android:id="@+id/et_phone"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:hint="Phone Number"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="phone"
+                                        android:maxLines="1"
+                                        android:textColor="@color/blue_gray" />
 
-        <include android:id="@+id/Toolbar"
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:id="@+id/rv_pass"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/_15sdp"
+                                android:background="@drawable/field_shape"
+                                android:paddingTop="@dimen/_5sdp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/rv_phone">
+
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="@dimen/_10sdp"
+                                    app:passwordToggleEnabled="true"
+                                    app:passwordToggleTint="@color/blue_gray">
+
+                                    <EditText
+                                        android:id="@+id/et_pass"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:hint="Password"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="textPassword"
+                                        android:maxLines="1"
+                                        android:textColor="@color/blue_gray" />
+                                </com.google.android.material.textfield.TextInputLayout>
+
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:id="@+id/rv_bracnh"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_50sdp"
+                                android:layout_margin="@dimen/_15sdp"
+                                android:background="@drawable/field_shape"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/rv_pass">
+
+                                <jrizani.jrspinner.JRSpinner
+                                    android:id="@+id/spiner"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginBottom="@dimen/_10sdp"
+                                    android:gravity="bottom"
+                                    android:hint="select Branch"
+                                    android:textColor="@color/blue_gray"
+                                    app:backgroundTint="@color/gray"
+                                    app:jrs_icon_tint="@color/gray" />
+
+
+                            </RelativeLayout>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.cardview.widget.CardView>
+                </ScrollView>
+
+                <TextView
+                    android:id="@+id/btnSave"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_gravity="bottom"
+                    android:background="@drawable/ripple"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:text="Registration"
+                    android:textColor="#FFF"
+                    android:textSize="@dimen/_15sdp" />
+            </androidx.coordinatorlayout.widget.CoordinatorLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <include
+            android:id="@+id/Toolbar"
             layout="@layout/toolbar"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
 
     </RelativeLayout>

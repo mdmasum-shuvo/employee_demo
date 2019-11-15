@@ -1,4 +1,4 @@
-package com.nuveq.sojibdemo.view.fragment;
+package com.nuveq.sojibdemo.feature.sales;
 
 import android.text.TextUtils;
 import android.view.View;

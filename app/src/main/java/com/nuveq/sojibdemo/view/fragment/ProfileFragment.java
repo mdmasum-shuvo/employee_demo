@@ -8,8 +8,9 @@ import com.nuveq.sojibdemo.R;
 import com.nuveq.sojibdemo.appdata.AppConstants;
 import com.nuveq.sojibdemo.common.BaseFragment;
 import com.nuveq.sojibdemo.databinding.FragmentProfileBinding;
-import com.nuveq.sojibdemo.datamodel.LoginResponse;
+import com.nuveq.sojibdemo.datamodel.login.LoginResponse;
 import com.nuveq.sojibdemo.datamodel.VisitLocationPost;
+import com.nuveq.sojibdemo.datamodel.login.Result;
 import com.nuveq.sojibdemo.listener.ServerResponseFailedCallback;
 import com.nuveq.sojibdemo.utils.CommonUtils;
 import com.nuveq.sojibdemo.viewmodel.Viewmodel;
@@ -41,7 +42,7 @@ public class ProfileFragment extends BaseFragment implements ServerResponseFaile
         if (getArguments() != null) {
             Bundle bundle = getArguments();
             if (bundle != null) {
-                LoginResponse data = (LoginResponse) bundle.getSerializable(AppConstants.INTENT_KEY);
+                Result data = (Result) bundle.getSerializable(AppConstants.INTENT_KEY);
                 try {
                     binding.setModel(data);
                 } catch (Exception e) {

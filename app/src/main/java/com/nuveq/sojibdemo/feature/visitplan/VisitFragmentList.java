@@ -1,4 +1,4 @@
-package com.nuveq.sojibdemo.view.fragment.visitplan;
+package com.nuveq.sojibdemo.feature.visitplan;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -8,7 +8,6 @@ import androidx.viewpager.widget.ViewPager;
 import com.nuveq.sojibdemo.R;
 import com.nuveq.sojibdemo.common.BaseFragment;
 import com.nuveq.sojibdemo.databinding.FragmentVisitFragmentListBinding;
-import com.nuveq.sojibdemo.view.fragment.AddSalesFragment;
 
 import java.util.ArrayList;
 import java.util.List;
