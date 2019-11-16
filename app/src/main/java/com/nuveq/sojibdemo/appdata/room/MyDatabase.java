@@ -9,6 +9,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.nuveq.sojibdemo.common.App;
 
 
 @Database(entities = {TrackingPost.class}, version = 1)
@@ -18,9 +19,9 @@ public abstract class MyDatabase extends RoomDatabase {
 
     private static MyDatabase instance;
 
-    public static synchronized MyDatabase getInstance(Context context) {
+    public static synchronized MyDatabase getInstance() {
         if (instance == null) {
-            instance = Room.databaseBuilder(context, MyDatabase.class, "db")
+            instance = Room.databaseBuilder(App.getContext(), MyDatabase.class, "db")
                     .fallbackToDestructiveMigration()
                     .addCallback(roomCallback).build();
         }
@@ -34,4 +35,7 @@ public abstract class MyDatabase extends RoomDatabase {
 
         }
     };
+
+
+
 }
