@@ -294,12 +294,12 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         if (bundle != null) {
             Result result = (Result) bundle.getSerializable(AppConstants.INTENT_KEY);
             if (result.getRoleId() == 1) {
-                nav_Menu.findItem(R.id.nav_add_attendance).setVisible(false);
+  /*              nav_Menu.findItem(R.id.nav_add_attendance).setVisible(false);
                 nav_Menu.findItem(R.id.nav_add_plan).setVisible(false);
                 nav_Menu.findItem(R.id.nav_add_sale).setVisible(false);
                 nav_Menu.findItem(R.id.nav_attendance_list).setVisible(false);
                 nav_Menu.findItem(R.id.nav_plan_list).setVisible(false);
-                nav_Menu.findItem(R.id.nav_sales_list).setVisible(false);
+                nav_Menu.findItem(R.id.nav_sales_list).setVisible(false);*/
             } else if (result.getRoleId() == 3) {
                 nav_Menu.findItem(R.id.nav_map).setVisible(false);
                 // nav_Menu.findItem(R.id.nav_sales_list).setVisible(false);

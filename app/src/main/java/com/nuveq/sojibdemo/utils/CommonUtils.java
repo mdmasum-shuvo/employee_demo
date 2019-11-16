@@ -4,12 +4,15 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
 
 import com.nuveq.sojibdemo.R;
 import com.nuveq.sojibdemo.appdata.AppConstants;
+import com.nuveq.sojibdemo.common.App;
 import com.nuveq.sojibdemo.network.ApiService;
 import com.nuveq.sojibdemo.network.RestClient;
 import com.nuveq.sojibdemo.utils.custom_dialog.Activity.SmartDialog;
@@ -77,6 +80,17 @@ public class CommonUtils {
         return null;
     }
 
+
+    public static boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) App.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = null;
+        if (connectivityManager != null) {
+            activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        }
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
     public static String currentTime(String currentTime) {
         SimpleDateFormat currentFormatter = new SimpleDateFormat(AppConstants.TIME_PATTERN_24);
         try {
@@ -142,7 +156,7 @@ public class CommonUtils {
                 new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker tp, int sHour, int sMinute) {
-                        editText.setText(currentTime(sHour+":"+sMinute));
+                        editText.setText(currentTime(sHour + ":" + sMinute));
                     }
                 }, hour, minutes, false);
         picker.show();

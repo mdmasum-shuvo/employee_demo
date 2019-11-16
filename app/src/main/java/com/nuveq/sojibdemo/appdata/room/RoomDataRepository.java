@@ -1,6 +1,6 @@
 package com.nuveq.sojibdemo.appdata.room;
 
-import android.content.Context;
+import java.util.List;
 
 
 public class RoomDataRepository {
@@ -11,11 +11,11 @@ public class RoomDataRepository {
         mDatabase = database;
     }
 
-    public static RoomDataRepository getInstance(Context context) {
+    public static RoomDataRepository getInstance() {
         if (sInstance == null) {
             synchronized (RoomDataRepository.class) {
                 if (sInstance == null) {
-                    sInstance = new RoomDataRepository(MyDatabase.getInstance(context));
+                    sInstance = new RoomDataRepository(MyDatabase.getInstance());
                 }
             }
         }
@@ -25,5 +25,10 @@ public class RoomDataRepository {
     public long insertTrackingData(TrackingPost request) {
         return mDatabase.myDatabaseDao().insertTrackingData(request);
     }
+
+    public List<TrackingPost> getLocalTrackingData() {
+        return mDatabase.myDatabaseDao().retrieveData();
+    }
+
 
 }

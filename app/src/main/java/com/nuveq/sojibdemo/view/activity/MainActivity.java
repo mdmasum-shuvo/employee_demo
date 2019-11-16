@@ -6,7 +6,7 @@ import com.nuveq.sojibdemo.databinding.ActivityMainBinding;
 
 public class MainActivity extends BaseActivity {
 
-    ActivityMainBinding binding;
+    private ActivityMainBinding binding;
 
     @Override
     protected int getLayoutResourceFile() {
@@ -19,7 +19,6 @@ public class MainActivity extends BaseActivity {
         initToolbar();
         initDrawer();
         loadHomeFragment();
-
         binding.Toolbar.logout.setOnClickListener(view -> {
             logout();
         });
