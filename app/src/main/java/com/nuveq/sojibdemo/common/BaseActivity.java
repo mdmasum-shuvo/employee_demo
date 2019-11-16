@@ -294,15 +294,15 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         if (bundle != null) {
             Result result = (Result) bundle.getSerializable(AppConstants.INTENT_KEY);
             if (result.getRoleId() == 1) {
-  /*              nav_Menu.findItem(R.id.nav_add_attendance).setVisible(false);
+                nav_Menu.findItem(R.id.nav_add_attendance).setVisible(false);
                 nav_Menu.findItem(R.id.nav_add_plan).setVisible(false);
                 nav_Menu.findItem(R.id.nav_add_sale).setVisible(false);
                 nav_Menu.findItem(R.id.nav_attendance_list).setVisible(false);
                 nav_Menu.findItem(R.id.nav_plan_list).setVisible(false);
-                nav_Menu.findItem(R.id.nav_sales_list).setVisible(false);*/
+                nav_Menu.findItem(R.id.nav_sales_list).setVisible(false);
             } else if (result.getRoleId() == 3) {
-                nav_Menu.findItem(R.id.nav_map).setVisible(false);
-                // nav_Menu.findItem(R.id.nav_sales_list).setVisible(false);
+           /*     nav_Menu.findItem(R.id.nav_map).setVisible(false);
+                nav_Menu.findItem(R.id.nav_admin_employee).setVisible(false);*/
             }
         }
 
@@ -350,6 +350,9 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
                 break;
             case R.id.nav_map:
                 loadFragment(mapFragment, getResources().getString(R.string.map));
+                break;
+            case R.id.nav_admin_employee:
+                loadFragment(employeeFragment, getResources().getString(R.string.employee_info));
                 break;
             case R.id.nav_log_out:
 

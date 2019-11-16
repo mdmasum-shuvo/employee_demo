@@ -46,6 +46,11 @@
             android:icon="@drawable/map"
             android:title="@string/map" />
 
+        <item
+            android:id="@+id/nav_admin_employee"
+            android:icon="@drawable/planer_list"
+            android:title="@string/employee_info" />
+
 
         <!-- <item
              android:id="@+id/nav_approved_apprisal"

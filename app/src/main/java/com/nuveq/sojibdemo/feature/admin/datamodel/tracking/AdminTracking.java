@@ -1,4 +1,4 @@
-package com.nuveq.sojibdemo.feature.admin.datamodel;
+package com.nuveq.sojibdemo.feature.admin.datamodel.tracking;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

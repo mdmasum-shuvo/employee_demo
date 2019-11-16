@@ -27,8 +27,8 @@ import retrofit2.Response;
 public class AttendanceRepository {
     MutableLiveData<String> checkData;
     Gson gson = new Gson();
-    private ServerResponseFailedCallback mListener;
     private MutableLiveData<List<Emp>> empttendanceDataList;
+    private ServerResponseFailedCallback mListener;
 
 
     public void setCallbackListener(ServerResponseFailedCallback mListener) {

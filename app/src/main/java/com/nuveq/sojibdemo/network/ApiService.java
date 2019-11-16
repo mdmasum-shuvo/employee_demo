@@ -10,7 +10,8 @@ import com.nuveq.sojibdemo.datamodel.global.area.AreaResponse;
 import com.nuveq.sojibdemo.datamodel.global.cat.CatResponse;
 import com.nuveq.sojibdemo.datamodel.sales.SalesResponse;
 import com.nuveq.sojibdemo.datamodel.visitplan.VisitPlanResponse;
-import com.nuveq.sojibdemo.feature.admin.datamodel.TrackingDataresponse;
+import com.nuveq.sojibdemo.feature.admin.datamodel.employee_list.EmployeeResponse;
+import com.nuveq.sojibdemo.feature.admin.datamodel.tracking.TrackingDataresponse;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -97,6 +98,9 @@ public interface ApiService {
 
     @POST(HTTP_PARAM.TRACKING_LIST)
     Call<TrackingDataresponse> getTrackingList(@Body JsonObject object);
+
+    @POST(HTTP_PARAM.EMPLOYEE_LIST)
+    Call<EmployeeResponse> getEmployeeList(@Body JsonObject object);
 
 
 }

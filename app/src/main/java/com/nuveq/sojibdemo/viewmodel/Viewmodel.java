@@ -20,6 +20,8 @@ import com.nuveq.sojibdemo.datamodel.visitplan.Plan;
 import com.nuveq.sojibdemo.datamodel.visitplan.VisitPlanDataPost;
 import com.nuveq.sojibdemo.datamodel.attendance.Emp;
 import com.nuveq.sojibdemo.datamodel.registration.Data;
+import com.nuveq.sojibdemo.feature.admin.datamodel.tracking.AdminTracking;
+import com.nuveq.sojibdemo.server_repository.AdminRepository;
 import com.nuveq.sojibdemo.server_repository.AttendanceRepository;
 import com.nuveq.sojibdemo.server_repository.AuthenticationRepository;
 import com.nuveq.sojibdemo.server_repository.GlobalRepository;
@@ -36,6 +38,7 @@ public class Viewmodel extends AndroidViewModel {
     private GlobalRepository globalRepository;
     private VisitPlanRepository visitRepository;
     private SalesRepository salesRepository;
+    private AdminRepository adminRepository;
 
     public Viewmodel(@NonNull Application application) {
         super(application);
@@ -44,8 +47,13 @@ public class Viewmodel extends AndroidViewModel {
         globalRepository = new GlobalRepository();
         visitRepository = new VisitPlanRepository();
         salesRepository = new SalesRepository();
+        adminRepository = new AdminRepository();
     }
 
+
+    public AdminRepository getAdminRepository() {
+        return adminRepository;
+    }
 
     public MutableLiveData<String> getRegistrationResponse(Data jsonObject) {
 
@@ -158,5 +166,13 @@ public class Viewmodel extends AndroidViewModel {
 
     public MutableLiveData<String> locationPost(VisitLocationPost post) {
         return globalRepository.locationPost(post);
+    }
+
+    public MutableLiveData<List<com.nuveq.sojibdemo.feature.admin.datamodel.employee_list.Result>> getAdminEmployeeList(String post) {
+        return adminRepository.getEmployeeList(post);
+    }
+
+    public MutableLiveData<List<com.nuveq.sojibdemo.feature.admin.datamodel.tracking.Result>> getAdminEmployeeList(AdminTracking post) {
+        return adminRepository.getTrackingDataList(post);
     }
 }
