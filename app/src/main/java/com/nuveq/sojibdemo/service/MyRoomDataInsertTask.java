@@ -5,10 +5,10 @@ import android.os.AsyncTask;
 import com.nuveq.sojibdemo.appdata.room.RoomDataRepository;
 import com.nuveq.sojibdemo.appdata.room.TrackingPost;
 
-class MyRoomDataInsert extends AsyncTask<TrackingPost, Void, Long> {
+class MyRoomDataInsertTask extends AsyncTask<TrackingPost, Void, Long> {
     RoomDataRepository roomDataRepository;
 
-    public MyRoomDataInsert(RoomDataRepository roomDataRepository) {
+    public MyRoomDataInsertTask(RoomDataRepository roomDataRepository) {
         this.roomDataRepository = roomDataRepository;
     }
 

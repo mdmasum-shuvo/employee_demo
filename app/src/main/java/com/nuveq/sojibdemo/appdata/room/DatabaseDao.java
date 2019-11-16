@@ -23,6 +23,6 @@ public interface DatabaseDao {
 
 
     @Query("delete from tracking_table where id=:trackId")
-    long deleteData(int trackId);
+    int deleteData(int trackId);
 
 }

@@ -44,7 +44,7 @@ public class LocationMonitoringService extends Service implements
     GoogleApiClient mLocationClient;
     LocationRequest mLocationRequest = new LocationRequest();
 
-    private MyRoomDataInsert localInsertTask;
+    private MyRoomDataInsertTask localInsertTask;
     private RoomDataRepository mRepo;
     public static final String EXTRA_LATITUDE = "extra_latitude";
     public static final String EXTRA_LONGITUDE = "extra_longitude";
@@ -67,7 +67,7 @@ public class LocationMonitoringService extends Service implements
         mLocationRequest.setInterval(AppConstants.FASTEST_LOCATION_INTERVAL);
         mLocationRequest.setFastestInterval(AppConstants.FASTEST_LOCATION_INTERVAL);
         mRepo = RoomDataRepository.getInstance();
-        localInsertTask = new MyRoomDataInsert(mRepo);
+        localInsertTask = new MyRoomDataInsertTask(mRepo);
         int priority = LocationRequest.PRIORITY_HIGH_ACCURACY; //by default
         //PRIORITY_BALANCED_POWER_ACCURACY, PRIORITY_LOW_POWER, PRIORITY_NO_POWER are the other priority modes
 
