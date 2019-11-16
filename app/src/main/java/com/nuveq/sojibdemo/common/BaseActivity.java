@@ -307,9 +307,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         }
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-
         toggle.syncState();
-
         toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
