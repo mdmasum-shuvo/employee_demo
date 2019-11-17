@@ -57,8 +57,6 @@ public class VisitedFragment extends BaseFragment implements ServerResponseFaile
 
     @Override
     protected void initFragmentListener() {
-
-
         binding.btnFloatFilter.setOnClickListener(v -> {
             showAskIdDialog();
         });

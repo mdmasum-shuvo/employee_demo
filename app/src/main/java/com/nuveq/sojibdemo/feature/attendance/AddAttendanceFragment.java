@@ -38,7 +38,7 @@ public class AddAttendanceFragment extends BaseFragment implements ServerRespons
     private Viewmodel viewModel;
     private FragmentAttendanceListBinding binding;
     private String location = null;
-    int areaItemPosition = -1;
+    private int areaItemPosition = -1;
     private String[] areaList;
     private Integer[] areaIdList;
 

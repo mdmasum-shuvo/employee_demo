@@ -40,14 +40,16 @@ public class GlobalRepository {
                     brachDataList.setValue(response.body().getResult());
 
                 } else {
-                    Log.e("", "");
-                }
+                    if (mListener != null) {
+                        mListener.onFailed("Something went wrong on server or check your connection\ntry again");
+                    }               }
             }
 
             @Override
             public void onFailure(Call<BranchResponse> call, Throwable t) {
-                Log.e("", "");
-
+                if (mListener != null) {
+                    mListener.onFailed("Something went wrong on server or check your connection\ntry again");
+                }
 
             }
         });
@@ -70,7 +72,7 @@ public class GlobalRepository {
             @Override
             public void onFailure(Call<CatResponse> call, Throwable t) {
                 if (mListener != null) {
-                    mListener.onFailed("Something went wrong on server,category data ");
+                    mListener.onFailed("Something went wrong on server or check your connection\ntry again");
                 }
             }
         });
@@ -89,11 +91,18 @@ public class GlobalRepository {
                 if (response.isSuccessful()) {
                     locationDataResponse.setValue(response.body());
                 }
+                else {
+                    if (mListener != null) {
+                        mListener.onFailed("Something went wrong on server\ntry again");
+                    }
+                }
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-
+                if (mListener != null) {
+                    mListener.onFailed("Something went wrong on server or check your connection\ntry again");
+                }
             }
         });
         return locationDataResponse;
@@ -122,11 +131,18 @@ public class GlobalRepository {
 
                     }
                 }
+                else {
+                    if (mListener != null) {
+                        mListener.onFailed("Something went wrong on server\ntry again");
+                    }
+                }
             }
 
             @Override
             public void onFailure(Call<AreaResponse> call, Throwable t) {
-
+                if (mListener != null) {
+                    mListener.onFailed("Something went wrong on server or check your connection\ntry again");
+                }
             }
         });
 
@@ -151,11 +167,18 @@ public class GlobalRepository {
 
                     }
                 }
+                else {
+                    if (mListener != null) {
+                        mListener.onFailed("Something went wrong on server or check your connection\ntry again");
+                    }
+                }
             }
 
             @Override
             public void onFailure(Call<AreaResponse> call, Throwable t) {
-
+                if (mListener != null) {
+                    mListener.onFailed("Something went wrong on server or check your connection\ntry again");
+                }
             }
         });
 
@@ -186,7 +209,9 @@ public class GlobalRepository {
 
             @Override
             public void onFailure(Call<AreaResponse> call, Throwable t) {
-
+                if (mListener != null) {
+                    mListener.onFailed("Something went wrong on server or check your connection\ntry again");
+                }
             }
         });
         return shiftList;

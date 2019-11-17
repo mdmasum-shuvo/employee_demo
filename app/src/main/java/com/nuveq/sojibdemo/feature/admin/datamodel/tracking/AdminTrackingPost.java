@@ -3,7 +3,7 @@ package com.nuveq.sojibdemo.feature.admin.datamodel.tracking;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class AdminTracking {
+public class AdminTrackingPost {
 
 @SerializedName("empid")
 @Expose

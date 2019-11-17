@@ -62,5 +62,10 @@ public class AppUtils {
         }
     }
 
+    public static BitmapDescriptor getMapMarker(Context context) {
+        int dimen = 30;
+        Bitmap b = ((BitmapDrawable) context.getResources().getDrawable(R.drawable.circle)).getBitmap();
+        return BitmapDescriptorFactory.fromBitmap(Bitmap.createScaledBitmap(b, dimen, dimen, false));
+    }
 
 }

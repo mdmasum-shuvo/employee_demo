@@ -60,7 +60,7 @@
     <string name="success_code">200</string>
     <string name="success_status">ok</string>
     <string name="otp_success"><![CDATA[otp code sent successfully,please check your phone for otp code & enter the code]]></string>
-    <string name="internet_not_available">Internet not available, please connect to the internet</string>
+    <string name="internet_not_available">Internet not available, Please check your connection or connect to the internet</string>
     <string name="please_wait">Please wait...</string>
     <string name="reqired_text">Required</string>
     <string name="enable_location">Please wait... GPS is not enabled,please enable your device location.Data save is not valid without your device location.</string>

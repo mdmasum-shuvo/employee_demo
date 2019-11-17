@@ -24,6 +24,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class CommonUtils {
+    private static String date;
 
 
     public static ApiService getApiService() {
@@ -138,13 +139,13 @@ public class CommonUtils {
             public void onDateSet(DatePicker datePicker, int yy, int mm, int dd) {
                 mm += 1;
                 editText.setText(yy + "-" + (mm) + "-" + dd);
-
             }
         },
                 c.get(Calendar.YEAR),
                 c.get(Calendar.MONTH),
                 c.get(Calendar.DAY_OF_MONTH));
         dpd.show();
+
     }
 
     public static void showTimePicker(Context context, final EditText editText, Calendar c) {
