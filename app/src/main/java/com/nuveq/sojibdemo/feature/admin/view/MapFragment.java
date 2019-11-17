@@ -1,4 +1,4 @@
-package com.nuveq.sojibdemo.feature.admin;
+package com.nuveq.sojibdemo.feature.admin.view;
 
 import android.Manifest;
 import android.app.DatePickerDialog;

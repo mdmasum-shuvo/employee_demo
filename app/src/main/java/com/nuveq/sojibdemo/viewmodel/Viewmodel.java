@@ -19,6 +19,7 @@ import com.nuveq.sojibdemo.datamodel.visitplan.Plan;
 import com.nuveq.sojibdemo.datamodel.visitplan.VisitPlanDataPost;
 import com.nuveq.sojibdemo.datamodel.attendance.Emp;
 import com.nuveq.sojibdemo.datamodel.registration.Data;
+import com.nuveq.sojibdemo.feature.admin.datamodel.AdminAttendPost;
 import com.nuveq.sojibdemo.feature.admin.datamodel.tracking.AdminTrackingPost;
 import com.nuveq.sojibdemo.server_repository.AdminRepository;
 import com.nuveq.sojibdemo.server_repository.AttendanceRepository;
@@ -109,8 +110,12 @@ public class Viewmodel extends AndroidViewModel {
         return salesRepository;
     }
 
-    public MutableLiveData<List<Emp>> getAttenDataList(AttendDatePost post) {
+    public MutableLiveData<List<com.nuveq.sojibdemo.feature.admin.datamodel.attendance.Result>> getAttenDataList(AttendDatePost post) {
         return attendanceRepository.getEmpttendanceDataList(post);
+    }
+
+    public MutableLiveData<List<com.nuveq.sojibdemo.feature.admin.datamodel.attendance.Result>> getAdminAttenDataList(AdminAttendPost post) {
+        return attendanceRepository.getAdminEmpttendanceDataList(post);
     }
 
     public MutableLiveData<List<Result>> getBrachData() {

@@ -7,7 +7,7 @@
 
         <variable
             name="model"
-            type="com.nuveq.sojibdemo.datamodel.attendance.Emp" />
+            type="com.nuveq.sojibdemo.feature.admin.datamodel.attendance.Result" />
     </data>
 
 
@@ -64,7 +64,7 @@
 
                     <TextView
                         android:id="@+id/tv_check_in_location"
-                        android:layout_width="wrap_content"
+                        android:layout_width="@dimen/_140sdp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:maxLines="1"
@@ -103,18 +103,17 @@
                         android:background="@drawable/light_shape"
                         android:text="@{model.checkOutTime}"
                         android:textColor="@color/off_white"
-
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/tv_check_out_location"
-                        android:layout_width="wrap_content"
+                        android:layout_width="@dimen/_140sdp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
+                        android:textAlignment="textEnd"
                         android:maxLines="1"
                         android:text="@{model.checkOutLocation}"
-
                         android:textColor="@color/blue_gray"
                         app:layout_constraintEnd_toEndOf="@+id/btn_check_out"
                         app:layout_constraintTop_toBottomOf="@+id/btn_check_out" />

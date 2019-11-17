@@ -10,18 +10,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.nuveq.sojibdemo.R;
 import com.nuveq.sojibdemo.databinding.ItemDetailsBinding;
 import com.nuveq.sojibdemo.datamodel.attendance.Emp;
+import com.nuveq.sojibdemo.feature.admin.datamodel.attendance.Result;
 import com.nuveq.sojibdemo.utils.CommonUtils;
 
 import java.util.List;
 
 public class AttendanceAdapter extends RecyclerView.Adapter<AttendanceAdapter.ViewFilesHolder> {
     private Context context;
-    private List<Emp> list;
+    private List<Result> list;
     private LayoutInflater layoutInflater;
     public static final int REQUEST_UPDATE = 100;
 
 
-    public AttendanceAdapter(Context context, List<Emp> list) {
+    public AttendanceAdapter(Context context, List<Result> list) {
         this.context = context;
         this.list = list;
 
@@ -43,7 +44,7 @@ public class AttendanceAdapter extends RecyclerView.Adapter<AttendanceAdapter.Vi
 
     @Override
     public void onBindViewHolder(AttendanceAdapter.ViewFilesHolder holder, int position) {
-        Emp emp = new Emp();
+        Result emp = new Result();
         emp.setCheckInTime("CHECK IN\n" + CommonUtils.currentTime(list.get(position).getCheckInTime()));
         emp.setCheckOutTime("CHECK OUT\n" + CommonUtils.currentTime(list.get(position).getCheckOutTime()));
         emp.setDate(CommonUtils.currentDate(list.get(position).getDate()));

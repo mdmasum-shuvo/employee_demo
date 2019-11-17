@@ -12,6 +12,7 @@ import com.nuveq.sojibdemo.common.BaseFragment;
 import com.nuveq.sojibdemo.databinding.FragmentAttendanceListBinding;
 import com.nuveq.sojibdemo.datamodel.AttendDatePost;
 import com.nuveq.sojibdemo.datamodel.attendance.Emp;
+import com.nuveq.sojibdemo.feature.admin.datamodel.attendance.Result;
 import com.nuveq.sojibdemo.listener.ServerResponseFailedCallback;
 import com.nuveq.sojibdemo.utils.CommonUtils;
 import com.nuveq.sojibdemo.view.adapter.AttendanceAdapter;
@@ -26,7 +27,7 @@ public class AttendanceListFragment extends BaseFragment implements ServerRespon
 
     private Viewmodel viewModel;
     private Calendar calendar;
-    private List<Emp> empList = new ArrayList<>();
+    private List<Result> empList = new ArrayList<>();
     private AttendanceAdapter adapter;
 
     @Override

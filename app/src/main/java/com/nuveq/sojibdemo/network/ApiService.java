@@ -10,6 +10,7 @@ import com.nuveq.sojibdemo.datamodel.global.area.AreaResponse;
 import com.nuveq.sojibdemo.datamodel.global.cat.CatResponse;
 import com.nuveq.sojibdemo.datamodel.sales.SalesResponse;
 import com.nuveq.sojibdemo.datamodel.visitplan.VisitPlanResponse;
+import com.nuveq.sojibdemo.feature.admin.datamodel.attendance.EmployeeAttendResponse;
 import com.nuveq.sojibdemo.feature.admin.datamodel.employee_list.EmployeeResponse;
 import com.nuveq.sojibdemo.feature.admin.datamodel.tracking.TrackingDataresponse;
 
@@ -36,6 +37,13 @@ public interface ApiService {
     @POST(HTTP_PARAM.USER)
     Call<String> getDataBytMac(@Body JsonObject data);
 
+    @POST(HTTP_PARAM.ATTENDANCE_INFO)
+    Call<EmployeeAttendResponse> getAttendanceData(@Body JsonObject jsonObject);
+
+
+    @POST(HTTP_PARAM.ADMIN_ATTEND_LIST)
+    Call<EmployeeAttendResponse> getAdminAttendanceData(@Body JsonObject jsonObject);
+
     @POST(HTTP_PARAM.CHECK_IN)
     Call<String> postCheckIn(@Body JsonObject data);
 
@@ -47,9 +55,6 @@ public interface ApiService {
     @Headers("Content-Type: application/json")
     @POST(HTTP_PARAM.TACKING)
     Call<String> postTracking(@Body JsonObject data);
-
-    @POST(HTTP_PARAM.ATTENDANCE_INFO)
-    Call<AttendanceDataResponse> getAttendanceData(@Body JsonObject jsonObject);
 
     @POST(HTTP_PARAM.ADD_VISIT)
     Call<String> visitPlanPost(@Body JsonObject object);

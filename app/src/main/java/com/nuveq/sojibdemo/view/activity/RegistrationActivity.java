@@ -153,9 +153,12 @@ public class RegistrationActivity extends BaseActivity implements ServerResponse
             showProgressDialog();
             viewModel.getLoginResponse(post).observe(this, data -> {
                 if (data != null) {
+
                     hideProgressDialog();
                     Toast.makeText(getApplicationContext(), "Login successful", Toast.LENGTH_SHORT).show();
                     SharedPreferencesEnum.getInstance(this).put(SharedPreferencesEnum.Key.USER_ID, data.getEmpId());
+                    SharedPreferencesEnum.getInstance(this).put(SharedPreferencesEnum.Key.BRANCH_ID, data.getBranchId());
+                    SharedPreferencesEnum.getInstance(this).put(SharedPreferencesEnum.Key.ROLE_ID, data.getRoleId());
                     Bundle bundle = new Bundle();
                     bundle.putSerializable(AppConstants.INTENT_KEY, data);
                     startActivity(MainActivity.class, true, bundle);

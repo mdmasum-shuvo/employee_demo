@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <RelativeLayout android:layout_width="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="visible"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/dateFilterLayout"
+            app:cardElevation="@dimen/_5sdp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:cardBackgroundColor="@color/gray"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorWhite"
+                    android:background="@color/pink_blue"
+                    android:text="Filter List"/>
+
+                    <jrizani.jrspinner.JRSpinner
+                        android:id="@+id/spiner"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="Select Employee"
+                        android:layout_gravity="center"
+                        android:textColor="@color/blue_gray"
+                        app:backgroundTint="@color/colorWhite"
+                        app:jrs_icon_tint="@color/colorWhite"
+                        />
+
+                <!--1st-->
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <!--(1)No of Leads-->
+                    <LinearLayout
+                        android:id="@+id/dateFrom"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_8sdp"
+                        android:layout_weight="1"
+                        android:elevation="@dimen/_4sdp"
+                        android:orientation="vertical"
+                        android:padding="@dimen/_4sdp">
+
+                        <EditText
+                            android:id="@+id/etDateFrom"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:focusable="false"
+                            android:hint="Select Date"
+                            android:imeOptions="actionNext"
+                            android:inputType="date"
+                            android:maxLines="1"
+                            android:textColor="@color/deep_red"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="From date"
+                            android:textColor="@color/colorPrimary" />
+
+
+                    </LinearLayout>
+                    <!--(2)No of Prospects-->
+                    <LinearLayout
+                        android:id="@+id/dateTo"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/_8sdp"
+                        android:layout_weight="1"
+                        android:elevation="@dimen/_4sdp"
+                        android:orientation="vertical"
+                        android:padding="@dimen/_4sdp">
+
+                        <EditText
+                            android:id="@+id/etDateTo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:focusable="false"
+                            android:hint="Select Date"
+                            android:imeOptions="actionNext"
+                            android:inputType="date"
+                            android:maxLines="1"
+                            android:textColor="@color/deep_red"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="To date"
+                            android:textColor="@color/colorPrimary" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btnFilter"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:background="@drawable/shape_pink_blue"
+                    android:text="SEARCH"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/_10sdp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+</layout>

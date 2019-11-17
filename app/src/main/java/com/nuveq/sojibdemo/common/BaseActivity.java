@@ -47,8 +47,8 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonNull;
 import com.nuveq.sojibdemo.appdata.AppConstants;
 import com.nuveq.sojibdemo.datamodel.login.Result;
-import com.nuveq.sojibdemo.feature.admin.EmployeeFragment;
-import com.nuveq.sojibdemo.feature.admin.MapFragment;
+import com.nuveq.sojibdemo.feature.admin.view.EmployeeFragment;
+import com.nuveq.sojibdemo.feature.admin.view.MapFragment;
 import com.nuveq.sojibdemo.network.ApiService;
 import com.nuveq.sojibdemo.R;
 import com.nuveq.sojibdemo.network.RestClient;
@@ -301,8 +301,8 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
                 nav_Menu.findItem(R.id.nav_plan_list).setVisible(false);
                 nav_Menu.findItem(R.id.nav_sales_list).setVisible(false);
             } else if (result.getRoleId() == 3) {
-           /*     nav_Menu.findItem(R.id.nav_map).setVisible(false);
-                nav_Menu.findItem(R.id.nav_admin_employee).setVisible(false);*/
+                nav_Menu.findItem(R.id.nav_map).setVisible(false);
+                nav_Menu.findItem(R.id.nav_admin_employee).setVisible(false);
             }
         }
 

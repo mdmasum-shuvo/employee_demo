@@ -49,7 +49,6 @@ public class VisitApprovedFragment extends BaseFragment implements ServerRespons
         adapter = new PlanListAdapter(getActivity(), planList);
         binding.rv.setAdapter(adapter);
         calendar = Calendar.getInstance();
-
     }
 
     @Override
