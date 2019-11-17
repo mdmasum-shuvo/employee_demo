@@ -92,7 +92,7 @@ public class AdminRepository {
             @Override
             public void onFailure(Call<EmployeeResponse> call, Throwable t) {
                 if (mListener != null) {
-                    mListener.onFailed("Something went wrong on server or check your connection\ntry again");
+                    mListener.onFailed("Something went wrong on server \nor\n Check your connection\nTry again");
                 }
             }
         });
