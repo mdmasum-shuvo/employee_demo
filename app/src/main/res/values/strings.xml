@@ -99,8 +99,11 @@
     <string name="check_out_alert">Are you sure, do you want to check out now?</string>
     <string name="visited_alert">Are you sure? Do  you want to complete this visit ?</string>
     <string name="map">Track On Map</string>
-    <string name="employee_info">Employee Info</string>
+    <string name="employee_info">Employee Attendance</string>
     <string name="select_empl">Please select an employee</string>
+    <string name="admin">Admin</string>
+    <string name="add_location">Add Location</string>
+    <string name="Editor">Editor</string>
 
 
 </resources>

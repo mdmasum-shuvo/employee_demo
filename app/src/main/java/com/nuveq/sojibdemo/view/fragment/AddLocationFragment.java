@@ -1,5 +1,6 @@
 package com.nuveq.sojibdemo.view.fragment;
 
+
 import android.os.Bundle;
 import android.view.View;
 
@@ -8,8 +9,8 @@ import androidx.lifecycle.ViewModelProviders;
 import com.nuveq.sojibdemo.R;
 import com.nuveq.sojibdemo.appdata.AppConstants;
 import com.nuveq.sojibdemo.common.BaseFragment;
+import com.nuveq.sojibdemo.databinding.FragmentPlanListBinding;
 import com.nuveq.sojibdemo.databinding.FragmentProfileBinding;
-import com.nuveq.sojibdemo.datamodel.login.LoginResponse;
 import com.nuveq.sojibdemo.datamodel.VisitLocationPost;
 import com.nuveq.sojibdemo.datamodel.login.Result;
 import com.nuveq.sojibdemo.listener.ServerResponseFailedCallback;
@@ -18,9 +19,8 @@ import com.nuveq.sojibdemo.viewmodel.Viewmodel;
 
 import jrizani.jrspinner.JRSpinner;
 
-public class ProfileFragment extends BaseFragment implements ServerResponseFailedCallback {
-
-    private FragmentProfileBinding binding;
+public class AddLocationFragment extends BaseFragment  implements ServerResponseFailedCallback {
+    FragmentProfileBinding binding;
     private String[] catList;
     private String[] areaList;
     private Integer[] areaIdList;
@@ -28,7 +28,6 @@ public class ProfileFragment extends BaseFragment implements ServerResponseFaile
 
     private Viewmodel viewModel;
     private int catItemPosition = -1, areaItemPosition = -1;
-
     @Override
     protected Integer layoutResourceId() {
         return R.layout.fragment_profile;
@@ -48,12 +47,10 @@ public class ProfileFragment extends BaseFragment implements ServerResponseFaile
                     binding.setModel(data);
                 } catch (Exception e) {
                 }
-
             }
         }
 
-        binding.layoutAreaEntry.setVisibility(View.GONE);
-
+        binding.layoutProfile.setVisibility(View.GONE);
     }
 
     @Override

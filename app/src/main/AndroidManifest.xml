@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
-
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
 
         <activity android:name=".view.activity.AdminActivity"></activity>
         <activity android:name=".view.activity.SplashActivity">

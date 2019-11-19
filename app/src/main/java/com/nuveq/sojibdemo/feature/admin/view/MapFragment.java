@@ -134,6 +134,7 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback,
         post.setEmpid(myEmployeId);
         viewModel.getAdminTrackingList(post).observe(getActivity(), dataList -> {
             if (!dataList.isEmpty()) {
+                hideProgressDialog();
                 mapCameraUpdate(new LatLng(dataList.get(0).getLatitude(), dataList.get(0).getLongitude()));
                 addMarkerToMap(dataList);
             }
@@ -162,7 +163,13 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback,
     }
 
     private void addMarkerToMap(List<Result> dataList) {
-        for (int i = 0; i < dataList.size(); i++) {
+        MarkerOptions markerOption1 = new MarkerOptions()
+                .position(new LatLng(dataList.get(0).getLatitude(), dataList.get(0).getLongitude()))
+                .snippet(CommonUtils.currentTime(dataList.get(0).getTime()))
+                .icon(AppUtils.getMapFirstMarker(getActivity()));
+        mMap.addMarker(markerOption1);
+
+        for (int i = 1; i < dataList.size()-1; i++) {
 
             MarkerOptions markerOption = new MarkerOptions()
                     .position(new LatLng(dataList.get(i).getLatitude(), dataList.get(i).getLongitude()))
@@ -174,6 +181,13 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback,
             markerList.add(marker);*/
 
         }
+
+        int lastEntry=dataList.size()-1;
+        MarkerOptions markerOption = new MarkerOptions()
+                .position(new LatLng(dataList.get(lastEntry).getLatitude(), dataList.get(lastEntry).getLongitude()))
+                .snippet(CommonUtils.currentTime(dataList.get(lastEntry).getTime()))
+                .icon(AppUtils.getMapLastMarker(getActivity()));
+        mMap.addMarker(markerOption);
 
         hideProgressDialog();
 

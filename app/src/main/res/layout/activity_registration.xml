@@ -10,6 +10,7 @@
             android:id="@+id/login_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:visibility="gone"
             >
 
             <ImageView
@@ -162,7 +163,7 @@
                         android:layout_width="@dimen/_170sdp"
                         android:layout_height="@dimen/_30sdp"
                         android:layout_gravity="end"
-                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_marginTop="@dimen/_15sdp"
                         android:clickable="true"
                         android:foreground="?android:attr/selectableItemBackground"
                         app:cardBackgroundColor="@color/colorPrimary"
@@ -195,7 +196,8 @@
             android:id="@+id/registration_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone">
+            android:background="@color/colorWhite"
+         >
 
             <ImageView
                 android:id="@+id/imageView3"
@@ -207,7 +209,8 @@
 
             <androidx.coordinatorlayout.widget.CoordinatorLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                >
 
                 <ScrollView
                     android:layout_width="match_parent"
@@ -233,17 +236,23 @@
 
                             <ImageView
                                 android:id="@+id/img_reg_logo"
-                                android:layout_width="@dimen/_70sdp"
-                                android:layout_height="@dimen/_70sdp"
-                                android:layout_marginStart="8dp"
-                                android:layout_marginLeft="8dp"
+                                android:layout_width="@dimen/_30sdp"
+                                android:layout_height="@dimen/_30sdp"
+                                android:layout_marginStart="@dimen/_15sdp"
                                 android:layout_marginTop="@dimen/_20sdp"
-                                android:layout_marginEnd="8dp"
-                                android:layout_marginRight="8dp"
                                 android:src="@drawable/saic_logo"
-                                app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="SIGN UP OR REGISTRATION"
+                                android:layout_marginLeft="@dimen/_15sdp"
+                                android:textColor="@color/colorPrimaryDark"
+                                app:layout_constraintBottom_toBottomOf="@+id/img_reg_logo"
+                                app:layout_constraintStart_toEndOf="@+id/img_reg_logo"
+                                app:layout_constraintTop_toTopOf="@+id/img_reg_logo" />
 
                             <RelativeLayout
                                 android:id="@+id/rvone"
@@ -274,6 +283,7 @@
                                         android:textColor="@color/blue_gray" />
 
                                 </com.google.android.material.textfield.TextInputLayout>
+
 
                             </RelativeLayout>
 
@@ -368,21 +378,42 @@
 
                             </RelativeLayout>
 
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/btnSave"
+                                android:layout_width="@dimen/_170sdp"
+                                android:layout_height="@dimen/_30sdp"
+                                android:layout_marginTop="@dimen/_15sdp"
+                                android:clickable="true"
+                                android:foreground="?android:attr/selectableItemBackground"
+                                app:cardBackgroundColor="@color/colorPrimary"
+                                app:cardCornerRadius="@dimen/_5sdp"
+                                app:cardElevation="@dimen/_5sdp"
+                                app:layout_constraintEnd_toEndOf="@+id/rv_bracnh"
+                                app:layout_constraintStart_toStartOf="@+id/rv_bracnh"
+                                app:layout_constraintTop_toBottomOf="@+id/rv_bracnh">
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="REGISTRATION"
+                                        android:textColor="@color/colorWhite"
+                                        android:textSize="@dimen/_14sdp"
+                                        android:textStyle="bold" />
+                                </RelativeLayout>
+                            </androidx.cardview.widget.CardView>
                         </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
                     </androidx.cardview.widget.CardView>
                 </ScrollView>
 
-                <TextView
-                    android:id="@+id/btnSave"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_30sdp"
-                    android:layout_gravity="bottom"
-                    android:background="@drawable/ripple"
-                    android:clickable="true"
-                    android:gravity="center"
-                    android:text="Registration"
-                    android:textColor="#FFF"
-                    android:textSize="@dimen/_15sdp" />
+
+
             </androidx.coordinatorlayout.widget.CoordinatorLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 

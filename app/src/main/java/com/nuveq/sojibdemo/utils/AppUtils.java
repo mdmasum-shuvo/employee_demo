@@ -66,6 +66,14 @@ public class AppUtils {
         int dimen = 30;
         Bitmap b = ((BitmapDrawable) context.getResources().getDrawable(R.drawable.circle)).getBitmap();
         return BitmapDescriptorFactory.fromBitmap(Bitmap.createScaledBitmap(b, dimen, dimen, false));
+    }   public static BitmapDescriptor getMapFirstMarker(Context context) {
+        int dimen = 30;
+        Bitmap b = ((BitmapDrawable) context.getResources().getDrawable(R.drawable.blue_location)).getBitmap();
+        return BitmapDescriptorFactory.fromBitmap(Bitmap.createScaledBitmap(b, dimen, dimen, false));
+    }  public static BitmapDescriptor getMapLastMarker(Context context) {
+        int dimen = 30;
+        Bitmap b = ((BitmapDrawable) context.getResources().getDrawable(R.drawable.red_location)).getBitmap();
+        return BitmapDescriptorFactory.fromBitmap(Bitmap.createScaledBitmap(b, dimen, dimen, false));
     }
 
 }

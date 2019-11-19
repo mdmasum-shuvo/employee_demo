@@ -59,6 +59,7 @@ import com.nuveq.sojibdemo.feature.attendance.AddAttendanceFragment;
 import com.nuveq.sojibdemo.feature.sales.AddSalesFragment;
 import com.nuveq.sojibdemo.feature.visitplan.AddVisitPlanFragment;
 import com.nuveq.sojibdemo.feature.attendance.AttendanceListFragment;
+import com.nuveq.sojibdemo.view.fragment.AddLocationFragment;
 import com.nuveq.sojibdemo.view.fragment.ProfileFragment;
 import com.nuveq.sojibdemo.feature.sales.SalesListFragment;
 import com.nuveq.sojibdemo.feature.visitplan.VisitFragmentList;
@@ -98,6 +99,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
     SalesListFragment salesListFragment;
     MapFragment mapFragment;
     EmployeeFragment employeeFragment;
+    AddLocationFragment addLocationFragment;
     // toolbar titles respected to selected nav menu item
     private String[] activityTitles;
 
@@ -246,6 +248,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         salesListFragment = new SalesListFragment();
         mapFragment = new MapFragment();
         employeeFragment = new EmployeeFragment();
+        addLocationFragment = new AddLocationFragment();
     }
 
 
@@ -300,6 +303,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
                 nav_Menu.findItem(R.id.nav_attendance_list).setVisible(false);
                 nav_Menu.findItem(R.id.nav_plan_list).setVisible(false);
                 nav_Menu.findItem(R.id.nav_sales_list).setVisible(false);
+                nav_Menu.findItem(R.id.nav_add_location).setVisible(false);
             } else if (result.getRoleId() == 3) {
                 nav_Menu.findItem(R.id.nav_map).setVisible(false);
                 nav_Menu.findItem(R.id.nav_admin_employee).setVisible(false);
@@ -328,6 +332,10 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
 
             case R.id.nav_add_plan:
                 loadFragment(addVisitPlanFragment, getResources().getString(R.string.add_plan));
+                break;
+
+            case R.id.nav_add_location:
+                loadFragment(addLocationFragment, getResources().getString(R.string.add_location));
                 break;
             case R.id.nav_plan_list:
                 loadFragment(myPlannerFragment, getResources().getString(R.string.plan_list));

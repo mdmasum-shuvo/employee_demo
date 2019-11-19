@@ -167,11 +167,6 @@ public class EmployeeFragment extends BaseFragment implements ServerResponseFail
                     empList.clear();
                 }
                 empList.addAll(dataList);
-                empList.addAll(dataList);
-                empList.addAll(dataList);
-                empList.addAll(dataList);
-                empList.addAll(dataList);
-                empList.addAll(dataList);
                 adapter.notifyDataSetChanged();
             }
         });

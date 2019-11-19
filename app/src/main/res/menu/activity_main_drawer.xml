@@ -6,52 +6,65 @@
 
 
     <group android:checkableBehavior="single">
+        <item android:title="@string/admin">
+            <menu>
 
-        <item
-            android:id="@+id/nav_profile"
-            android:checked="true"
-            android:enabled="true"
-            android:icon="@drawable/man_user"
-            android:title="@string/profile" />
-        <item
-            android:id="@+id/nav_add_attendance"
-            android:icon="@drawable/ic_add"
-            android:title="@string/attend_add" />
-        <item
-            android:id="@+id/nav_attendance_list"
-            android:icon="@drawable/planer_list"
-            android:title="@string/attend_list" />
-        <item
-            android:id="@+id/nav_add_plan"
-            android:checked="true"
-            android:enabled="true"
-            android:icon="@drawable/ic_add"
-            android:title="@string/add_plan" />
+                <item
+                    android:id="@+id/nav_map"
+                    android:icon="@drawable/map"
+                    android:title="@string/map" />
 
-        <item
-            android:id="@+id/nav_plan_list"
-            android:icon="@drawable/planer_list"
-            android:title="@string/plan_list" />
+                <item
+                    android:id="@+id/nav_admin_employee"
+                    android:icon="@drawable/planer_list"
+                    android:title="@string/employee_info" />
 
-        <item
-            android:id="@+id/nav_add_sale"
-            android:icon="@drawable/bag"
-            android:title="@string/add_sale" />
-        <item
-            android:id="@+id/nav_sales_list"
-            android:icon="@drawable/planer_list"
-            android:title="@string/sales_list" />
-        <item
-            android:id="@+id/nav_map"
-            android:icon="@drawable/map"
-            android:title="@string/map" />
+            </menu>
+        </item>
+        <item android:title="@string/Editor">
+            <menu>
 
-        <item
-            android:id="@+id/nav_admin_employee"
-            android:icon="@drawable/planer_list"
-            android:title="@string/employee_info" />
+                <item
+                    android:id="@+id/nav_profile"
+                    android:checked="true"
+                    android:enabled="true"
+                    android:icon="@drawable/man_user"
+                    android:title="@string/profile" />
+                <item
+                    android:id="@+id/nav_add_location"
+                    android:icon="@drawable/ic_add"
+                    android:title="@string/add_location" />
+                <item
+                    android:id="@+id/nav_add_attendance"
+                    android:icon="@drawable/ic_add"
+                    android:title="@string/attend_add" />
+                <item
+                    android:id="@+id/nav_attendance_list"
+                    android:icon="@drawable/planer_list"
+                    android:title="@string/attend_list" />
+                <item
+                    android:id="@+id/nav_add_plan"
+                    android:checked="true"
+                    android:enabled="true"
+                    android:icon="@drawable/ic_add"
+                    android:title="@string/add_plan" />
 
+                <item
+                    android:id="@+id/nav_plan_list"
+                    android:icon="@drawable/planer_list"
+                    android:title="@string/plan_list" />
 
+                <item
+                    android:id="@+id/nav_add_sale"
+                    android:icon="@drawable/bag"
+                    android:title="@string/add_sale" />
+                <item
+                    android:id="@+id/nav_sales_list"
+                    android:icon="@drawable/planer_list"
+                    android:title="@string/sales_list" />
+
+            </menu>
+        </item>
         <!-- <item
              android:id="@+id/nav_approved_apprisal"
              android:icon="@drawable/ic_approved"
