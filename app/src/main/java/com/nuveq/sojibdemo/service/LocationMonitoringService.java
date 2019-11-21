@@ -28,6 +28,7 @@ import com.nuveq.sojibdemo.appdata.room.RoomDataRepository;
 import com.nuveq.sojibdemo.datamodel.TrackingPost;
 import com.nuveq.sojibdemo.utils.CommonUtils;
 
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -45,6 +46,7 @@ public class LocationMonitoringService extends Service implements
     LocationRequest mLocationRequest = new LocationRequest();
 
     private MyRoomDataInsertTask localInsertTask;
+    private RoomDataRetriveSaveToServerTask toServerTask;
     private RoomDataRepository mRepo;
     public static final String EXTRA_LATITUDE = "extra_latitude";
     public static final String EXTRA_LONGITUDE = "extra_longitude";
@@ -55,6 +57,7 @@ public class LocationMonitoringService extends Service implements
     private Timer mTimer;
     private TimerTask mTimerTask;
     int count = 0;
+    int i = 0;
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -67,7 +70,7 @@ public class LocationMonitoringService extends Service implements
         mLocationRequest.setInterval(AppConstants.FASTEST_LOCATION_INTERVAL);
         mLocationRequest.setFastestInterval(AppConstants.FASTEST_LOCATION_INTERVAL);
         mRepo = RoomDataRepository.getInstance();
-        localInsertTask = new MyRoomDataInsertTask(mRepo);
+
         int priority = LocationRequest.PRIORITY_HIGH_ACCURACY; //by default
         //PRIORITY_BALANCED_POWER_ACCURACY, PRIORITY_LOW_POWER, PRIORITY_NO_POWER are the other priority modes
 
@@ -128,7 +131,7 @@ public class LocationMonitoringService extends Service implements
             // Toast.makeText(this, String.valueOf(location.getLatitude()) + " \n" + String.valueOf(location.getLongitude()), Toast.LENGTH_SHORT).show();
             //Send result to activities
 
-            if (CommonUtils.isNetworkAvailable()) {
+     /*       if (CommonUtils.isNetworkAvailable()) {
                 TrackingPost post = new TrackingPost();
                 post.setDate(CommonUtils.currentDate());
                 post.setEmpid(String.valueOf(SharedPreferencesEnum.getInstance(this).getInt(SharedPreferencesEnum.Key.USER_ID)));
@@ -137,33 +140,9 @@ public class LocationMonitoringService extends Service implements
                 post.setTime(CommonUtils.currentTime());
                 String jsonString = gson.toJson(post);
                 JsonObject jsonObject = new JsonParser().parse(jsonString).getAsJsonObject();
-                CommonUtils.getApiService().postTracking(jsonObject).enqueue(new Callback<String>() {
-                    @Override
-                    public void onResponse(Call<String> call, Response<String> response) {
-                        if (response.isSuccessful()) {
-                            if (response.body() != null) {
-                                Log.e("run", "location data save");
 
-                            } else {
-                     /*   if (mListener != null) {
-                            mListener.onFailed(response.message());
-                        }*/
+                callApi(jsonObject);
 
-                            }
-                        } else {
-                  /*  if (mListener != null) {
-                        mListener.onFailed(response.message());
-                    }*/
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<String> call, Throwable t) {
-              /*  if (mListener != null) {
-                    mListener.onFailed(t.getMessage());
-                }*/
-                    }
-                });
             } else {
 
                 com.nuveq.sojibdemo.appdata.room.TrackingPost post1 = new com.nuveq.sojibdemo.appdata.room.TrackingPost();
@@ -173,12 +152,49 @@ public class LocationMonitoringService extends Service implements
                 post1.setLogpoint("" + location.getLongitude());
                 post1.setTime(CommonUtils.currentTime());
                 post1.setStatus("0");
-
+                localInsertTask = new MyRoomDataInsertTask(mRepo);
                 localInsertTask.execute(post1);
             }
-
+*/
             //sendMessageToUI(String.valueOf(location.getLatitude()), String.valueOf(location.getLongitude()));
+            if (CommonUtils.isNetworkAvailable())
+                insertDataToServer();
         }
+    }
+
+    private void callApi(JsonObject jsonObject) {
+        CommonUtils.getApiService().postTracking(jsonObject).enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if (response.isSuccessful()) {
+                    if (response.body() != null) {
+                        Log.e("run", "location data save");
+
+                    } else {
+                     /*   if (mListener != null) {
+                            mListener.onFailed(response.message());
+                        }*/
+
+                    }
+                } else {
+                  /*  if (mListener != null) {
+                        mListener.onFailed(response.message());
+                    }*/
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+              /*  if (mListener != null) {
+                    mListener.onFailed(t.getMessage());
+                }*/
+            }
+        });
+    }
+
+    private void insertDataToServer() {
+        toServerTask = new RoomDataRetriveSaveToServerTask(mRepo, this);
+        toServerTask.execute();
     }
 
     @Override
@@ -188,6 +204,11 @@ public class LocationMonitoringService extends Service implements
 
         if (localInsertTask != null) {
             localInsertTask.cancel(true);
+
+        }
+        if (toServerTask != null) {
+            toServerTask.cancel(true);
+            toServerTask.destroyTask();
         }
         super.onDestroy();
     }

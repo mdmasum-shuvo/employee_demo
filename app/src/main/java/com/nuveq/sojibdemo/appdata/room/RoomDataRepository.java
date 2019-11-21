@@ -30,5 +30,13 @@ public class RoomDataRepository {
         return mDatabase.myDatabaseDao().retrieveData();
     }
 
+    public int deleteOne(int trackId) {
+        return mDatabase.myDatabaseDao().deleteData(trackId);
+    }
+
+
+    public long countRow() {
+        return mDatabase.myDatabaseDao().countData();
+    }
 
 }
