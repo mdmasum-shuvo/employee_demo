@@ -53,7 +53,7 @@ public class VisitApprovedFragment extends BaseFragment implements ServerRespons
 
     @Override
     protected void initFragmentFunctionality() {
-        callApi( CommonUtils.currentDate(),CommonUtils.getLastDateOfMoth());
+        callApi(CommonUtils.currentDate(), CommonUtils.getLastDateOfMoth());
 
     }
 
@@ -168,5 +168,7 @@ public class VisitApprovedFragment extends BaseFragment implements ServerRespons
     public void onFailed(String msg) {
         hideProgressDialog();
         adapter.notifyDataSetChanged();
+        showAlertDialog(getString(R.string.failed), msg);
+
     }
 }

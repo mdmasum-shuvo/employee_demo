@@ -87,7 +87,6 @@ public class AddVisitPlanFragment extends BaseFragment implements ServerResponse
                 }
                 areaList = new String[0];
                 areaIdList = new Integer[0];
-
                 showProgressDialog();
                 viewModel.getVisitAreaData("" + catIdList[catItemPosition]).observe(getActivity(), data -> {
                     if (data != null) {

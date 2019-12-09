@@ -124,7 +124,10 @@ public class AddSalesFragment extends BaseFragment implements ServerResponseFail
             post.setName(name);
             post.setAddress(address);
             post.setPhone(phone);
-            post.setReferbydr("" + areaIdList[areaItemPosition]);
+            if (areaItemPosition < 0) {
+                post.setReferbydr(""+0);
+            } else
+                post.setReferbydr("" + areaIdList[areaItemPosition]);
             post.setReferbyemp("" + SharedPreferencesEnum.getInstance(getActivity()).getInt(SharedPreferencesEnum.Key.USER_ID));
             post.setDescription(desc);
 
@@ -150,9 +153,6 @@ public class AddSalesFragment extends BaseFragment implements ServerResponseFail
             return false;
         } else if (address.equals("")) {
             showAlertDialog("Error", "Please Enter Patient addresses");
-            return false;
-        } else if (areaItemPosition < 0) {
-            showAlertDialog("Error", "Please select Reference doctor");
             return false;
         } else if (date.equals("")) {
             showAlertDialog("Error", "Please pick up a visit date");
