@@ -1,27 +1,12 @@
 package com.nuveq.sojibdemo.view.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
-
-import android.Manifest;
-import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
-
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.nuveq.sojibdemo.appdata.AppConstants;
 import com.nuveq.sojibdemo.appdata.SharedPreferencesEnum;
 import com.nuveq.sojibdemo.common.BaseActivity;
@@ -32,21 +17,14 @@ import com.nuveq.sojibdemo.datamodel.registration.Data;
 import com.nuveq.sojibdemo.utils.CommonUtils;
 import com.nuveq.sojibdemo.utils.PermissionUtils;
 import com.nuveq.sojibdemo.R;
-import com.nuveq.sojibdemo.datamodel.registration.Registration;
 import com.nuveq.sojibdemo.network.RestClient;
 import com.nuveq.sojibdemo.databinding.ActivityRegistrationBinding;
 import com.nuveq.sojibdemo.utils.maputils.GPSTracker;
 import com.nuveq.sojibdemo.viewmodel.Viewmodel;
-
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-
 import jrizani.jrspinner.JRSpinner;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class RegistrationActivity extends BaseActivity implements ServerResponseFailedCallback {
 
@@ -55,7 +33,7 @@ public class RegistrationActivity extends BaseActivity implements ServerResponse
     private double latitude, longitude;
     private GPSTracker gps;
     private int itemPosition = -1;
-    private String name;
+    private String name, marketingCode;
     private String phone;
     private String pass;
     private String location = null;
@@ -130,6 +108,7 @@ public class RegistrationActivity extends BaseActivity implements ServerResponse
             name = binding.tvName.getText().toString();
             phone = binding.etPhone.getText().toString();
             pass = binding.etPass.getText().toString();
+            marketingCode = binding.etMarketingCode.getText().toString();
 
             if (isValid()) {
                 alertDialog();
@@ -159,6 +138,7 @@ public class RegistrationActivity extends BaseActivity implements ServerResponse
                     SharedPreferencesEnum.getInstance(this).put(SharedPreferencesEnum.Key.USER_ID, data.getEmpId());
                     SharedPreferencesEnum.getInstance(this).put(SharedPreferencesEnum.Key.BRANCH_ID, data.getBranchId());
                     SharedPreferencesEnum.getInstance(this).put(SharedPreferencesEnum.Key.ROLE_ID, data.getRoleId());
+                    SharedPreferencesEnum.getInstance(this).put(SharedPreferencesEnum.Key.MARKETING_CODE, data.getMarketingCode());
                     Bundle bundle = new Bundle();
                     bundle.putSerializable(AppConstants.INTENT_KEY, data);
                     startActivity(MainActivity.class, true, bundle);
@@ -171,16 +151,19 @@ public class RegistrationActivity extends BaseActivity implements ServerResponse
     private boolean isValid() {
 
         if (name.equals("")) {
-            showAlertDialog("Error", "name can't be empty");
+            showAlertDialog(getString(R.string.error_text), "name can't be empty");
             return false;
         } else if (pass.equals("")) {
-            showAlertDialog("Error", "password can't be empty");
+            showAlertDialog(getString(R.string.error_text), "password can't be empty");
             return false;
         } else if (phone.equals("")) {
-            showAlertDialog("Error", "phone number can't be empty");
+            showAlertDialog(getString(R.string.error_text), "phone number can't be empty");
             return false;
         } else if (itemPosition < 0) {
-            showAlertDialog("Error", "Please select branch");
+            showAlertDialog(getString(R.string.error_text), "Please select branch");
+            return false;
+        } else if (marketingCode.equals("")) {
+            showAlertDialog(getString(R.string.error_text), "Please input your marketing code ");
             return false;
         }
         return true;
@@ -273,6 +256,7 @@ public class RegistrationActivity extends BaseActivity implements ServerResponse
             data.setPassword(pass);
             data.setLocation(location);
             data.setMacAddress(AppConstants.ANDROID_ID);
+            data.setMarketingcode(marketingCode);
             data.setBranchId(branchIdList[itemPosition]);
             showProgressDialog();
             viewModel.getRegistrationResponse(data).observe(RegistrationActivity.this, isSuccess -> {
@@ -299,6 +283,6 @@ public class RegistrationActivity extends BaseActivity implements ServerResponse
     @Override
     public void onFailed(String msg) {
         hideProgressDialog();
-        CommonUtils.showCustomAlert(this, "Failed", msg, false);
+        CommonUtils.showCustomAlert(this, getString(R.string.failed), msg, false);
     }
 }

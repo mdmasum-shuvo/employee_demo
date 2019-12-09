@@ -14,6 +14,7 @@ public class HTTP_PARAM {
     public static final String USER = "loginview";
     public static final String REGISTRATION = "EmpInfoes";
     public static final String AREA ="visitareainfo" ;
+    public static final String TO_DOCTOR_LIST ="todoctorlist" ;
     public static final String ADD_VISIT ="visitplanadd" ;
     public static final String PENDING_PLAN_DATA ="pendingplanlist" ;
     public static final String APPROVED_PLAN_LIST ="approvedplanlist" ;

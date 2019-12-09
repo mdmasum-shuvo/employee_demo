@@ -20,8 +20,41 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-
                     >
+
+                    <RelativeLayout
+                        android:id="@+id/rv_ref_to"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_15sdp"
+                        android:background="@drawable/field_shape"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                      >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/_10sdp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Refered to doctor"
+                                android:textColor="@color/blue_gray" />
+
+                            <jrizani.jrspinner.JRSpinner
+                                android:id="@+id/spiner_ref_to"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="select doctor"
+                                android:textColor="@color/blue_gray"
+                                app:backgroundTint="@color/gray"
+                                app:jrs_icon_tint="@color/gray"/>
+                        </LinearLayout>
+
+                    </RelativeLayout>
 
                     <RelativeLayout
                         android:id="@+id/rvone"
@@ -30,7 +63,7 @@
                         android:layout_margin="@dimen/_15sdp"
                         android:background="@drawable/field_shape"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
+                        app:layout_constraintTop_toBottomOf="@id/rv_ref_to">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -153,6 +186,8 @@
                         </LinearLayout>
 
                     </RelativeLayout>
+
+
 
                     <RelativeLayout
                         android:id="@+id/rv_date"

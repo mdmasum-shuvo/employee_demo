@@ -5,93 +5,106 @@ import com.google.gson.annotations.SerializedName;
 
 public class Data {
 
-@SerializedName("name")
-@Expose
-private String name;
-@SerializedName("phoneNumber")
-@Expose
-private String phoneNumber;
-@SerializedName("macAddress")
-@Expose
-private String macAddress;
-@SerializedName("branchId")
-@Expose
-private Integer branchId;
-@SerializedName("password")
-@Expose
-private String password;
-@SerializedName("location")
-@Expose
-private String location;
-@SerializedName("roleId")
-@Expose
-private Integer roleId;
-@SerializedName("createDate")
-@Expose
-private String createDate;
+    @SerializedName("name")
+    @Expose
+    private String name;
+    @SerializedName("phoneNumber")
+    @Expose
+    private String phoneNumber;
+    @SerializedName("macAddress")
+    @Expose
+    private String macAddress;
 
-public String getName() {
-return name;
-}
+    @SerializedName("marketingcode")
+    @Expose
+    private String marketingcode;
 
-public void setName(String name) {
-this.name = name;
-}
+    @SerializedName("branchId")
+    @Expose
+    private Integer branchId;
 
-public String getPhoneNumber() {
-return phoneNumber;
-}
+    @SerializedName("password")
+    @Expose
+    private String password;
+    @SerializedName("location")
+    @Expose
+    private String location;
+    @SerializedName("roleId")
+    @Expose
+    private Integer roleId;
+    @SerializedName("createDate")
+    @Expose
+    private String createDate;
+    public String getName() {
+        return name;
+    }
 
-public void setPhoneNumber(String phoneNumber) {
-this.phoneNumber = phoneNumber;
-}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-public String getMacAddress() {
-return macAddress;
-}
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
 
-public void setMacAddress(String macAddress) {
-this.macAddress = macAddress;
-}
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 
-public Integer getBranchId() {
-return branchId;
-}
+    public String getMacAddress() {
+        return macAddress;
+    }
 
-public void setBranchId(Integer branchId) {
-this.branchId = branchId;
-}
+    public void setMacAddress(String macAddress) {
+        this.macAddress = macAddress;
+    }
 
-public String getPassword() {
-return password;
-}
+    public Integer getBranchId() {
+        return branchId;
+    }
 
-public void setPassword(String password) {
-this.password = password;
-}
+    public void setBranchId(Integer branchId) {
+        this.branchId = branchId;
+    }
 
-public String getLocation() {
-return location;
-}
+    public String getPassword() {
+        return password;
+    }
 
-public void setLocation(String location) {
-this.location = location;
-}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-public Integer getRoleId() {
-return roleId;
-}
+    public String getLocation() {
+        return location;
+    }
 
-public void setRoleId(Integer roleId) {
-this.roleId = roleId;
-}
+    public void setLocation(String location) {
+        this.location = location;
+    }
 
-public String getCreateDate() {
-return createDate;
-}
+    public Integer getRoleId() {
+        return roleId;
+    }
 
-public void setCreateDate(String createDate) {
-this.createDate = createDate;
-}
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
+    }
+
+    public String getCreateDate() {
+        return createDate;
+    }
+
+    public String getMarketingcode() {
+        return marketingcode;
+    }
+
+    public void setMarketingcode(String marketingcode) {
+        this.marketingcode = marketingcode;
+    }
+
+    public void setCreateDate(String createDate) {
+        this.createDate = createDate;
+    }
 
 }

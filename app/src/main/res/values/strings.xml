@@ -93,7 +93,7 @@
     <string name="share">share</string>
     <string name="add_sale">Add sale</string>
     <string name="sales_list">Sales list</string>
-    <string name="failed">Failed</string>
+    <string name="failed">Failed!</string>
     <string name="user_empty">please select both dates</string>
     <string name="check_in_alert">Are you sure, do you want to check in now?</string>
     <string name="check_out_alert">Are you sure, do you want to check out now?</string>

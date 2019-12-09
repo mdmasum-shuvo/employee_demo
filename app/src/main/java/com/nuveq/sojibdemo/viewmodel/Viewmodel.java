@@ -129,6 +129,8 @@ public class Viewmodel extends AndroidViewModel {
 
     public MutableLiveData<List<com.nuveq.sojibdemo.datamodel.global.area.Result>> getVisitAreaData(String post) {
         return globalRepository.getVisitAreaDataList(post);
+    }  public MutableLiveData<List<com.nuveq.sojibdemo.datamodel.global.area.Result>> getToDoctorList(int post) {
+        return globalRepository.getToDoctorList(post);
     }
 
     public MutableLiveData<List<com.nuveq.sojibdemo.datamodel.global.area.Result>> getDoctorAreaData() {

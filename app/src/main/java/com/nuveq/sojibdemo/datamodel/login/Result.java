@@ -15,7 +15,7 @@ private Integer empId;
 private String name;
 @SerializedName("marketingCode")
 @Expose
-private Object marketingCode;
+private String marketingCode;
 @SerializedName("picture")
 @Expose
 private Object picture;
@@ -45,11 +45,11 @@ public void setName(String name) {
 this.name = name;
 }
 
-public Object getMarketingCode() {
+public String getMarketingCode() {
 return marketingCode;
 }
 
-public void setMarketingCode(Object marketingCode) {
+public void setMarketingCode(String marketingCode) {
 this.marketingCode = marketingCode;
 }
 

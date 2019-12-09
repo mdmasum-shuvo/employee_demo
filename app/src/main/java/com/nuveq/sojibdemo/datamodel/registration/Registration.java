@@ -25,6 +25,8 @@ public class Registration {
     @SerializedName("macAddress")
     @Expose
     private String macAddress;
+
+
     @SerializedName("branchId")
     @Expose
     private Integer branchId;

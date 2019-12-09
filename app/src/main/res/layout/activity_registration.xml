@@ -322,6 +322,39 @@
                                 </com.google.android.material.textfield.TextInputLayout>
 
                             </RelativeLayout>
+                            <RelativeLayout
+                                android:id="@+id/rv_marketing_code"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/_15sdp"
+                                android:background="@drawable/field_shape"
+                                android:paddingTop="@dimen/_5sdp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/rv_phone">
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="@dimen/_10sdp"
+                                    android:backgroundTint="@color/colorPrimary"
+                                    android:defaultFocusHighlightEnabled="true"
+                                    android:textColorHint="@color/gray">
+
+
+                                    <EditText
+                                        android:id="@+id/et_marketing_code"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:hint="Marketing Code "
+                                        android:imeOptions="actionNext"
+                                        android:inputType="phone"
+                                        android:maxLines="1"
+                                        android:textColor="@color/blue_gray" />
+
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                            </RelativeLayout>
 
                             <RelativeLayout
                                 android:id="@+id/rv_pass"
@@ -331,7 +364,7 @@
                                 android:background="@drawable/field_shape"
                                 android:paddingTop="@dimen/_5sdp"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@id/rv_phone">
+                                app:layout_constraintTop_toBottomOf="@id/rv_marketing_code">
 
 
                                 <com.google.android.material.textfield.TextInputLayout

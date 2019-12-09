@@ -26,9 +26,9 @@ public class AddSalesFragment extends BaseFragment implements ServerResponseFail
     private FragmentAddSalesBinding binding;
     private Calendar calendar;
     private Viewmodel viewmodel;
-    private int areaItemPosition = -1;
-    private String[] areaList;
-    private Integer[] areaIdList;
+    private int areaItemPosition = -1, toDoctorItemPosition = -1;
+    private String[] areaList, toDoctorList;
+    private Integer[] areaIdList, toDoctorIdList;
     private String date, time, name, phone, address, desc;
 
     @Override
@@ -71,6 +71,28 @@ public class AddSalesFragment extends BaseFragment implements ServerResponseFail
 
         });
 
+        int branchId = SharedPreferencesEnum.getInstance().getInt(SharedPreferencesEnum.Key.BRANCH_ID);
+        viewmodel.getToDoctorList(branchId).observe(getActivity(), data -> {
+            if (data != null) {
+                hideProgressDialog();
+                toDoctorList = new String[data.size()];
+                toDoctorIdList = new Integer[data.size()];
+                for (int i = 0; i < data.size(); i++) {
+                    try {
+                        if (data.get(i).getName() != null) {
+                            toDoctorList[i] = data.get(i).getName();
+                            toDoctorIdList[i] = data.get(i).getId();
+                        }
+                    } catch (Exception e) {
+
+                    }
+                }
+
+                binding.spinerRefTo.setItems(toDoctorList);
+            }
+
+        });
+
     }
 
     @Override
@@ -86,6 +108,13 @@ public class AddSalesFragment extends BaseFragment implements ServerResponseFail
             @Override
             public void onItemClick(int position) {
                 areaItemPosition = position;
+            }
+        });
+
+        binding.spinerRefTo.setOnItemClickListener(new JRSpinner.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                toDoctorItemPosition = position;
             }
         });
 
@@ -124,10 +153,16 @@ public class AddSalesFragment extends BaseFragment implements ServerResponseFail
             post.setName(name);
             post.setAddress(address);
             post.setPhone(phone);
+
             if (areaItemPosition < 0) {
-                post.setReferbydr(""+0);
+                post.setReferbydr("0");
             } else
                 post.setReferbydr("" + areaIdList[areaItemPosition]);
+
+            if (toDoctorItemPosition < 0) {
+                post.setToDoctor("0");
+            } else
+                post.setToDoctor("" + toDoctorIdList[toDoctorItemPosition]);
             post.setReferbyemp("" + SharedPreferencesEnum.getInstance(getActivity()).getInt(SharedPreferencesEnum.Key.USER_ID));
             post.setDescription(desc);
 
@@ -146,19 +181,16 @@ public class AddSalesFragment extends BaseFragment implements ServerResponseFail
     private boolean isValid() {
 
         if (name.equals("")) {
-            showAlertDialog("Error", "Please enter Patient name");
+            showAlertDialog(getString(R.string.error_text), "Please enter Patient name");
             return false;
         } else if (phone.equals("")) {
-            showAlertDialog("Error", "Please enter Patient phone number");
+            showAlertDialog(getString(R.string.error_text), "Please enter Patient phone number");
             return false;
         } else if (address.equals("")) {
-            showAlertDialog("Error", "Please Enter Patient addresses");
+            showAlertDialog(getString(R.string.error_text), "Please Enter Patient addresses");
             return false;
         } else if (date.equals("")) {
-            showAlertDialog("Error", "Please pick up a visit date");
-            return false;
-        } else if (time.equals("")) {
-            showAlertDialog("Error", "Please pick up a visit date");
+            showAlertDialog(getString(R.string.error_text), "Please pick up a visit date");
             return false;
         }
         return true;
@@ -167,6 +199,6 @@ public class AddSalesFragment extends BaseFragment implements ServerResponseFail
     @Override
     public void onFailed(String msg) {
         hideProgressDialog();
-        CommonUtils.showCustomAlert(getActivity(), "Failed!", msg, false);
+        CommonUtils.showCustomAlert(getActivity(), getString(R.string.failed), msg, false);
     }
 }

@@ -70,6 +70,10 @@ public interface ApiService {
     @POST(HTTP_PARAM.AREA)
     Call<AreaResponse> getAreaData(@Body JsonObject object);
 
+
+    @POST(HTTP_PARAM.TO_DOCTOR_LIST)
+    Call<AreaResponse> getToDoctor(@Body JsonObject object);
+
     @GET(HTTP_PARAM.DOCTOR)
     Call<AreaResponse> getDoctor();
 

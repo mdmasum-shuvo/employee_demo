@@ -1,13 +1,14 @@
 package com.nuveq.sojibdemo.server_repository;
 
-import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.nuveq.sojibdemo.appdata.SharedPreferencesEnum;
 import com.nuveq.sojibdemo.datamodel.VisitLocationPost;
+import com.nuveq.sojibdemo.datamodel.global.branch.BranchPost;
 import com.nuveq.sojibdemo.datamodel.global.branch.BranchResponse;
 import com.nuveq.sojibdemo.datamodel.global.branch.Result;
 import com.nuveq.sojibdemo.datamodel.global.area.AreaPost;
@@ -27,6 +28,7 @@ public class GlobalRepository {
     private MutableLiveData<String> locationDataResponse;
     private MutableLiveData<List<com.nuveq.sojibdemo.datamodel.global.cat.Result>> visitCatDataList;
     private MutableLiveData<List<com.nuveq.sojibdemo.datamodel.global.area.Result>> visitAreaDataList;
+    private MutableLiveData<List<com.nuveq.sojibdemo.datamodel.global.area.Result>> toDoctorList;
     private ServerResponseFailedCallback mListener;
     private MutableLiveData<List<com.nuveq.sojibdemo.datamodel.global.area.Result>> shiftList;
     Gson gson = new Gson();
@@ -42,7 +44,8 @@ public class GlobalRepository {
                 } else {
                     if (mListener != null) {
                         mListener.onFailed("Something went wrong on server or check your connection\ntry again");
-                    }               }
+                    }
+                }
             }
 
             @Override
@@ -90,8 +93,7 @@ public class GlobalRepository {
             public void onResponse(Call<String> call, Response<String> response) {
                 if (response.isSuccessful()) {
                     locationDataResponse.setValue(response.body());
-                }
-                else {
+                } else {
                     if (mListener != null) {
                         mListener.onFailed("Something went wrong on server\ntry again");
                     }
@@ -113,6 +115,7 @@ public class GlobalRepository {
         visitAreaDataList = new MutableLiveData<>();
         AreaPost areaPost = new AreaPost();
         areaPost.setCategoryid(id);
+        areaPost.setMarketingcode(SharedPreferencesEnum.getInstance().getString(SharedPreferencesEnum.Key.MARKETING_CODE));
         String jsonString = gson.toJson(areaPost);
         JsonObject jsonObject = new JsonParser().parse(jsonString).getAsJsonObject();
 
@@ -130,8 +133,7 @@ public class GlobalRepository {
                         }
 
                     }
-                }
-                else {
+                } else {
                     if (mListener != null) {
                         mListener.onFailed("Something went wrong on server\ntry again");
                     }
@@ -147,6 +149,43 @@ public class GlobalRepository {
         });
 
         return visitAreaDataList;
+    }
+
+    public MutableLiveData<List<com.nuveq.sojibdemo.datamodel.global.area.Result>> getToDoctorList(int id) {
+        toDoctorList = new MutableLiveData<>();
+        BranchPost areaPost = new BranchPost();
+        areaPost.setBranchid(id);
+        String jsonString = gson.toJson(areaPost);
+        JsonObject jsonObject = new JsonParser().parse(jsonString).getAsJsonObject();
+
+        CommonUtils.getApiService().getToDoctor(jsonObject).enqueue(new Callback<AreaResponse>() {
+            @Override
+            public void onResponse(Call<AreaResponse> call, Response<AreaResponse> response) {
+                if (response.isSuccessful()) {
+                    if (response.body() != null) {
+                        if (response.body().getStatus()) {
+                            toDoctorList.setValue(response.body().getResult());
+                        } else {
+
+                        }
+
+                    }
+                } else {
+                    if (mListener != null) {
+                        mListener.onFailed("Something went wrong on server\ntry again");
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AreaResponse> call, Throwable t) {
+                if (mListener != null) {
+                    mListener.onFailed("Something went wrong on server or check your connection\ntry again");
+                }
+            }
+        });
+
+        return toDoctorList;
     }
 
     public MutableLiveData<List<com.nuveq.sojibdemo.datamodel.global.area.Result>> getDoctorDataList() {
@@ -166,8 +205,7 @@ public class GlobalRepository {
                         }
 
                     }
-                }
-                else {
+                } else {
                     if (mListener != null) {
                         mListener.onFailed("Something went wrong on server or check your connection\ntry again");
                     }
