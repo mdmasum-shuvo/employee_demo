@@ -586,6 +586,29 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         }
     }
 
+    public void isExitFromAppDialog() {
+        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setMessage(getResources().getString(R.string.dialoge_text));
+        alertDialogBuilder.setPositiveButton(getResources().getString(R.string.yes),
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        finish();
+                    }
+                });
+
+        alertDialogBuilder.setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+
+    }
 
     public double getltd() {
         return latitude;
@@ -640,6 +663,11 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         super.onDestroy();
     }
 
+    @Override
+    public void onBackPressed() {
+        isExitFromAppDialog();
+
+    }
 
     /*    // when app first time load
     public void homeFragment() {

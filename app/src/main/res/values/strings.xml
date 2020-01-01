@@ -83,6 +83,7 @@
     <string name="loan">Loan</string>
     <string name="save_this_change">Do you want to save this change?</string>
     <string name="save_this_change_successfully">Data successfully saved</string>
+    <string name="dialoge_text">Are you sure,want exit from App?</string>
 
     <string name="sub_sector">SubSectors</string>
     <string name="crg_ques">CRG Questionnaire</string>

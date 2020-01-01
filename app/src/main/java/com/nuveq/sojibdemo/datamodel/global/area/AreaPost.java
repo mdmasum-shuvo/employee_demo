@@ -11,6 +11,17 @@ public class AreaPost {
     @SerializedName("marketingcode")
     @Expose
     private String marketingcode;
+    @SerializedName("empid")
+    @Expose
+    private String empid;
+
+    public String getEmpid() {
+        return empid;
+    }
+
+    public void setEmpid(String empid) {
+        this.empid = empid;
+    }
 
     public String getMarketingcode() {
         return marketingcode;

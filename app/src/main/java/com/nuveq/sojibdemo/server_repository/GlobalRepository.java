@@ -115,7 +115,7 @@ public class GlobalRepository {
         visitAreaDataList = new MutableLiveData<>();
         AreaPost areaPost = new AreaPost();
         areaPost.setCategoryid(id);
-        areaPost.setMarketingcode(SharedPreferencesEnum.getInstance().getString(SharedPreferencesEnum.Key.MARKETING_CODE));
+        areaPost.setEmpid(SharedPreferencesEnum.getInstance().getString(SharedPreferencesEnum.Key.USER_ID));
         String jsonString = gson.toJson(areaPost);
         JsonObject jsonObject = new JsonParser().parse(jsonString).getAsJsonObject();
 
