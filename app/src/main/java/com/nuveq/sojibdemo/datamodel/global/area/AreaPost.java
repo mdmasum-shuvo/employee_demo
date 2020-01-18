@@ -13,13 +13,13 @@ public class AreaPost {
     private String marketingcode;
     @SerializedName("empid")
     @Expose
-    private String empid;
+    private Integer empid;
 
-    public String getEmpid() {
+    public Integer getEmpid() {
         return empid;
     }
 
-    public void setEmpid(String empid) {
+    public void setEmpid(Integer empid) {
         this.empid = empid;
     }
 

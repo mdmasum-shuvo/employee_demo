@@ -57,12 +57,12 @@ dependencies {
     implementation 'com.github.jrizani:JRSpinner:1.0.0'    // Number Format
 
     //Spinner
-    implementation 'com.intuit.sdp:sdp-android:1.0.6'    // Google Place
     implementation 'com.google.android.gms:play-services-maps:15.0.1'
     implementation 'com.google.android.gms:play-services-location:15.0.1'
     implementation 'com.google.maps:google-maps-services:0.1.20'
     implementation 'com.google.maps.android:android-maps-utils:0.5'
     implementation 'com.google.android.gms:play-services-ads:15.0.1'
+    implementation 'com.intuit.sdp:sdp-android:1.0.6'    // Google Place
     def lifecycle_version = "1.1.1"
     // ViewModel and LiveData
     implementation "android.arch.lifecycle:extensions:$lifecycle_version"

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#01579b</color>
-    <color name="colorPrimaryDark">#01579b</color>
-    <color name="colorAccent">#455a64</color>
+    <color name="colorPrimary">#4466ad</color>
+    <color name="colorPrimaryDark">#4466ad</color>
+    <color name="colorAccent">#BBBBBB</color>
 
     <color name="black">@android:color/black</color>
     <color name="black_2">#050505</color>
@@ -18,7 +18,7 @@
     <color name="colorGrayText">#8D8787</color>
     <color name="blue">#4466ad</color>
     <color name="pink_blue">#6200EE</color>
-    <color name="text_color">#383a3e</color>
+    <color name="text_color">#636563</color>
     <color name="colorQuestionText">#C60001</color>
     <color name="colorBlack">#000000</color>
     <color name="colorGreenText">#356859</color>
@@ -44,5 +44,5 @@
     <color name="dimgray">#696969</color>
     <color name="gray">#BBBBBB</color>
 
-    <color name="blue_gray">#455a64</color>
+    <color name="blue_gray">#636563</color>
 </resources>
