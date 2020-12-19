@@ -293,22 +293,6 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         mNavigationView.setNavigationItemSelectedListener(this);
         mNavigationView.setItemIconTintList(null);
         Menu nav_Menu = mNavigationView.getMenu();
-        Bundle bundle = getIntent().getExtras();
-        if (bundle != null) {
-            Result result = (Result) bundle.getSerializable(AppConstants.INTENT_KEY);
-            if (result.getRoleId() == 1) {
-                nav_Menu.findItem(R.id.nav_add_attendance).setVisible(false);
-                nav_Menu.findItem(R.id.nav_add_plan).setVisible(false);
-                nav_Menu.findItem(R.id.nav_add_sale).setVisible(false);
-                nav_Menu.findItem(R.id.nav_attendance_list).setVisible(false);
-                nav_Menu.findItem(R.id.nav_plan_list).setVisible(false);
-                nav_Menu.findItem(R.id.nav_sales_list).setVisible(false);
-                nav_Menu.findItem(R.id.nav_add_location).setVisible(false);
-            } else if (result.getRoleId() == 3) {
-                nav_Menu.findItem(R.id.nav_map).setVisible(false);
-                nav_Menu.findItem(R.id.nav_admin_employee).setVisible(false);
-            }
-        }
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         toggle.syncState();
@@ -330,37 +314,12 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
                 loadHomeFragment();
                 break;
 
-            case R.id.nav_add_plan:
-                loadFragment(addVisitPlanFragment, getResources().getString(R.string.add_plan));
-                break;
-
             case R.id.nav_add_location:
                 loadFragment(addLocationFragment, getResources().getString(R.string.add_location));
-                break;
-            case R.id.nav_plan_list:
-                loadFragment(myPlannerFragment, getResources().getString(R.string.plan_list));
-
-                break;
-
-            case R.id.nav_add_attendance:
-                loadFragment(addAttendanceFragment, getResources().getString(R.string.attend_add));
                 break;
 
             case R.id.nav_attendance_list:
                 loadFragment(attendanceListFragment, getResources().getString(R.string.attend_list));
-                break;
-            case R.id.nav_add_sale:
-                loadFragment(addSalesFragment, getResources().getString(R.string.add_sale));
-                break;
-            case R.id.nav_sales_list:
-
-                loadFragment(salesListFragment, getResources().getString(R.string.sales_list));
-                break;
-            case R.id.nav_map:
-                loadFragment(mapFragment, getResources().getString(R.string.map));
-                break;
-            case R.id.nav_admin_employee:
-                loadFragment(employeeFragment, getResources().getString(R.string.employee_info));
                 break;
             case R.id.nav_log_out:
 

@@ -30,7 +30,7 @@ import java.util.UUID;
 
 import static com.nuveq.sojibdemo.appdata.AppConstants.ANDROID_ID;
 
-public class SplashActivity extends AppCompatActivity implements ServerResponseFailedCallback {
+public class SplashActivity extends AppCompatActivity {
     private Viewmodel viewModel;
     private LinearLayout loadingView;
 
@@ -41,50 +41,22 @@ public class SplashActivity extends AppCompatActivity implements ServerResponseF
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
         setContentView(R.layout.activity_splash);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                loadingView = findViewById(R.id.loadingView);
 
-        loadingView = findViewById(R.id.loadingView);
 
-        viewModel = ViewModelProviders.of(this).get(Viewmodel.class);
-        viewModel.getRepository().setCallbackListener(this);
+                loadingView.setVisibility(View.GONE);
+                startActivity(new Intent(SplashActivity.this, RegistrationActivity.class));
+                finish();
+
+            }
+        },3000);
 
 
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_PHONE_STATE}, 2);
-        } else {
-            TelephonyManager tManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-            ANDROID_ID = tManager.getDeviceId();
-            //ANDROID_ID = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
-
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    viewModel.getMacData(ANDROID_ID).observe(SplashActivity.this, data -> {
-                        if (data != null) {
-                            loadingView.setVisibility(View.GONE);
-                            SharedPreferencesEnum.getInstance(SplashActivity.this).put(SharedPreferencesEnum.Key.PHONE_NUMBER, data);
-                            startActivity(new Intent(SplashActivity.this, RegistrationActivity.class).putExtra(AppConstants.PHONE_NUMBER, data));
-                            finish();
-                        }
-                    });
-                }
-            }, 2000);
-        }
-    }
-
-
-    @Override
-    public void onFailed(String msg) {
-        loadingView.setVisibility(View.GONE);
-        startActivity(new Intent(this, RegistrationActivity.class));
-        finish();
-    }
 
 }

@@ -88,7 +88,7 @@
     <string name="sub_sector">SubSectors</string>
     <string name="crg_ques">CRG Questionnaire</string>
     <string name="attend_add">Check in/out</string>
-    <string name="attend_list">Attendance List</string>
+    <string name="attend_list">Data List</string>
     <string name="it_support">Developed by nuveq Software LTD</string>
     <string name="permission_denied">Permission denied</string>
     <string name="share">share</string>
@@ -103,7 +103,7 @@
     <string name="employee_info">Employee Attendance</string>
     <string name="select_empl">Please select an employee</string>
     <string name="admin">Admin</string>
-    <string name="add_location">Add Location</string>
+    <string name="add_location">Add Data</string>
     <string name="Editor">Editor</string>
 
 
