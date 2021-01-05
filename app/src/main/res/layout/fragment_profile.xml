@@ -48,7 +48,6 @@
                             android:layout_height="wrap_content"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="70dp"
-                            android:text="@{model.name}"
                             android:textColor="@color/colorWhite"
                             android:textSize="@dimen/_24sdp"
                             android:textStyle="bold"
@@ -103,10 +102,4 @@
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    <data>
-
-        <variable
-            name="model"
-            type="com.nuveq.sojibdemo.datamodel.login.Result" />
-    </data>
 </layout>

@@ -20,18 +20,12 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 
 import com.nuveq.sojibdemo.R;
-import com.nuveq.sojibdemo.appdata.AppConstants;
-import com.nuveq.sojibdemo.appdata.SharedPreferencesEnum;
-import com.nuveq.sojibdemo.listener.ServerResponseFailedCallback;
-import com.nuveq.sojibdemo.utils.CommonUtils;
-import com.nuveq.sojibdemo.viewmodel.Viewmodel;
 
 import java.util.UUID;
 
 import static com.nuveq.sojibdemo.appdata.AppConstants.ANDROID_ID;
 
 public class SplashActivity extends AppCompatActivity {
-    private Viewmodel viewModel;
     private LinearLayout loadingView;
 
     @RequiresApi(api = Build.VERSION_CODES.M)

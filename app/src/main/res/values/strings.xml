@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Saic Group</string>
+    <string name="app_name">Data Entry</string>
     <string name="gps_setting">GPS settings</string>
     <string name="gps_settting_mesg">GPS is not enabled. Do you want to go to settings menu?</string>
     <string name="cancel">Cancel</string>
@@ -105,6 +105,7 @@
     <string name="admin">Admin</string>
     <string name="add_location">Add Data</string>
     <string name="Editor">Editor</string>
+    <string name="home">Home</string>
 
 
 </resources>

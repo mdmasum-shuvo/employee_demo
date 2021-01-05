@@ -5,7 +5,6 @@ import android.util.Log;
 
 import com.nuveq.sojibdemo.appdata.room.RoomDataRepository;
 import com.nuveq.sojibdemo.appdata.room.TrackingPost;
-import com.nuveq.sojibdemo.utils.CommonUtils;
 
 class MyRoomDataInsertTask extends AsyncTask<TrackingPost, Void, Long> {
     RoomDataRepository roomDataRepository;

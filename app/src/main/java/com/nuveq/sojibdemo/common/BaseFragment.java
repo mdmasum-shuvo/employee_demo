@@ -28,14 +28,13 @@ import androidx.fragment.app.Fragment;
 import com.nuveq.sojibdemo.network.ApiService;
 import com.nuveq.sojibdemo.R;
 import com.nuveq.sojibdemo.network.RestClient;
-import com.nuveq.sojibdemo.utils.maputils.GPSTracker;
 
 
 public abstract class BaseFragment extends Fragment {
     private ViewDataBinding binding;
     private ProgressDialog progressDialog;
     private LinearLayout loadingView, noDataView;
-    private GPSTracker gps;
+   // private GPSTracker gps;
     public double latitude = 0, longitude = 0;
 
     // Inflate the view for the fragment based on layout XML
@@ -51,11 +50,12 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getGpsLocation();
+        //getGpsLocation();
         initFragmentComponents();
         initFragmentFunctionality();
         initFragmentListener();
     }
+/*
 
     public void getGpsLocation() {
         gps = new GPSTracker(getActivity());
@@ -66,6 +66,7 @@ public abstract class BaseFragment extends Fragment {
 
         }
     }
+*/
 
     public void toast(String msg) {
         Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
@@ -192,6 +193,14 @@ public abstract class BaseFragment extends Fragment {
     public void startActivity(Activity activity, Class<?> cls, boolean finishSelf, Bundle bundle) {
         Intent intent = new Intent(activity, cls);
         intent.putExtras(bundle);
+        startActivity(intent);
+        if (finishSelf) {
+            activity.finish();
+        }
+    }
+
+    public void startActivity(Activity activity, Class<?> cls, boolean finishSelf) {
+        Intent intent = new Intent(activity, cls);
         startActivity(intent);
         if (finishSelf) {
             activity.finish();

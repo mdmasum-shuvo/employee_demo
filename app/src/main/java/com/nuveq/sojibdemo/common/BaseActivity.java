@@ -6,17 +6,13 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.location.Address;
-import android.location.Geocoder;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,7 +22,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -41,34 +36,20 @@ import androidx.databinding.ViewDataBinding;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-
 import com.google.android.material.navigation.NavigationView;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonNull;
 import com.nuveq.sojibdemo.appdata.AppConstants;
-import com.nuveq.sojibdemo.datamodel.login.Result;
-import com.nuveq.sojibdemo.feature.admin.view.EmployeeFragment;
-import com.nuveq.sojibdemo.feature.admin.view.MapFragment;
 import com.nuveq.sojibdemo.network.ApiService;
 import com.nuveq.sojibdemo.R;
 import com.nuveq.sojibdemo.network.RestClient;
 import com.nuveq.sojibdemo.appdata.SharedPreferencesEnum;
-import com.nuveq.sojibdemo.utils.maputils.GPSTracker;
 import com.nuveq.sojibdemo.view.activity.RegistrationActivity;
-import com.nuveq.sojibdemo.feature.attendance.AddAttendanceFragment;
-import com.nuveq.sojibdemo.feature.sales.AddSalesFragment;
-import com.nuveq.sojibdemo.feature.visitplan.AddVisitPlanFragment;
-import com.nuveq.sojibdemo.feature.attendance.AttendanceListFragment;
-import com.nuveq.sojibdemo.view.fragment.AddLocationFragment;
-import com.nuveq.sojibdemo.view.fragment.ProfileFragment;
-import com.nuveq.sojibdemo.feature.sales.SalesListFragment;
-import com.nuveq.sojibdemo.feature.visitplan.VisitFragmentList;
-
-
-import java.io.IOException;
+import com.nuveq.sojibdemo.feature.DataEntryFragment;
+import com.nuveq.sojibdemo.feature.HomeFragment;
+import com.nuveq.sojibdemo.feature.ProfileFragment;
 import java.util.Calendar;
-import java.util.List;
-import java.util.Locale;
+
 
 
 public abstract class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -91,22 +72,16 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
     private static final String TAG_SETTINGS = "settings";
     public static String CURRENT_TAG = TAG_HOME;
     ProfileFragment profileFragment;
-    AddVisitPlanFragment addVisitPlanFragment;
-    VisitFragmentList myPlannerFragment;
-    AddAttendanceFragment addAttendanceFragment;
-    AttendanceListFragment attendanceListFragment;
-    AddSalesFragment addSalesFragment;
-    SalesListFragment salesListFragment;
-    MapFragment mapFragment;
-    EmployeeFragment employeeFragment;
-    AddLocationFragment addLocationFragment;
+    DataEntryFragment dataEntryFragment;
+
+    HomeFragment homeFragment;
     // toolbar titles respected to selected nav menu item
     private String[] activityTitles;
 
     // flag to load home fragment when user presses back key
     private boolean shouldLoadHomeFragOnBackPress = true;
     private Handler mHandler;
-    private GPSTracker gps;
+    //private GPSTracker gps;
     private double latitude = 0, longitude = 0;
     private ActionBarDrawerToggle toggle;
 
@@ -240,26 +215,21 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
 
     private void initAllFragment() {
         profileFragment = new ProfileFragment();
-        addVisitPlanFragment = new AddVisitPlanFragment();
-        myPlannerFragment = new VisitFragmentList();
-        addAttendanceFragment = new AddAttendanceFragment();
-        attendanceListFragment = new AttendanceListFragment();
-        addSalesFragment = new AddSalesFragment();
-        salesListFragment = new SalesListFragment();
-        mapFragment = new MapFragment();
-        employeeFragment = new EmployeeFragment();
-        addLocationFragment = new AddLocationFragment();
+
+        dataEntryFragment = new DataEntryFragment();
+
+        homeFragment = new HomeFragment();
     }
 
 
     public void loadHomeFragment() {
-        profileFragment.setArguments(getIntentData());
+        homeFragment.setArguments(getIntentData());
 
         Runnable mPendingRunnable = new Runnable() {
             @Override
             public void run() {
                 // update the main content by replacing fragments
-                fragmentTransaction(profileFragment, "My Profile");
+                fragmentTransaction(homeFragment, "Home");
             }
         };
 
@@ -311,15 +281,15 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         int id = item.getItemId();
         switch (id) {
             case R.id.nav_profile:
+                loadFragment(profileFragment, getResources().getString(R.string.profile));
+                break;
+
+            case R.id.nav_home:
                 loadHomeFragment();
                 break;
 
-            case R.id.nav_add_location:
-                loadFragment(addLocationFragment, getResources().getString(R.string.add_location));
-                break;
-
             case R.id.nav_attendance_list:
-                loadFragment(attendanceListFragment, getResources().getString(R.string.attend_list));
+                // loadFragment(attendanceListFragment, getResources().getString(R.string.attend_list));
                 break;
             case R.id.nav_log_out:
 
@@ -327,7 +297,6 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
                 break;
             default:
                 break;
-
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -535,6 +504,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
     }
 
 
+/*
     public void getGpsLocation() {
         gps = new GPSTracker(BaseActivity.this);
         if (gps.canGetLocation()) {
@@ -544,6 +514,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
 
         }
     }
+*/
 
     public void isExitFromAppDialog() {
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
@@ -577,6 +548,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         return longitude;
     }
 
+/*
     public String getLocalAddress(double latitude, double longitude) {
 
         Geocoder geocoder;
@@ -605,6 +577,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
 
         return "location not found";
     }
+*/
 
 
     private Bundle getIntentData() {

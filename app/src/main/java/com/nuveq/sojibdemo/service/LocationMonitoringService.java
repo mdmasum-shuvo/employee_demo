@@ -5,10 +5,10 @@ import android.app.Service;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationListener;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
-
 import android.util.Log;
 
 import androidx.annotation.Nullable;
@@ -16,25 +16,15 @@ import androidx.core.app.ActivityCompat;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.nuveq.sojibdemo.appdata.AppConstants;
-import com.nuveq.sojibdemo.appdata.SharedPreferencesEnum;
 import com.nuveq.sojibdemo.appdata.room.RoomDataRepository;
-import com.nuveq.sojibdemo.datamodel.TrackingPost;
-import com.nuveq.sojibdemo.utils.CommonUtils;
-
-import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 public class LocationMonitoringService extends Service implements
@@ -106,7 +96,7 @@ public class LocationMonitoringService extends Service implements
 
             return;
         }
-        LocationServices.FusedLocationApi.requestLocationUpdates(mLocationClient, mLocationRequest, this);
+        LocationServices.FusedLocationApi.requestLocationUpdates(mLocationClient, mLocationRequest, (com.google.android.gms.location.LocationListener) this);
 
         Log.d(TAG, "Connected to Google API");
     }
@@ -157,39 +147,26 @@ public class LocationMonitoringService extends Service implements
             }
 */
             //sendMessageToUI(String.valueOf(location.getLatitude()), String.valueOf(location.getLongitude()));
-            if (CommonUtils.isNetworkAvailable())
-                insertDataToServer();
+
         }
     }
 
+    @Override
+    public void onStatusChanged(String s, int i, Bundle bundle) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String s) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String s) {
+
+    }
+
     private void callApi(JsonObject jsonObject) {
-        CommonUtils.getApiService().postTracking(jsonObject).enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                if (response.isSuccessful()) {
-                    if (response.body() != null) {
-                        Log.e("run", "location data save");
-
-                    } else {
-                     /*   if (mListener != null) {
-                            mListener.onFailed(response.message());
-                        }*/
-
-                    }
-                } else {
-                  /*  if (mListener != null) {
-                        mListener.onFailed(response.message());
-                    }*/
-                }
-            }
-
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-              /*  if (mListener != null) {
-                    mListener.onFailed(t.getMessage());
-                }*/
-            }
-        });
     }
 
     private void insertDataToServer() {
