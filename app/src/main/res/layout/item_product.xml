@@ -14,7 +14,6 @@
         android:layout_marginLeft="5dp"
         android:text="Product Name"
         android:textColor="@color/testcolorblue"
-        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -33,9 +32,6 @@
         android:gravity="center"
         android:text="Quantity"
         android:textColor="@color/testcolorblue"
-
-        android:textStyle="bold"
-
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toEndOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="parent" />
@@ -54,7 +50,6 @@
         android:gravity="center"
         android:text="SKU"
         android:textColor="@color/testcolorblue"
-        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -68,15 +63,12 @@
 
     <TextView
         android:id="@+id/cross"
-        android:layout_width="@dimen/_20sdp"
-        android:layout_height="@dimen/_20sdp"
-        android:gravity="center"
-        android:visibility="gone"
+        android:layout_width="@dimen/_15sdp"
+        android:layout_height="@dimen/_15sdp"
         android:background="@drawable/ic_baseline_cancel_24"
-        android:textColor="@color/testcolorblue"
-        android:textStyle="bold"
+        android:padding="@dimen/_5sdp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/monthBudget" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,20 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorWhite"
     tools:context=".view.activity.SplashActivity">
 
     <include
         android:id="@+id/include2"
+        android:layout_height="@dimen/_100sdp"
+        android:layout_width="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/imageView3"
         layout="@layout/view_common_loader" />
 
     <ImageView
+        android:id="@+id/imageView3"
         android:layout_width="@dimen/_150sdp"
         android:layout_height="@dimen/_150sdp"
         android:src="@drawable/school"
-        android:layout_marginTop="@dimen/_50sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/include2" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView4"

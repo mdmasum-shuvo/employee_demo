@@ -45,7 +45,6 @@ import com.nuveq.sojibdemo.R;
 import com.nuveq.sojibdemo.network.RestClient;
 import com.nuveq.sojibdemo.appdata.SharedPreferencesEnum;
 import com.nuveq.sojibdemo.view.activity.RegistrationActivity;
-import com.nuveq.sojibdemo.feature.DataEntryFragment;
 import com.nuveq.sojibdemo.feature.HomeFragment;
 import com.nuveq.sojibdemo.feature.ProfileFragment;
 import java.util.Calendar;
@@ -72,7 +71,6 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
     private static final String TAG_SETTINGS = "settings";
     public static String CURRENT_TAG = TAG_HOME;
     ProfileFragment profileFragment;
-    DataEntryFragment dataEntryFragment;
 
     HomeFragment homeFragment;
     // toolbar titles respected to selected nav menu item
@@ -215,9 +213,6 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
 
     private void initAllFragment() {
         profileFragment = new ProfileFragment();
-
-        dataEntryFragment = new DataEntryFragment();
-
         homeFragment = new HomeFragment();
     }
 
