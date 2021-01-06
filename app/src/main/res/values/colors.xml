@@ -2,19 +2,20 @@
 <resources>
     <color name="colorPrimary">#4466ad</color>
     <color name="colorPrimaryDark">#4466ad</color>
-    <color name="colorAccent">#BBBBBB</color>
+    <color name="colorAccent">#4466ad</color>
 
     <color name="black">@android:color/black</color>
     <color name="black_2">#050505</color>
     <color name="black_overlay">#66000000</color>
-    <color name="black_overlay_2">#28000000</color>
+    <color name="black_overlay_2">#4466ad</color>
     <color name="off_white">#F8F8F8</color>
-
+    <color name="textColorPrimary">#212121</color>
+    <color name="textColorSecondary">#757575</color>
 
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorOffWhite">#F8F8F8</color>
     <color name="colorWhiteGrey">#eeeeee</color>
-    <color name="colorSmallText">#8C95C4</color>
+    <color name="colorSmallText">#4466ad</color>
     <color name="colorGrayText">#8D8787</color>
     <color name="blue">#4466ad</color>
     <color name="pink_blue">#6200EE</color>
@@ -24,6 +25,9 @@
     <color name="colorGreenText">#356859</color>
     <color name="tab_indicator">#cfafff</color>
 
+    <color name="status_bar_color_drawer_open">#212121</color>
+    <color name="white_shade">#E0E0E0</color>
+    <color name="white_shade_status_bar">#797B83</color>
     <color name="red">#E30000</color>
     <color name="deep_red">#A52A2A</color>
 

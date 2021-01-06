@@ -24,8 +24,8 @@ public class RegistrationActivity extends BaseActivity {
 
     @Override
     protected void initListener() {
-        binding.btnLogin.setOnClickListener(view -> {
-            startActvity(this, MainActivity.class, true);
+        binding.btnLogin.btnLogin.setOnClickListener(view -> {
+            startActvity(this, HomeActivity.class, true);
         });
 
     }

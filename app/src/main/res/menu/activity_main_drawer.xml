@@ -24,7 +24,12 @@
         <item
             android:id="@+id/nav_attendance_list"
             android:icon="@drawable/planer_list"
-            android:title="Data List" />
+            android:title="History" />
+
+        <item
+            android:id="@+id/nav_change_pass"
+            android:icon="@drawable/planer_list"
+            android:title="Change Password" />
 
         <item
             android:id="@+id/nav_log_out"

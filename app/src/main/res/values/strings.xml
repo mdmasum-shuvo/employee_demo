@@ -16,6 +16,7 @@
     <string name="add_plan">Add Visit Plan</string>
     <string name="profile">My Profile</string>
 
+    <string name="drawer_icon">Drawer Icon</string>
 
     <string name="menu_assignment">My Assignment</string>
     <string name="menu_plan">My Planner</string>
@@ -106,6 +107,23 @@
     <string name="add_location">Add Data</string>
     <string name="Editor">Editor</string>
     <string name="home">Home</string>
+    <string name="change_pass">Change Password</string>
 
+    <string-array name="ld_activityScreenTitles">
+        <item>HOME</item>
+        <item>My Profile</item>
+        <item>History</item>
+        <item>Change Password</item>
+        <item />
+        <item>Log Out</item>
+    </string-array>
 
+    <array name="ld_activityScreenIcons">
+        <item>@drawable/ic_home</item>
+        <item>@drawable/ic_person</item>
+        <item>@drawable/ic_list</item>
+        <item>@drawable/ic_lock</item>
+        <item>0</item>
+        <item>@drawable/log_out</item>
+    </array>
 </resources>

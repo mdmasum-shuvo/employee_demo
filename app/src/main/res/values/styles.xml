@@ -19,6 +19,14 @@
         <item name="selectableItemBackgroundBorderless">?android:selectableItemBackground</item>
         <item name="colorControlHighlight">@color/colorAccent</item>
     </style>
+
+
+    <style name="Header" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
     <style name="TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="android:textSize">@dimen/_10sdp</item>
         <item name="android:textColor">@color/testcolorblue</item>

@@ -3,6 +3,7 @@ package com.nuveq.sojibdemo.view.activity
 import android.app.Activity
 import android.app.Dialog
 import android.view.MenuItem
+import android.view.View
 import android.view.Window
 import androidx.cardview.widget.CardView
 import com.nuveq.sojibdemo.R
@@ -13,10 +14,10 @@ import com.nuveq.sojibdemo.databinding.ActivityDataEntryBinding
 class DataEntryActivity : BaseActivity() {
 
     private lateinit var binding: ActivityDataEntryBinding
+    override val layoutResourceFile: Int
+        get() = R.layout.activity_data_entry
     lateinit var dialog: Dialog
-    override fun getLayoutResourceFile(): Int {
-        return R.layout.activity_data_entry
-    }
+
 
     override fun initComponent() {
         binding = getBinding() as ActivityDataEntryBinding
@@ -44,14 +45,19 @@ class DataEntryActivity : BaseActivity() {
         dialog.setContentView(R.layout.product_dialuge)
 
         var cardView = dialog.findViewById<CardView>(R.id.btnCross)
+        var btnSave = dialog.findViewById<CardView>(R.id.btn_add_to_list)
         cardView.setOnClickListener {
             dialog.dismiss()
-            showToast("Product add to list")
+        }
 
+        btnSave.setOnClickListener {
+            dialog.dismiss()
+            showToast("Add to list")
         }
 
         dialog.show()
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
         if (id == android.R.id.home) {
@@ -63,4 +69,8 @@ class DataEntryActivity : BaseActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
+
+
+
+
 }
