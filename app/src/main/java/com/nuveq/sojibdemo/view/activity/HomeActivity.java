@@ -77,10 +77,10 @@ public class HomeActivity extends BaseActivity implements DrawerAdapter.OnItemSe
     @SuppressWarnings("rawtypes")
     private DrawerItem createItemFor(int position) {
         return new SimpleItem(screenIcons[position], screenTitles[position])
-                .withIconTint(color(R.color.textColorSecondary))
-                .withTextTint(color(R.color.textColorPrimary))
-                .withSelectedIconTint(color(R.color.colorAccent))
-                .withSelectedTextTint(color(R.color.colorAccent));
+                .withIconTint(color(R.color.colorWhite))
+                .withTextTint(color(R.color.colorWhite))
+                .withSelectedIconTint(color(R.color.white_shade))
+                .withSelectedTextTint(color(R.color.white_shade));
     }
 
     private String[] loadScreenTitles() {
